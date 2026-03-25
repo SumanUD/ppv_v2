@@ -1,0 +1,27 @@
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.anova-vimeo-feed__video-container').forEach(function(container) {
+        var iframe = container.querySelector('iframe');
+        var toggleButton = container.querySelector('.toggle-button');
+
+        // Create Vimeo player instance
+        var player = new Vimeo.Player(iframe);
+
+        toggleButton.addEventListener('click', function() {
+            player.getPaused().then(function(paused) {
+                if (paused) {
+                    player.play().then(function() {
+                        toggleButton.innerHTML = '<i class="fas fa-pause-circle"></i>';
+                    }).catch(function(error) {
+                        console.error('Error playing the video:', error);
+                    });
+                } else {
+                    player.pause().then(function() {
+                        toggleButton.innerHTML = '<i class="fas fa-play-circle"></i>';
+                    }).catch(function(error) {
+                        console.error('Error pausing the video:', error);
+                    });
+                }
+            });
+        });
+    });
+});
