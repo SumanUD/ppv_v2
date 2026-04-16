@@ -1,493 +1,1918 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Netlify | Maintenance</title>
-    <!-- Preconnect to Netlify's font CDN and use system fonts for a native feel -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Using Inter, Netlify's primary font family -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform Play Venture | Strategic Growth Company</title>
+  <meta name="description" content="Platform Play Venture helps brands turn scattered activity, strategy, technology, and decision-making into a structured growth system.">
+  <style>
+    :root {
+      --ink: #111111;
+      --muted: #5f646c;
+      --paper: #ffffff;
+      --soft: #f4f5f1;
+      --line: #d9ded5;
+      --teal: #027d73;
+      --green: #78b843;
+      --red: #d64032;
+      --yellow: #f2b84b;
+      --charcoal: #202322;
+      --shadow: 0 24px 70px rgba(17, 17, 17, 0.12);
+      --shadow-strong: 0 34px 90px rgba(17, 17, 17, 0.18);
+      --max: 1180px;
+      --nav-h: 74px;
+    }
 
-        body {
-            background: #0D1E2D;  /* Deep navy, Netlify's dark background from their platform */
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: #F9FAFB;
-            height: 100%;
-            width: 100%;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        /* Main container: elegant centered card with subtle glow */
-        .maintenance-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            background: radial-gradient(circle at 20% 30%, rgba(0, 140, 255, 0.08), rgba(13, 30, 45, 0.95));
-        }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-h) + 24px);
+    }
 
-        /* Card style matching Netlify’s UI — clean, rounded, elevated */
-        .maintenance-card {
-            max-width: 640px;
-            width: 100%;
-            background: #102433;   /* Slightly lighter than body for depth */
-            border-radius: 32px;
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(255, 255, 255, 0.05) inset;
-            backdrop-filter: blur(0px);
-            border: 1px solid rgba(72, 187, 255, 0.2);
-            transition: all 0.2s ease;
-        }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-        /* inner content spacing */
-        .card-content {
-            padding: 3rem 2.5rem;
-        }
+    body.is-loading {
+      overflow: hidden;
+    }
 
-        /* Netlify brand header: small logo + wordmark */
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 2.5rem;
-        }
+    body.menu-open {
+      overflow: hidden;
+    }
 
-        .netlify-logo-svg {
-            width: 32px;
-            height: 32px;
-        }
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-        .netlify-wordmark {
-            font-weight: 600;
-            font-size: 1.35rem;
-            letter-spacing: -0.3px;
-            background: linear-gradient(135deg, #FFFFFF 0%, #B0E0FF 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        /* Maintenance badge / pill */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(244, 67, 54, 0.12);
-            border-radius: 100px;
-            padding: 0.3rem 1rem;
-            margin-bottom: 1.5rem;
-            border: 0.5px solid rgba(244, 67, 54, 0.3);
-            backdrop-filter: blur(2px);
-        }
+    p {
+      margin: 0;
+    }
 
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background-color: #F44336;
-            border-radius: 50%;
-            margin-right: 8px;
-            box-shadow: 0 0 5px #F44336;
-            animation: subtle-pulse 1.6s infinite ease-out;
-        }
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      background: #101111;
+      color: #fff;
+      transition: opacity 700ms ease, visibility 700ms ease;
+    }
 
-        .status-text {
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #FFAAA5;
-        }
+    .loader.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-        @keyframes subtle-pulse {
-            0% { opacity: 0.5; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.1); background-color: #FF6B5E; }
-            100% { opacity: 0.5; transform: scale(0.9); }
-        }
+    .loader-mark {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      text-align: center;
+    }
 
-        /* Main heading */
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            background: linear-gradient(145deg, #FFFFFF 0%, #E2F0FF 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
+    .brand-reveal {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: min(760px, 86vw);
+      font-size: 5.6rem;
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
 
-        /* descriptive text */
-        .description {
-            font-size: 1.05rem;
-            color: #C9D9E8;
-            margin-bottom: 2rem;
-            font-weight: 400;
-            border-left: 2px solid #2C6E9E;
-            padding-left: 1rem;
-        }
+    .brand-reveal span {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: revealLetter 720ms cubic-bezier(0.2, 0.85, 0.2, 1) forwards;
+      animation-delay: calc(var(--i) * 42ms);
+    }
 
-        /* progress bar container — Netlify style minimal */
-        .progress-section {
-            margin: 2rem 0 1.5rem 0;
-        }
+    .loader-line {
+      width: min(420px, 68vw);
+      height: 2px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.2);
+    }
 
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            color: #9AB3D0;
-            margin-bottom: 8px;
-        }
+    .loader-line::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), var(--yellow), var(--red));
+      transform-origin: left;
+      animation: loadBar 1600ms ease forwards;
+    }
 
-        .progress-track {
-            background: #1E3349;
-            border-radius: 60px;
-            height: 6px;
-            width: 100%;
-            overflow: hidden;
-        }
+    @keyframes revealLetter {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-        .progress-fill {
-            width: 68%;
-            background: linear-gradient(90deg, #2B9AFF, #6BC2FF);
-            height: 100%;
-            border-radius: 60px;
-            position: relative;
-            animation: shimmer 2s infinite linear;
-            background-size: 200% 100%;
-        }
+    @keyframes loadBar {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
 
-        @keyframes shimmer {
-            0% { background-position: 100% 0; }
-            100% { background-position: -100% 0; }
-        }
+    .site-shell {
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity 600ms ease;
+    }
 
-        /* extra info cards */
-        .info-grid {
-            display: flex;
-            gap: 1.2rem;
-            margin: 2rem 0 1.8rem;
-            flex-wrap: wrap;
-        }
+    .site-shell.is-ready {
+      opacity: 1;
+    }
 
-        .info-item {
-            background: rgba(18, 36, 54, 0.8);
-            border-radius: 20px;
-            padding: 0.9rem 1rem;
-            flex: 1;
-            border: 0.5px solid rgba(59, 130, 246, 0.2);
-            backdrop-filter: blur(4px);
-        }
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1001;
+      width: 100%;
+      height: 3px;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: linear-gradient(90deg, var(--green), var(--yellow), var(--red));
+      pointer-events: none;
+    }
 
-        .info-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            font-weight: 600;
-            color: #84A7D1;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-        }
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      border-bottom: 1px solid transparent;
+      background: linear-gradient(180deg, rgba(8, 10, 12, 0.74), rgba(8, 10, 12, 0.48));
+      backdrop-filter: blur(16px) saturate(140%);
+      transition: background 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+    }
 
-        .info-value {
-            font-weight: 600;
-            font-size: 1rem;
-            color: #EFF6FF;
-            font-family: monospace;
-        }
+    .nav.is-scrolled,
+    .nav.is-open {
+      border-bottom-color: rgba(17, 17, 17, 0.08);
+      background: rgba(249, 250, 248, 0.92);
+      box-shadow: 0 18px 50px rgba(17, 17, 17, 0.12);
+    }
 
-        /* status update feed mock */
-        .update-feed {
-            margin-top: 2rem;
-            background: #0C1A28;
-            border-radius: 18px;
-            padding: 1rem 1.2rem;
-            border-left: 3px solid #2B9AFF;
-        }
+    .nav-inner {
+      width: min(var(--max), calc(100% - 40px));
+      height: 100%;
+      margin: 0 auto;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-        .update-head {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #B9D0F0;
-            margin-bottom: 8px;
-        }
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      min-width: max-content;
+      color: #fff;
+      line-height: 0;
+      transition: transform 220ms ease;
+    }
 
-        .update-message {
-            font-size: 0.85rem;
-            color: #D1E3FF;
-        }
+    .wordmark:hover,
+    .wordmark:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+    }
 
-        /* secondary actions & support link */
-        .support-link {
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(72, 187, 255, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+    .wordmark img {
+      width: clamp(152px, 18vw, 238px);
+      height: auto;
+      display: block;
+    }
 
-        .netlify-status-link {
-            font-size: 0.85rem;
-            color: #5F9FFF;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
 
-        .netlify-status-link:hover {
-            color: #8CBDFF;
-            text-decoration: underline;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      font-size: 0.86rem;
+      font-weight: 750;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transition: color 240ms ease, background 240ms ease, border-color 240ms ease;
+    }
 
-        .refresh-note {
-            font-size: 0.75rem;
-            color: #6F8FB2;
-        }
+    .nav.is-scrolled .nav-links,
+    .nav.is-open .nav-links {
+      color: #2d3132;
+      border-color: rgba(17, 17, 17, 0.1);
+      background: rgba(243, 245, 241, 0.92);
+    }
 
-        /* button style like netlify outline */
-        .outline-button {
-            background: transparent;
-            border: 1px solid #2E6A9B;
-            border-radius: 40px;
-            padding: 6px 14px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #B8DBFF;
-            cursor: default;
-            transition: all 0.15s;
-        }
+    .nav-links a {
+      position: relative;
+      border-radius: 999px;
+      padding: 10px 13px;
+      text-decoration: none;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 2px;
+      text-decoration-color: transparent;
+      transition: color 180ms ease, background 180ms ease, text-decoration-color 180ms ease;
+    }
 
-        /* small icons for netlify vibe */
-        .inline-icon {
-            width: 16px;
-            height: 16px;
-            vertical-align: middle;
-            margin-right: 4px;
-            opacity: 0.8;
-        }
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a.is-active {
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--teal);
+      text-decoration: underline;
+      text-decoration-color: currentColor;
+      outline: none;
+    }
 
-        /* responsiveness */
-        @media (max-width: 550px) {
-            .card-content {
-                padding: 2rem 1.5rem;
-            }
-            h1 {
-                font-size: 1.8rem;
-            }
-            .info-grid {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
+    .nav-cta {
+      border: 0;
+      background: transparent;
+      color: inherit !important;
+      box-shadow: none;
+    }
 
-        /* Additional subtle noise texture for authenticity */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjYiIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMDMiLz48L3N2Zz4=');
-            pointer-events: none;
-            z-index: 0;
-        }
+    .nav-cta:hover,
+    .nav-cta:focus-visible,
+    .nav-cta.is-active {
+      background: transparent !important;
+      color: var(--teal) !important;
+    }
 
-        /* copy netlify's subtle focus ring */
-        a:focus-visible, button:focus-visible {
-            outline: 2px solid #2B9AFF;
-            outline-offset: 2px;
-            border-radius: 6px;
-        }
-    </style>
+    .mobile-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .mobile-toggle:hover,
+    .mobile-toggle:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--teal);
+      outline: none;
+    }
+
+    .mobile-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 4px auto;
+      background: currentColor;
+    }
+
+    .hero {
+      min-height: 88svh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      color: #fff;
+      background: #101111;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(116deg, rgba(9, 14, 16, 0.74), rgba(11, 17, 22, 0.58)),
+        url("./bg.png") center / cover no-repeat;
+      transform: scale(1.06);
+      transition: transform 9000ms ease;
+      overflow: hidden;
+      animation: heroAmbient 14s ease-in-out infinite alternate;
+    }
+
+    .hero-bg::before,
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: -28%;
+      pointer-events: none;
+    }
+
+    .hero-bg::before {
+      background:
+        url("./bg.png") center / cover no-repeat;
+      filter: blur(16px) saturate(88%);
+      opacity: 0.58;
+      transform: scale(1.1);
+      animation: heroFloat 18s ease-in-out infinite alternate;
+    }
+
+    .hero-bg::after {
+      inset: 0;
+      background:
+        linear-gradient(95deg, rgba(0, 0, 0, 0.74), rgba(0, 0, 0, 0.34) 56%, rgba(0, 0, 0, 0.18)),
+        radial-gradient(circle at 20% 22%, rgba(120, 184, 67, 0.22), transparent 40%),
+        radial-gradient(circle at 76% 80%, rgba(214, 64, 50, 0.2), transparent 44%);
+    }
+
+    .site-shell.is-ready .hero-bg {
+      transform: scale(1);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity: 0.34;
+      animation: gridDrift 22s linear infinite;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 28%;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.74));
+    }
+
+    .hero-inner {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 64px) 0 52px;
+    }
+
+    .hero-content {
+      max-width: 960px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-size: 0.82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      border-radius: 8px;
+      background: var(--green);
+    }
+
+    .hero h1,
+    .section-title,
+    .cta h2 {
+      margin: 0;
+      font-weight: 850;
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .hero h1 {
+      max-width: 950px;
+      font-size: 7.4rem;
+      opacity: 0;
+      transform: translateY(26px);
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin-top: 28px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 1.28rem;
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    .hero-actions,
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-actions {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .site-shell.is-ready .hero .eyebrow,
+    .site-shell.is-ready .hero h1,
+    .site-shell.is-ready .hero-copy,
+    .site-shell.is-ready .hero-actions {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 850ms ease, transform 850ms ease;
+    }
+
+    .site-shell.is-ready .hero h1 {
+      transition-delay: 120ms;
+    }
+
+    .site-shell.is-ready .hero-copy {
+      transition-delay: 240ms;
+    }
+
+    .site-shell.is-ready .hero-actions {
+      transition-delay: 360ms;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      width: min(820px, 100%);
+      margin-top: 46px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .site-shell.is-ready .hero-metrics {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 850ms ease 480ms, transform 850ms ease 480ms;
+    }
+
+    .metric {
+      min-height: 112px;
+      padding: 18px;
+      background: rgba(13, 15, 15, 0.58);
+      backdrop-filter: blur(16px);
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 1.42rem;
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    @keyframes gridDrift {
+      from {
+        background-position: 0 0, 0 0;
+      }
+      to {
+        background-position: 72px 72px, 72px 72px;
+      }
+    }
+
+    @keyframes heroAmbient {
+      0% {
+        filter: saturate(100%) brightness(100%);
+      }
+      100% {
+        filter: saturate(114%) brightness(108%);
+      }
+    }
+
+    @keyframes heroFloat {
+      from {
+        transform: translate3d(-2%, -1%, 0) scale(1.08);
+      }
+      to {
+        transform: translate3d(2%, 1.5%, 0) scale(1.16);
+      }
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      padding: 13px 20px;
+      font-weight: 850;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 38px rgba(17, 17, 17, 0.16);
+      outline: none;
+    }
+
+    .button-primary {
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .button-dark {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .button-outline {
+      border-color: rgba(255, 255, 255, 0.62);
+      color: #fff;
+    }
+
+    .button-muted {
+      border-color: var(--line);
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .section {
+      padding: clamp(72px, 9vw, 130px) 0;
+    }
+
+    .band-soft {
+      background: var(--soft);
+    }
+
+    .band-ink {
+      background: #101111;
+      color: #fff;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section-kicker {
+      margin-bottom: 14px;
+      color: var(--teal);
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .band-ink .section-kicker {
+      color: var(--yellow);
+    }
+
+    .section-title {
+      max-width: 980px;
+      font-size: 4.6rem;
+    }
+
+    .section-title span,
+    .cta h2 span {
+      color: var(--teal);
+    }
+
+    .band-ink .section-title span,
+    .band-ink .cta h2 span {
+      color: var(--yellow);
+    }
+
+    .section-lead {
+      max-width: 790px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 1.2rem;
+    }
+
+    .band-ink .section-lead,
+    .band-ink .split-copy,
+    .band-ink .feature p,
+    .band-ink .why-item p,
+    .band-ink .insight-card p {
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+      gap: clamp(30px, 6vw, 84px);
+      align-items: center;
+    }
+
+    .split-copy {
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .split-copy p + p {
+      margin-top: 16px;
+    }
+
+    .image-stage {
+      position: relative;
+      min-height: 440px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #dfe4df;
+      transform: translateZ(0);
+      transition: transform 420ms ease, box-shadow 420ms ease;
+    }
+
+    .image-stage:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .image-stage img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+      transition: transform 900ms ease;
+    }
+
+    .image-stage:hover img {
+      transform: scale(1.04);
+    }
+
+    .image-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .image-caption span {
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .help-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(28px, 6vw, 78px);
+      align-items: start;
+      margin-top: 54px;
+    }
+
+    .pill-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pill-list li {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 18px 20px;
+      font-size: 1.28rem;
+      font-weight: 800;
+      box-shadow: 0 14px 32px rgba(17, 17, 17, 0.04);
+      transform: translateX(0);
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .pill-list li:hover {
+      transform: translateX(8px);
+      border-color: rgba(2, 125, 115, 0.38);
+      box-shadow: 0 18px 42px rgba(17, 17, 17, 0.08);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 48px;
+    }
+
+    .feature {
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 28px;
+      background: #fff;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-6px);
+      border-color: rgba(2, 125, 115, 0.35);
+      box-shadow: var(--shadow);
+    }
+
+    .feature img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      margin-bottom: 34px;
+    }
+
+    .feature h3,
+    .why-item h3,
+      .thought h3,
+      .insight-card h3 {
+      margin: 0;
+      font-size: 1.85rem;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .feature p {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+      gap: clamp(28px, 6vw, 80px);
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .principle-visual {
+      position: sticky;
+      top: calc(var(--nav-h) + 28px);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      width: min(100%, 430px);
+      justify-self: center;
+    }
+
+    .principle-visual img {
+      width: 100%;
+      height: 172px;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 16px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
+    }
+
+    .principle-visual img:first-child {
+      height: 190px;
+    }
+
+    .quote-block {
+      border-left: 4px solid var(--yellow);
+      padding: 0 0 0 24px;
+      font-size: 2.1rem;
+      font-weight: 780;
+      line-height: 1.14;
+    }
+
+    .quote-block span {
+      color: var(--yellow);
+    }
+
+    .thought-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .thought {
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.06);
+      transition: transform 260ms ease, border-color 260ms ease;
+    }
+
+    .thought:hover {
+      transform: translateY(-5px);
+      border-color: rgba(242, 184, 75, 0.5);
+    }
+
+    .thought h3 {
+      color: var(--yellow);
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .thought p {
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 0.95rem;
+    }
+
+    .definitions {
+      margin-top: 26px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.95rem;
+    }
+
+    .why-list {
+      display: grid;
+      gap: 1px;
+      margin-top: 54px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--line);
+    }
+
+    .why-item {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 22px;
+      padding: clamp(22px, 4vw, 38px);
+      background: #fff;
+      transition: transform 260ms ease, box-shadow 260ms ease;
+    }
+
+    .why-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .why-item .num {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 900;
+      transition: background 220ms ease, transform 220ms ease;
+    }
+
+    .why-item:hover .num {
+      background: var(--teal);
+      transform: rotate(-4deg);
+    }
+
+    .why-item p {
+      max-width: 860px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 52px;
+    }
+
+    .insight-card {
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 20px 54px rgba(0, 0, 0, 0.16);
+      transition: transform 260ms ease, box-shadow 260ms ease;
+    }
+
+    .insight-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .insight-card img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #dfe4df;
+      transition: transform 700ms ease;
+    }
+
+    .insight-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .insight-card div {
+      padding: 22px;
+    }
+
+    .insight-card h3 {
+      font-size: 1.32rem;
+    }
+
+    .insight-card p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .cta {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(16, 17, 17, 0.94), rgba(16, 17, 17, 0.64)),
+        url("./Win Loss Analysis Research Methods Leader to Improve Sales Results_files/anova-hero-image_opt.jpg") center 34% / cover no-repeat;
+      color: #fff;
+    }
+
+    .cta-inner {
+      min-height: 520px;
+      display: grid;
+      align-content: center;
+      padding: clamp(72px, 9vw, 120px) 0;
+    }
+
+    .cta h2 {
+      max-width: 900px;
+      font-size: 6.2rem;
+    }
+
+    .cta p {
+      max-width: 620px;
+      margin-top: 24px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 1.2rem;
+    }
+
+    .footer {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(74px, 10vw, 126px) 0 38px;
+      background:
+        radial-gradient(circle at 10% 16%, rgba(2, 125, 115, 0.22), transparent 36%),
+        radial-gradient(circle at 84% 82%, rgba(242, 184, 75, 0.16), transparent 32%),
+        #101111;
+      color: #fff;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: minmax(280px, 1.25fr) repeat(2, minmax(170px, 0.8fr));
+      gap: clamp(24px, 4vw, 56px);
+      align-items: start;
+    }
+
+    .footer-brand {
+      max-width: 520px;
+    }
+
+    .footer-logo {
+      display: inline-block;
+      line-height: 0;
+      margin-bottom: clamp(20px, 3vw, 34px);
+    }
+
+    .footer-logo img {
+      width: clamp(176px, 18vw, 240px);
+      height: auto;
+      display: block;
+    }
+
+    .footer-title {
+      margin-top: 0;
+      max-width: 580px;
+      font-size: 2.05rem;
+      font-weight: 820;
+      line-height: 1.08;
+    }
+
+    .footer-description {
+      max-width: 520px;
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 1rem;
+    }
+
+    .footer-social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .footer-social a {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .footer-social a:hover,
+    .footer-social a:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(120, 184, 67, 0.8);
+      background: rgba(120, 184, 67, 0.2);
+      outline: none;
+    }
+
+    .footer-social svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .footer-heading {
+      margin: 6px 0 14px;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 0.95rem;
+    }
+
+    .footer-links a {
+      width: fit-content;
+      border-bottom: 1px solid transparent;
+      transition: color 180ms ease, border-color 180ms ease;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: #fff;
+      border-bottom-color: rgba(255, 255, 255, 0.62);
+      outline: none;
+    }
+
+    .footer-bottom {
+      grid-column: 1 / -1;
+      margin-top: 18px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.88rem;
+    }
+
+    .copyright {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.88rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 760ms ease, transform 760ms cubic-bezier(0.2, 0.82, 0.22, 1);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-flow {
+      opacity: 0;
+      transform: translateY(44px);
+      transition: opacity 900ms ease, transform 900ms cubic-bezier(0.2, 0.82, 0.22, 1);
+      transition-delay: var(--section-delay, 0ms);
+    }
+
+    .section-flow.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        border-bottom-color: rgba(17, 17, 17, 0.1);
+        background: rgba(255, 255, 255, 0.92);
+      }
+
+      .wordmark {
+        color: var(--ink);
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: var(--nav-h);
+        left: 20px;
+        right: 20px;
+        color: #2d3132;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: var(--shadow);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: opacity 220ms ease, visibility 220ms ease, transform 220ms ease;
+      }
+
+      .nav-links.is-open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        padding: 13px 14px;
+        text-decoration-color: transparent;
+      }
+
+      .split,
+      .help-grid,
+      .principles,
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid,
+      .thought-grid,
+      .insight-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature {
+        min-height: auto;
+      }
+
+      .principle-visual {
+        position: static;
+        max-width: none;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .principle-visual img,
+      .principle-visual img:first-child {
+        grid-column: auto;
+        height: 132px;
+      }
+
+      .hero h1 {
+        font-size: 5.4rem;
+      }
+
+      .section-title {
+        font-size: 3.5rem;
+      }
+
+      .cta h2 {
+        font-size: 4.8rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --nav-h: 66px;
+      }
+
+      .nav-inner,
+      .container,
+      .hero-inner {
+        width: min(var(--max), calc(100% - 28px));
+      }
+
+      .wordmark {
+        max-width: 176px;
+      }
+
+      .wordmark img {
+        width: 100%;
+      }
+
+      .brand-reveal {
+        font-size: 3.6rem;
+      }
+
+      .hero {
+        min-height: 86svh;
+      }
+
+      .hero-bg {
+        background-position: 56% center;
+      }
+
+      .hero-bg::before {
+        inset: -16%;
+      }
+
+      .hero-inner {
+        padding-bottom: 34px;
+      }
+
+      .hero h1 {
+        font-size: 3.65rem;
+      }
+
+      .hero-copy,
+      .section-lead,
+      .split-copy,
+      .cta p {
+        font-size: 1rem;
+      }
+
+      .hero-metrics {
+        grid-template-columns: 1fr;
+        margin-top: 32px;
+      }
+
+      .metric {
+        min-height: auto;
+      }
+
+      .section-title {
+        font-size: 2.7rem;
+        line-height: 1.02;
+      }
+
+      .feature h3,
+      .why-item h3,
+      .thought h3,
+      .insight-card h3 {
+        font-size: 1.45rem;
+      }
+
+      .quote-block {
+        font-size: 1.62rem;
+      }
+
+      .principle-visual {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .principle-visual img:first-child {
+        grid-column: 1 / -1;
+      }
+
+      .principle-visual img,
+      .principle-visual img:first-child {
+        height: 124px;
+      }
+
+      .cta h2 {
+        font-size: 3.2rem;
+      }
+
+      .footer-title {
+        font-size: 1.75rem;
+      }
+
+      .section {
+        padding: 66px 0;
+      }
+
+      .image-stage {
+        min-height: 330px;
+      }
+
+      .image-caption {
+        grid-template-columns: 1fr;
+      }
+
+      .why-item {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-links {
+        gap: 8px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .brand-reveal {
+        font-size: 2.7rem;
+      }
+
+      .wordmark {
+        max-width: 150px;
+      }
+
+      .nav-inner {
+        gap: 12px;
+      }
+
+      .hero h1 {
+        font-size: 3.05rem;
+      }
+
+      .section-title {
+        font-size: 2.32rem;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        transition-duration: 1ms !important;
+      }
+
+      .reveal,
+      .hero .eyebrow,
+      .hero h1,
+      .hero-copy,
+      .hero-actions,
+      .hero-metrics {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .section-flow {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
 </head>
-<body>
-    <div class="maintenance-container">
-        <div class="maintenance-card">
-            <div class="card-content">
-                <!-- netlify brand - official look -->
-                <div class="brand">
-                    <!-- netlify infinity-style svg logo -->
-                    <svg class="netlify-logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#2B9AFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        <path d="M2 17L12 22L22 17" stroke="#2B9AFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        <path d="M2 12L12 17L22 12" stroke="#2B9AFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        <circle cx="12" cy="12" r="1.5" fill="#2B9AFF" stroke="none"/>
-                    </svg>
-                    <span class="netlify-wordmark">Netlify</span>
-                </div>
-
-                <!-- status badge: official maintenance -->
-                <div class="status-badge">
-                    <div class="status-dot"></div>
-                    <span class="status-text">SCHEDULED MAINTENANCE</span>
-                </div>
-
-                <!-- main message -->
-                <h1>Platform maintenance in progress</h1>
-                <div class="description">
-                    Netlify is currently undergoing a planned infrastructure upgrade. During this time, 
-                    some sites, deploys, and the Netlify UI may be temporarily unavailable. 
-                    We're working to restore full service as quickly as possible.
-                </div>
-
-                <!-- progress-like indicator to show ongoing work (not exact ETA but UX) -->
-                <div class="progress-section">
-                    <div class="progress-label">
-                        <span>Maintenance progress</span>
-                        <span>Estimated completion ~ 45 mins</span>
-                    </div>
-                    <div class="progress-track">
-                        <div class="progress-fill"></div>
-                    </div>
-                </div>
-
-                <!-- status info cards with realistic netlify-style metrics -->
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">LAST UPDATE</div>
-                        <div class="info-value">April 8, 2026 · 14:32 UTC</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">AFFECTED SERVICES</div>
-                        <div class="info-value">Web UI, Deploy API, Analytics</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">STATUS PAGE</div>
-                        <div class="info-value">Operational · partial outage</div>
-                    </div>
-                </div>
-
-                <!-- official looking update feed like Netlify status -->
-                <div class="update-feed">
-                    <div class="update-head">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20 12V8H4V12M20 12L12 18L4 12M20 12H22M2 12H4M12 2V4M12 20V22M6.5 5.5L5 4M18.5 5.5L20 4M6.5 18.5L5 20M18.5 18.5L20 20" stroke="#5F9FFF" stroke-width="1.2" stroke-linecap="round"/>
-                        </svg>
-                        <span>Incident Report</span>
-                    </div>
-                    <div class="update-message">
-                        <strong>Update:</strong> Database migration is in final stages. We are verifying edge function performance. 
-                        Next status update in 15 minutes.
-                    </div>
-                </div>
-
-                <!-- support and additional context like Netlify's own maintainence page -->
-                <div class="support-link">
-                    <a href="#" class="netlify-status-link" id="statusLink">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block;">
-                            <path d="M12 8V12L15 15M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                        Netlify Status
-                    </a>
-                    <div class="refresh-note">
-                        <span>🔄 Auto-refresh on resolution — we'll notify all impacted teams</span>
-                    </div>
-                    <div class="outline-button">
-                        ⚙️ Maintenance ID: NTLF-0408-01
-                    </div>
-                </div>
-                <!-- micro disclaimer matching netlify's tone -->
-                <div style="font-size: 0.7rem; text-align: center; margin-top: 1.5rem; color: #5B7A9A;">
-                    Deployments and builds are paused. Git interactions remain unaffected.
-                </div>
-            </div>
-        </div>
+<body class="is-loading">
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="loader" aria-label="Loading Platform Play Venture">
+    <div class="loader-mark">
+      <div class="brand-reveal" aria-hidden="true">
+        <span style="--i:1">P</span><span style="--i:2">L</span><span style="--i:3">A</span><span style="--i:4">T</span><span style="--i:5">F</span><span style="--i:6">O</span><span style="--i:7">R</span><span style="--i:8">M</span>
+        <span style="--i:9">&nbsp;</span>
+        <span style="--i:10">P</span><span style="--i:11">L</span><span style="--i:12">A</span><span style="--i:13">Y</span>
+        <span style="--i:14">&nbsp;</span>
+        <span style="--i:15">V</span><span style="--i:16">E</span><span style="--i:17">N</span><span style="--i:18">T</span><span style="--i:19">U</span><span style="--i:20">R</span><span style="--i:21">E</span>
+      </div>
+      <div class="loader-line" aria-hidden="true"></div>
     </div>
+  </div>
 
-    <!-- Script for subtle dynamic update: realistic timestamp & interaction to mimic official status page, 
-         but not essential for design. Also adds console silence but ensures fake link is inert. -->
-    <script>
-        (function() {
-            // Prevent any accidental navigation on the status link while keeping the official netlify appearance
-            const statusLink = document.getElementById('statusLink');
-            if (statusLink) {
-                statusLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    // mimics opening official status page but we keep consistent behavior: 
-                    // shows a small toast-like console info but not intrusive (design remains intact)
-                    // this is only to complete the illusion of real Netlify property
-                    // but we will not redirect to avoid external dependency, just show a subtle info
-                    const fakeToast = document.createElement('div');
-                    fakeToast.innerText = 'Netlify Status — Incident tracked internally. Updates will appear soon.';
-                    fakeToast.style.position = 'fixed';
-                    fakeToast.style.bottom = '20px';
-                    fakeToast.style.left = '20px';
-                    fakeToast.style.backgroundColor = '#102433';
-                    fakeToast.style.color = '#AAD4FF';
-                    fakeToast.style.padding = '10px 18px';
-                    fakeToast.style.borderRadius = '40px';
-                    fakeToast.style.fontSize = '0.8rem';
-                    fakeToast.style.fontFamily = 'Inter, sans-serif';
-                    fakeToast.style.border = '1px solid #2B6A9E';
-                    fakeToast.style.backdropFilter = 'blur(8px)';
-                    fakeToast.style.zIndex = '9999';
-                    fakeToast.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
-                    fakeToast.style.pointerEvents = 'none';
-                    document.body.appendChild(fakeToast);
-                    setTimeout(() => {
-                        fakeToast.style.opacity = '0';
-                        setTimeout(() => fakeToast.remove(), 400);
-                    }, 2800);
-                });
-            }
+  <div class="site-shell">
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="wordmark" href="#home" aria-label="Platform Play Venture home">
+          <img src="./logo.png" alt="Platform Play Venture">
+          <span class="visually-hidden">Platform Play Venture</span>
+        </a>
+        <button class="mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#clarity">Clarity</a>
+          <a href="#who">Who We Are</a>
+          <a href="#solutions">Solutions</a>
+          <a href="#principles">Principles</a>
+          <a href="#why">Why Us</a>
+          <a href="#insights">Insights</a>
+          <a class="nav-cta" href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
 
-            // Update progress fill subtly after time? optional: not needed, but we'll simulate 'last update' time realism
-            const lastUpdateEl = document.querySelector('.info-value');
-            if (lastUpdateEl && lastUpdateEl.innerText.includes('April 8, 2026')) {
-                // keep realistic but dynamic to reflect current time on hover? Not needed but nice to match Netlify's live feel
-                const now = new Date();
-                const formatted = now.toLocaleString('en-US', { timeZone: 'UTC', hour12: false });
-                // But we preserve initial design but make it dynamic to feel like live page? It could also keep static but design already authentic.
-                // we'll update only the minutes part to show realtime liveness - just subtle.
-                const updateSpan = document.querySelector('.info-item:first-child .info-value');
-                if (updateSpan) {
-                    const currentUTC = new Date().toISOString().replace(/T/, ' · ').replace(/\..+/, '').replace(/-/g, '/').slice(0, 19) + ' UTC';
-                    // convert to readable: 2026/04/08 · 15:04:05 UTC
-                    const parts = currentUTC.split(' · ');
-                    if (parts.length === 2) {
-                        const datePart = parts[0].replace(/\//g, '-');
-                        const timePart = parts[1];
-                        updateSpan.innerText = `${datePart} · ${timePart}`;
-                    }
-                }
-            }
-            
-            // Additional: add event listener to show that this is official Netlify maintenance page, without overriding any netlify assets
-            // Set document title
-            document.title = "Netlify Status - Maintenance in progress";
-            
-            // Simulate "refresh-note" click leads to nothing but shows tooltip effect? maintain design authenticity
-            const refreshNote = document.querySelector('.refresh-note');
-            if (refreshNote) {
-                refreshNote.style.cursor = 'default';
-            }
-            
-            // To match Netlify's typical support and contact, we also add an optional background message but keep as is
-            // No extra redirects.
-            console.log("%cNetlify Platform Maintenance Mode — This page reflects official Netlify server maintenance design.", "color: #2B9AFF; font-size: 12px;");
-        })();
-    </script>
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <div class="hero-content">
+            <div class="eyebrow">Strategic Growth Company</div>
+            <h1>Go Beyond Activity<br>Build Strategic Clarity</h1>
+            <p class="hero-copy">Want a clear view of why your brand is growing or why it isn't? We bring together strategy, execution, technology, and consumer understanding to turn scattered efforts into a structured growth system that supports real business outcomes.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#clarity">Learn About Win / Loss</a>
+              <a class="button button-outline" href="#solutions">Explore Solutions</a>
+            </div>
+            <div class="hero-metrics" aria-label="Platform Play Venture focus areas">
+              <div class="metric">
+                <strong>01</strong>
+                <span>Clarity before action</span>
+              </div>
+              <div class="metric">
+                <strong>02</strong>
+                <span>Strategy, technology, governance</span>
+              </div>
+              <div class="metric">
+                <strong>03</strong>
+                <span>Growth systems that compound</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="clarity">
+        <div class="container">
+          <div class="split">
+            <div class="reveal">
+              <div class="section-kicker">About Us</div>
+              <h2 class="section-title">Gain clarity where most brands struggle</h2>
+              <div class="section-lead">
+                <p>Building and growing a brand today takes more than marketing activity. It requires clear thinking, connected strategy, and the ability to align execution, technology, and capability in the right direction.</p>
+              </div>
+              <div class="split-copy" style="margin-top: 24px;">
+                <p>At Platform Play Venture, we work closely with businesses that want more than short-term campaigns. We help bring structure, clarity, and long-term direction so every effort contributes to meaningful business growth.</p>
+              </div>
+              <div class="button-row">
+                <a class="button button-dark" href="#principles">Learn About Strategic Intelligence</a>
+              </div>
+            </div>
+            <div class="image-stage reveal">
+              <img src="./Win Loss Analysis Research Methods Leader to Improve Sales Results_files/anova-hero-image_opt.jpg" alt="Strategic clarity and business intelligence visual">
+              <div class="image-caption">
+                <span>Reality Audit</span>
+                <span>Mindset Mapping</span>
+                <span>Growth Alignment</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="help-grid reveal">
+            <div>
+              <div class="section-kicker">How We Can Help</div>
+              <h2 class="section-title">A sharper path from brand reality to growth</h2>
+            </div>
+            <ul class="pill-list">
+              <li>Brand Reality Audit</li>
+              <li>Consumer Mindset Mapping</li>
+              <li>Digital & Technology Maturity Review</li>
+              <li>Growth Alignment Framework</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section band-soft" id="who">
+        <div class="container">
+          <div class="split">
+            <div class="image-stage reveal">
+              <img src="./index2_files/Home-Page-Banner1.gif" alt="Business team transforming complexity into clarity">
+            </div>
+            <div class="reveal">
+              <div class="section-kicker">Who We Are</div>
+              <h2 class="section-title">We are a <span>Strategic Growth Company</span></h2>
+              <div class="section-lead">
+                <p>Strategy firm? Consulting partner? Technology company? Governance support through a fractional CMO approach?</p>
+              </div>
+              <div class="split-copy" style="margin-top: 24px;">
+                <p>The truth is, we bring all of these together into one connected structure.</p>
+                <p>Platform Play Venture works with businesses that want clarity before action. We help define growth vision, shape brand and marketing strategy, build the right technology foundation, and bring structure to decision-making through strategic governance.</p>
+                <p>This is not about adding more marketing activity. It is about building a clear, sustainable way for a brand to grow with the right direction, systems, and leadership support.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="solutions">
+        <div class="container">
+          <div class="reveal">
+            <div class="section-kicker">Our Solutions</div>
+            <h2 class="section-title">What we <span>support brands with</span></h2>
+          </div>
+          <div class="feature-grid">
+            <article class="feature reveal">
+              <div>
+                <img src="./index2_files/Icons1-02.webp" alt="">
+                <h3>Strategy & Consulting</h3>
+                <p>We work with brands at the thinking stage first. This includes understanding the current position, aligning growth goals with business reality, defining brand direction, and creating a clear roadmap before anything moves forward.</p>
+              </div>
+              <a class="button button-muted" href="#contact">Know More</a>
+            </article>
+            <article class="feature reveal">
+              <div>
+                <img src="./index2_files/Icons1-03.webp" alt="">
+                <h3>Marketing Governance through a Fractional CMO Approach</h3>
+                <p>We take responsibility for how marketing is planned and executed. As a fractional CMO, we work with the brand's existing agencies, agencies from our network, or any new agency the brand chooses to onboard. Our role is to guide the direction, align execution with strategy, and ensure every campaign, platform, and activity moves the brand towards the same business goal.</p>
+              </div>
+              <a class="button button-muted" href="#contact">Know More</a>
+            </article>
+            <article class="feature reveal">
+              <div>
+                <img src="./index2_files/Icons1-04.webp" alt="">
+                <h3>Technology Development & Digital Platforms</h3>
+                <p>We analyse the current technology ecosystem, identify gaps that affect performance, and build the right technology assets to support long-term growth. This can include websites, apps, or custom tools based on the brand's requirements.</p>
+              </div>
+              <a class="button button-muted" href="#contact">Know More</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section band-ink" id="principles">
+        <div class="container">
+          <div class="reveal">
+            <div class="section-kicker">PPV Belief System</div>
+            <h2 class="section-title">A system of principles that turns <span>thinking, perception, and strategic clarity into stronger business decisions.</span></h2>
+          </div>
+          <div class="principles">
+            <div class="principle-visual reveal">
+              <img src="./index2_files/order_icon.png" alt="Order principle icon">
+              <img src="./index2_files/flow_icon.png" alt="Flow principle icon">
+              <img src="./index2_files/entropy.png" alt="Entropy principle icon">
+            </div>
+            <div class="reveal">
+              <div class="quote-block">Nature prefers the Goldilocks state of <span>Flow</span> which is a <span>Harmony</span> between Order and Entropy.</div>
+              <div class="thought-grid">
+                <article class="thought">
+                  <h3>Why?</h3>
+                  <p>"Learning is the rate of change of Knowledge... It is more important than Knowing...Yesterday, companies were competing on Knowledge...Today, companies are competing on learning...Tomorrow, companies will compete on rate of change of Learning; we don't yet have an english word for that!"</p>
+                </article>
+                <article class="thought">
+                  <h3>What?</h3>
+                  <p>"Most of us feel we know more than we actually do... We are like monkeys throwing darts at moving dartboards. Our hubris wants us to believe that we can throw more darts by reducing the cost per dart... This will improve our chances of hitting bullseye. Extreme experimentation is the key to innovation."</p>
+                </article>
+                <article class="thought">
+                  <h3>How?</h3>
+                  <p>"The new IP is no more just intellectual property...it is Interaction Property. The new IP is open and wants to connect, as opposed to the old IP which is closed. The new IP believes that to compete well, you need to complete the ideas by linking them across entities, functions and disciplines."</p>
+                </article>
+              </div>
+              <div class="definitions">
+                <p>"All entities in nature, animate or inanimate, cease to exist if they are not in a state of Flow. To feel and be alive, the configuration of a Flow System must evolve in such a way that provides easier access to currents that flow through it."</p>
+                <p style="margin-top: 12px;">1. harmony = appreciation for duality in pursuit of singularity</p>
+                <p>2. flow system = current that is flowing + design through which it flows</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section band-soft" id="why">
+        <div class="container">
+          <div class="reveal">
+            <div class="section-kicker">Why Choose Us</div>
+            <h2 class="section-title">Your Partner in <span>Transforming Complexity Into Clarity</span></h2>
+            <div class="section-lead">
+              <p>We are a pure play decision science company, built to elevate decisions and drive impact.</p>
+            </div>
+          </div>
+          <div class="why-list">
+            <article class="why-item reveal">
+              <div class="num">01</div>
+              <div>
+                <h3>A partner that brings clarity where brands feel complexity the most</h3>
+                <p>We work with businesses that want to move beyond fragmented marketing and unclear decision-making. Platform Play Venture partners with brands that want structure, strategic clarity, and a long-term way to grow rather than short-term activity.</p>
+              </div>
+            </article>
+            <article class="why-item reveal">
+              <div class="num">02</div>
+              <div>
+                <h3>We Work on Thinking, Not Just Marketing</h3>
+                <p>While others focus on campaigns, content, ads or platforms. We focus on the thinking behind them. From brand positioning, consumer mindset mapping and growth direction to technology alignment and governance, the goal is to ensure every decision supports the business goals, not just the marketing plan.</p>
+              </div>
+            </article>
+            <article class="why-item reveal">
+              <div class="num">03</div>
+              <div>
+                <h3>We Operationalize Intelligence at Scale.</h3>
+                <p>Our Decision OS, muAoPS(tm), brings structure to problem-solving. It transforms data, models, and actions into a repeatable system for faster, smarter enterprise outcomes.</p>
+              </div>
+            </article>
+            <article class="why-item reveal">
+              <div class="num">04</div>
+              <div>
+                <h3>We Bring Structure Where Most Brands Feel Chaos</h3>
+                <p>Many businesses work with multiple agencies, multiple platforms, and multiple ideas at the same time. We help bring clarity to priorities, structure to decision-making, and consistency to how the brand moves forward.</p>
+              </div>
+            </article>
+            <article class="why-item reveal">
+              <div class="num">05</div>
+              <div>
+                <h3>We Connect Strategy, Technology, and Governance</h3>
+                <p>Instead of treating strategy, digital platforms, and decision making as separate pieces, we bring them together into one structured system. This helps brands move with more confidence and less confusion.</p>
+              </div>
+            </article>
+          </div>
+          <div class="button-row reveal">
+            <a class="button button-dark" href="#contact">Connect With Us</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section band-ink" id="insights">
+        <div class="container">
+          <div class="reveal">
+            <div class="section-kicker">Insights</div>
+            <h2 class="section-title">Perspectives shaped by <span>real brand experience</span></h2>
+          </div>
+          <div class="insight-grid">
+            <article class="insight-card reveal">
+              <img src="./index2_files/Field-of-Context.png" alt="Field of Context">
+              <div>
+                <h3>muUniverse: A Field of Context for Memory in Complex Organizat...</h3>
+                <p>Intelligence is everywhere. Judgment is not. Mu Sigma Founder and CEO Dhiraj Rajaram m...</p>
+              </div>
+            </article>
+            <article class="insight-card reveal">
+              <img src="./index2_files/The-Source-is-Unconscious-Intuition.webp" alt="The Source is Unconscious Intuition">
+              <div>
+                <h3>The Source is Unconscious Intuition</h3>
+                <p>All of the universe is either actively or passively in its quest of the spirit ... that d...</p>
+              </div>
+            </article>
+            <article class="insight-card reveal">
+              <img src="./index2_files/not-2-but-1.webp" alt="Not 2 but 1">
+              <div>
+                <h3>Not 2 but 1</h3>
+                <p>Money is value created in the past. Ideas and talent are values that get created in the...</p>
+              </div>
+            </article>
+            <article class="insight-card reveal">
+              <img src="./index2_files/Why-Data-Visualization-Is-Now-Essential-for-Modern-Finance.webp" alt="Data Visualization in Finance">
+              <div>
+                <h3>Data Visualization in Finance: Dashboards for KPIs</h3>
+                <p>Introduction: Why dashboards matter in Finance. Financial data has become impossibly co...</p>
+              </div>
+            </article>
+            <article class="insight-card reveal">
+              <img src="./index2_files/Business-Intelligence-vs-Data-Analytics-for-Leaders-Guide.webp" alt="Business Intelligence vs Data Analytics for Leaders Guide">
+              <div>
+                <h3>Difference Between Business Intelligence and Data Analytics</h3>
+                <p>Business intelligence and data analytics sound interchangeable. They're not. The right ...</p>
+              </div>
+            </article>
+            <article class="insight-card reveal">
+              <img src="./index2_files/Data-Democratization-Strategy-to-Transform-Your-Business-Decisions.webp" alt="Data Democratization Strategy to Transform Your Business Decisions">
+              <div>
+                <h3>Data Democratization Strategy to Transform Your Business Decis...</h3>
+                <p>If your organization still waits days or weeks for insights that should shape today's d...</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="contact">
+        <div class="container cta-inner reveal">
+          <div class="section-kicker">Ready to Transform</div>
+          <h2>It's Time to <span>Do the Math.</span></h2>
+          <p>Let's turn your data, algorithms, and curiosity into decisions that move the markets.</p>
+          <div class="button-row">
+            <a class="button button-primary" href="mailto:hello@platformplayventure.com">Connect With Us</a>
+            <a class="button button-outline" href="#home">Back to Top</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <a class="footer-logo" href="#home" aria-label="Platform Play Venture home">
+          <img src="./logo.png" alt="Platform Play Venture">
+        </a>
+      </div>
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <div class="footer-title">Reimagining business through the power of AI, data, and decision science</div>
+          <p class="footer-description">Explore our core thinking, solution areas, principles, and insights from one place. Stay connected with Platform Play Venture for strategic growth updates.</p>
+          <div class="footer-social" aria-label="Platform Play Venture social links">
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.03-1.85-3.03-1.85 0-2.13 1.45-2.13 2.94v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.61 0 4.27 2.38 4.27 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg>
+            </a>
+            <a href="https://x.com/" target="_blank" rel="noreferrer" aria-label="X">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2H21l-6.6 7.54L22 22h-5.95l-4.65-6.08L6.08 22H3.3l7.07-8.08L2 2h6.1l4.2 5.54L18.24 2zm-1.05 18h1.65L7.2 3.9H5.42L17.19 20z"></path></svg>
+            </a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a2.95 2.95 0 0 0-2.08-2.08C19.56 3.6 12 3.6 12 3.6s-7.56 0-9.42.52A2.95 2.95 0 0 0 .5 6.2 30.4 30.4 0 0 0 0 12a30.4 30.4 0 0 0 .5 5.8 2.95 2.95 0 0 0 2.08 2.08C4.44 20.4 12 20.4 12 20.4s7.56 0 9.42-.52a2.95 2.95 0 0 0 2.08-2.08A30.4 30.4 0 0 0 24 12a30.4 30.4 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z"></path></svg>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.84.07 1.16.06 1.79.25 2.21.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.42.36 1.05.42 2.21.06 1.26.07 1.64.07 4.84s-.01 3.58-.07 4.84c-.06 1.16-.25 1.79-.42 2.21a3.7 3.7 0 0 1-.9 1.38 3.7 3.7 0 0 1-1.38.9c-.42.17-1.05.36-2.21.42-1.26.06-1.64.07-4.84.07s-3.58-.01-4.84-.07c-1.16-.06-1.79-.25-2.21-.42a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.17-.42-.36-1.05-.42-2.21C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.84c.06-1.16.25-1.79.42-2.21.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.17 1.05-.36 2.21-.42C8.42 2.17 8.8 2.16 12 2.16zm0 1.62a8.22 8.22 0 1 0 0 16.44 8.22 8.22 0 0 0 0-16.44zm0 13.56a5.34 5.34 0 1 1 0-10.68 5.34 5.34 0 0 1 0 10.68zm6.8-11.94a1.92 1.92 0 1 1-3.84 0 1.92 1.92 0 0 1 3.84 0z"></path></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Explore</div>
+          <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#clarity">Clarity</a>
+            <a href="#who">Who We Are</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#principles">Principles</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">References</div>
+          <div class="footer-links">
+            <a href="#why">Why Choose Us</a>
+            <a href="#insights">Insights</a>
+            <a href="#contact">Contact</a>
+            <a href="mailto:hello@platformplayventure.com">Email Us</a>
+            <a href="#home">Back to Top</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="copyright">Copyright (c) 2026 Platform Play Venture. All rights reserved.</div>
+          <div class="footer-bottom-links">
+            <a href="#clarity">Start with Clarity</a>
+            <a href="#contact">Talk to Our Team</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const body = document.body;
+    const loader = document.querySelector(".loader");
+    const shell = document.querySelector(".site-shell");
+    const nav = document.querySelector(".nav");
+    const toggle = document.querySelector(".mobile-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    const progress = document.querySelector(".scroll-progress");
+    const menuLinks = [...document.querySelectorAll(".nav-links a")];
+    const sections = menuLinks
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    const updateScrollState = () => {
+      const scrolled = window.scrollY > 18;
+      nav.classList.toggle("is-scrolled", scrolled);
+
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = height > 0 ? window.scrollY / height : 0;
+      progress.style.transform = `scaleX(${Math.min(1, Math.max(0, ratio))})`;
+    };
+
+    const setActiveLink = () => {
+      const marker = Math.max(130, window.innerHeight * 0.34);
+      const current = sections.find((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= marker && rect.bottom >= marker;
+      });
+
+      menuLinks.forEach((link) => {
+        link.classList.toggle("is-active", Boolean(current) && link.getAttribute("href") === `#${current.id}`);
+      });
+    };
+
+    window.addEventListener("load", () => {
+      window.setTimeout(() => {
+        loader.classList.add("is-hidden");
+        shell.classList.add("is-ready");
+        body.classList.remove("is-loading");
+        updateScrollState();
+        setActiveLink();
+      }, 1550);
+    });
+
+    window.addEventListener("scroll", () => {
+      updateScrollState();
+      setActiveLink();
+    }, { passive: true });
+
+    toggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("is-open");
+      nav.classList.toggle("is-open", isOpen);
+      body.classList.toggle("menu-open", isOpen);
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        navLinks.classList.remove("is-open");
+        nav.classList.remove("is-open");
+        body.classList.remove("menu-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.18,
+      rootMargin: "0px 0px -8% 0px"
+    });
+
+    document.querySelectorAll(".reveal").forEach((element, index) => {
+      element.style.setProperty("--delay", `${Math.min(index % 5, 4) * 70}ms`);
+      observer.observe(element);
+    });
+
+    document.querySelectorAll("main > section:not(.hero), .footer").forEach((section, index) => {
+      section.classList.add("section-flow");
+      section.style.setProperty("--section-delay", `${Math.min(index, 3) * 40}ms`);
+      sectionObserver.observe(section);
+    });
+
+    updateScrollState();
+    setActiveLink();
+  </script>
 </body>
 </html>
