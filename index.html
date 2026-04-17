@@ -743,15 +743,27 @@
     }
 
     .pill-list li {
+      display: flex;
+      flex-direction: column;
       border: 1px solid var(--line);
+      border-top: 3px solid var(--teal);
       border-radius: var(--radius);
       background: #fff;
-      padding: 18px 20px;
+      padding: 26px 28px;
       font-size: 1.08rem;
       font-weight: 800;
       box-shadow: 0 14px 32px rgba(17, 17, 17, 0.04);
-      transform: translateX(0);
       transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .pill-list li::before {
+      content: attr(data-icon) " " attr(data-step);
+      display: block;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--teal);
+      margin-bottom: 12px;
+      letter-spacing: 0.1em;
     }
 
     .pill-list li:hover {
@@ -1684,15 +1696,15 @@
             <div>
               <div class="section-kicker">How We Can Help</div>
               <h2 class="section-title">A sharper path from brand reality to growth</h2>
-              <div class="section-lead">
+              <div class="section-lead" style="max-width: 620px;">
                 <p>We help brands move from diagnosis to aligned action through four focused interventions that connect strategy, perception, and execution.</p>
               </div>
             </div>
             <ul class="pill-list">
-              <li>Brand Reality Audit</li>
-              <li>Consumer Mindset Mapping</li>
-              <li>Digital & Technology Maturity Review</li>
-              <li>Growth Alignment Framework</li>
+              <li class="reveal" style="--delay: 0ms;" data-step="01" data-icon="📋">Brand Reality Audit</li>
+              <li class="reveal" style="--delay: 120ms;" data-step="02" data-icon="🧠">Consumer Mindset Mapping</li>
+              <li class="reveal" style="--delay: 240ms;" data-step="03" data-icon="⚙️">Digital & Technology Maturity Review</li>
+              <li class="reveal" style="--delay: 360ms;" data-step="04" data-icon="🎯">Growth Alignment Framework</li>
             </ul>
           </div>
         </div>
