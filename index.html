@@ -756,14 +756,23 @@
       transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
     }
 
-    .pill-list li::before {
-      content: attr(data-icon) " " attr(data-step);
-      display: block;
-      font-size: 1.4rem;
-      font-weight: 400;
+    .pill-icon {
+      width: 32px;
+      height: 32px;
       color: var(--teal);
       margin-bottom: 12px;
-      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+
+    .pill-list li::before {
+      content: attr(data-step);
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
     }
 
     .pill-list li:hover {
@@ -1701,10 +1710,34 @@
               </div>
             </div>
             <ul class="pill-list">
-              <li class="reveal" style="--delay: 0ms;" data-step="01" data-icon="📋">Brand Reality Audit</li>
-              <li class="reveal" style="--delay: 120ms;" data-step="02" data-icon="🧠">Consumer Mindset Mapping</li>
-              <li class="reveal" style="--delay: 240ms;" data-step="03" data-icon="⚙️">Digital & Technology Maturity Review</li>
-              <li class="reveal" style="--delay: 360ms;" data-step="04" data-icon="🎯">Growth Alignment Framework</li>
+              <li class="reveal" style="--delay: 0ms;" data-step="01">
+                <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V5z"/>
+                  <path d="M9 13a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-6z"/>
+                </svg>
+                Brand Reality Audit
+              </li>
+              <li class="reveal" style="--delay: 120ms;" data-step="02">
+                <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                  <circle cx="12" cy="12" r="1.5"/>
+                  <path d="M12 6v4m0 4v0" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                Consumer Mindset Mapping
+              </li>
+              <li class="reveal" style="--delay: 240ms;" data-step="03">
+                <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="3.5"/>
+                  <path d="M12 1v5M12 18v5M23 12h-5M6 12H1M19.07 4.93l-3.54 3.54M8.47 19.53l-3.54 3.54M19.07 19.07l-3.54-3.54M8.47 4.93L4.93 8.47"/>
+                </svg>
+                Digital & Technology Maturity Review
+              </li>
+              <li class="reveal" style="--delay: 360ms;" data-step="04">
+                <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M5 12h14M12 5v14M5 12l3-3m-3 3l3 3m9-6l-3 3m3-3l-3-3"/>
+                </svg>
+                Growth Alignment Framework
+              </li>
             </ul>
           </div>
         </div>
