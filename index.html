@@ -21,6 +21,7 @@
       --shadow-strong: 0 34px 90px rgba(17, 17, 17, 0.18);
       --max: 1180px;
       --nav-h: 74px;
+      --radius: 12px;
     }
 
     * {
@@ -37,7 +38,7 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
       background: var(--paper);
-      line-height: 1.5;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
@@ -431,7 +432,7 @@
 
     .hero h1 {
       max-width: 950px;
-      font-size: 7.4rem;
+      font-size: clamp(3rem, 5.7vw, 4.5rem);
       opacity: 0;
       transform: translateY(26px);
     }
@@ -440,7 +441,7 @@
       max-width: 720px;
       margin-top: 28px;
       color: rgba(255, 255, 255, 0.88);
-      font-size: 1.28rem;
+      font-size: 1.08rem;
       opacity: 0;
       transform: translateY(22px);
     }
@@ -555,11 +556,12 @@
       align-items: center;
       justify-content: center;
       min-height: 48px;
-      border-radius: 8px;
+      border-radius: var(--radius);
       border: 1px solid transparent;
       padding: 13px 20px;
       font-weight: 850;
-      font-size: 0.9rem;
+      font-family: inherit;
+      font-size: 1rem;
       text-transform: uppercase;
       transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
     }
@@ -626,7 +628,7 @@
 
     .section-title {
       max-width: 980px;
-      font-size: 4.6rem;
+      font-size: clamp(2.3rem, 4.2vw, 3rem);
     }
 
     .section-title span,
@@ -640,10 +642,10 @@
     }
 
     .section-lead {
-      max-width: 790px;
+      max-width: 800px;
       margin-top: 22px;
       color: var(--muted);
-      font-size: 1.2rem;
+      font-size: 1.08rem;
     }
 
     .band-ink .section-lead,
@@ -662,8 +664,9 @@
     }
 
     .split-copy {
+      max-width: 800px;
       color: var(--muted);
-      font-size: 1.12rem;
+      font-size: 1.02rem;
     }
 
     .split-copy p + p {
@@ -673,7 +676,7 @@
     .image-stage {
       position: relative;
       min-height: 440px;
-      border-radius: 8px;
+      border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
       background: #dfe4df;
@@ -709,7 +712,7 @@
     }
 
     .image-caption span {
-      border-radius: 8px;
+      border-radius: var(--radius);
       padding: 12px;
       background: rgba(255, 255, 255, 0.9);
       color: var(--ink);
@@ -736,10 +739,10 @@
 
     .pill-list li {
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: var(--radius);
       background: #fff;
       padding: 18px 20px;
-      font-size: 1.28rem;
+      font-size: 1.08rem;
       font-weight: 800;
       box-shadow: 0 14px 32px rgba(17, 17, 17, 0.04);
       transform: translateX(0);
@@ -767,7 +770,7 @@
       flex-direction: column;
       justify-content: space-between;
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: var(--radius);
       padding: 28px;
       background: #fff;
       transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
@@ -820,7 +823,7 @@
       .thought h3,
       .insight-card h3 {
       margin: 0;
-      font-size: 1.85rem;
+      font-size: 1.5rem;
       line-height: 1.08;
       letter-spacing: 0;
     }
@@ -828,7 +831,7 @@
     .feature p {
       margin-top: 18px;
       color: var(--muted);
-      font-size: 0.98rem;
+      font-size: 1rem;
     }
 
     .principles {
@@ -885,7 +888,7 @@
 
     .thought {
       border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 8px;
+      border-radius: var(--radius);
       padding: 24px;
       background: rgba(255, 255, 255, 0.06);
       transition: transform 260ms ease, border-color 260ms ease;
@@ -921,7 +924,7 @@
       gap: 1px;
       margin-top: 54px;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: var(--radius);
       overflow: hidden;
       background: var(--line);
     }
@@ -945,7 +948,7 @@
       height: 54px;
       display: grid;
       place-items: center;
-      border-radius: 8px;
+      border-radius: var(--radius);
       background: var(--ink);
       color: #fff;
       font-weight: 900;
@@ -999,7 +1002,7 @@
     }
 
     .insight-card {
-      border-radius: 12px;
+      border-radius: var(--radius);
       overflow: hidden;
       background: #fff;
       color: var(--ink);
@@ -1008,8 +1011,8 @@
     }
 
     .insight-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-strong);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 58px rgba(0, 0, 0, 0.2);
     }
 
     .insight-card img {
@@ -1045,7 +1048,7 @@
     .insight-card p {
       margin-top: 12px;
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 1rem;
     }
 
     .faq-shell {
@@ -1059,7 +1062,7 @@
 
     .faq-item {
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: var(--radius);
       background: #fff;
       overflow: hidden;
       transition: border-color 220ms ease, box-shadow 220ms ease;
@@ -1074,7 +1077,7 @@
       position: relative;
       cursor: pointer;
       padding: 18px 52px 18px 20px;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 760;
       list-style: none;
     }
@@ -1102,7 +1105,7 @@
       border-top: 1px solid rgba(17, 17, 17, 0.08);
       padding: 0 20px 18px;
       color: var(--muted);
-      font-size: 0.98rem;
+      font-size: 1rem;
     }
 
     .faq-answer p {
@@ -1127,14 +1130,14 @@
 
     .cta h2 {
       max-width: 900px;
-      font-size: 6.2rem;
+      font-size: clamp(2.3rem, 4.2vw, 3rem);
     }
 
     .cta p {
       max-width: 620px;
       margin-top: 24px;
       color: rgba(255, 255, 255, 0.78);
-      font-size: 1.2rem;
+      font-size: 1.05rem;
     }
 
     .footer {
@@ -1379,15 +1382,15 @@
       }
 
       .hero h1 {
-        font-size: 5.4rem;
+        font-size: 3.8rem;
       }
 
       .section-title {
-        font-size: 3.5rem;
+        font-size: 2.6rem;
       }
 
       .cta h2 {
-        font-size: 4.8rem;
+        font-size: 2.6rem;
       }
     }
 
@@ -1431,7 +1434,7 @@
       }
 
       .hero h1 {
-        font-size: 3.65rem;
+        font-size: 3rem;
       }
 
       .hero-copy,
@@ -1452,7 +1455,7 @@
       }
 
       .section-title {
-        font-size: 2.7rem;
+        font-size: 2rem;
         line-height: 1.02;
       }
 
@@ -1460,7 +1463,7 @@
       .why-item h3,
       .thought h3,
       .insight-card h3 {
-        font-size: 1.45rem;
+        font-size: 1.25rem;
       }
 
       .quote-block {
@@ -1481,7 +1484,7 @@
       }
 
       .cta h2 {
-        font-size: 3.2rem;
+        font-size: 2rem;
       }
 
       .footer-title {
@@ -1528,11 +1531,11 @@
       }
 
       .hero h1 {
-        font-size: 3.05rem;
+        font-size: 2.55rem;
       }
 
       .section-title {
-        font-size: 2.32rem;
+        font-size: 2rem;
       }
 
       .button {
