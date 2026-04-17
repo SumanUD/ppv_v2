@@ -723,14 +723,15 @@
 
     .help-grid {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: clamp(28px, 6vw, 78px);
+      grid-template-columns: 1fr;
+      gap: 22px;
       align-items: start;
       margin-top: 54px;
     }
 
     .pill-list {
       display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
       margin: 0;
       padding: 0;
@@ -750,7 +751,7 @@
     }
 
     .pill-list li:hover {
-      transform: translateX(8px);
+      transform: translateY(-4px);
       border-color: rgba(2, 125, 115, 0.38);
       box-shadow: 0 18px 42px rgba(17, 17, 17, 0.08);
     }
@@ -802,6 +803,10 @@
 
     .feature:hover img {
       transform: scale(1.08) rotate(-4deg);
+    }
+
+    .feature-icon-teal {
+      filter: hue-rotate(126deg) saturate(1.45) brightness(0.96);
     }
 
     .feature-meta {
@@ -900,8 +905,7 @@
     }
 
     .thought h3 {
-      color: var(--yellow);
-      font-size: 1rem;
+      color: #fff;
       text-transform: uppercase;
     }
 
@@ -1042,7 +1046,7 @@
     }
 
     .insight-card h3 {
-      font-size: 1.32rem;
+      font-size: 1.5rem;
     }
 
     .insight-card p {
@@ -1463,7 +1467,11 @@
       .why-item h3,
       .thought h3,
       .insight-card h3 {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
+      }
+
+      .pill-list {
+        grid-template-columns: 1fr;
       }
 
       .quote-block {
@@ -1715,7 +1723,7 @@
             <article class="feature reveal">
               <div>
                 <span class="feature-meta">Solution 01</span>
-                <img src="./index2_files/Icons1-02.webp" alt="">
+                <img class="feature-icon-teal" src="./index2_files/Icons1-02.webp" alt="">
                 <h3>Strategy & Consulting</h3>
                 <p>We work with brands at the thinking stage first. This includes understanding the current position, aligning growth goals with business reality, defining brand direction, and creating a clear roadmap before anything moves forward.</p>
               </div>
