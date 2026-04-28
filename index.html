@@ -338,7 +338,7 @@
     }
 
     .hero {
-      min-height: 88svh;
+      min-height: 100svh;
       display: grid;
       align-items: end;
       position: relative;
@@ -415,7 +415,7 @@
     .hero-inner {
       width: min(var(--max), calc(100% - 40px));
       margin: 0 auto;
-      padding: calc(var(--nav-h) + 64px) 0 52px;
+      padding: calc(var(--nav-h) + 80px) 0 80px;
     }
 
     .hero-content {
@@ -426,7 +426,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
       font-size: 0.82rem;
       font-weight: 850;
       text-transform: uppercase;
@@ -455,13 +455,14 @@
     .hero h1 {
       max-width: 950px;
       font-size: clamp(3rem, 5.7vw, 4.5rem);
+      margin-bottom: 24px;
       opacity: 0;
       transform: translateY(26px);
     }
 
     .hero-copy {
       max-width: 720px;
-      margin-top: 28px;
+      margin-top: 36px;
       color: rgba(255, 255, 255, 0.88);
       font-size: 1.08rem;
       opacity: 0;
@@ -1281,6 +1282,70 @@
       font-size: 1.05rem;
     }
 
+    .contact-form {
+      margin-top: 48px;
+      max-width: 760px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: clamp(24px, 4vw, 40px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .contact-form label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.5px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--teal);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .form-actions {
+      margin-top: 12px;
+    }
+
     .footer {
       position: relative;
       overflow: hidden;
@@ -1605,7 +1670,7 @@
       }
 
       .hero {
-        min-height: 86svh;
+        min-height: 100svh;
       }
 
       .hero-bg {
@@ -1797,7 +1862,6 @@
           <a href="#solutions">Solutions</a>
           <a href="#principles">Principles</a>
           <a href="#why">Why Us</a>
-          <a href="#insights">Insights</a>
           <a href="#faq">FAQ</a>
           <a class="nav-cta" href="#contact">Contact</a>
         </nav>
@@ -2618,70 +2682,6 @@
         </div>
       </section>
 
-      <section class="section band-ink" id="insights">
-        <div class="container">
-          <div class="reveal">
-            <div class="section-kicker">Insights</div>
-            <h2 class="section-title">Perspectives shaped by <span>real brand experience</span></h2>
-            <p class="insight-intro">For now this section includes Blogs and Case Studies. Whitepapers will be added in a later phase.</p>
-            <ul class="insight-tags" aria-label="Insight categories">
-              <li>Blogs</li>
-              <li>Case Studies</li>
-              <li>Whitepapers (Soon)</li>
-            </ul>
-          </div>
-          <div class="insight-grid">
-            <article class="insight-card reveal">
-              <img src="./index2_files/Field-of-Context.png" alt="Field of Context">
-              <div>
-                <span class="insight-meta">Blog</span>
-                <h3>muUniverse: A Field of Context for Memory in Complex Organizat...</h3>
-                <p>Intelligence is everywhere. Judgment is not. Mu Sigma Founder and CEO Dhiraj Rajaram m...</p>
-              </div>
-            </article>
-            <article class="insight-card reveal">
-              <img src="./index2_files/The-Source-is-Unconscious-Intuition.webp" alt="The Source is Unconscious Intuition">
-              <div>
-                <span class="insight-meta">Blog</span>
-                <h3>The Source is Unconscious Intuition</h3>
-                <p>All of the universe is either actively or passively in its quest of the spirit ... that d...</p>
-              </div>
-            </article>
-            <article class="insight-card reveal">
-              <img src="./index2_files/not-2-but-1.webp" alt="Not 2 but 1">
-              <div>
-                <span class="insight-meta">Case Study</span>
-                <h3>Not 2 but 1</h3>
-                <p>Money is value created in the past. Ideas and talent are values that get created in the...</p>
-              </div>
-            </article>
-            <article class="insight-card reveal">
-              <img src="./index2_files/Why-Data-Visualization-Is-Now-Essential-for-Modern-Finance.webp" alt="Data Visualization in Finance">
-              <div>
-                <span class="insight-meta">Case Study</span>
-                <h3>Data Visualization in Finance: Dashboards for KPIs</h3>
-                <p>Introduction: Why dashboards matter in Finance. Financial data has become impossibly co...</p>
-              </div>
-            </article>
-            <article class="insight-card reveal">
-              <img src="./index2_files/Business-Intelligence-vs-Data-Analytics-for-Leaders-Guide.webp" alt="Business Intelligence vs Data Analytics for Leaders Guide">
-              <div>
-                <span class="insight-meta">Blog</span>
-                <h3>Difference Between Business Intelligence and Data Analytics</h3>
-                <p>Business intelligence and data analytics sound interchangeable. They're not. The right ...</p>
-              </div>
-            </article>
-            <article class="insight-card reveal">
-              <img src="./index2_files/Data-Democratization-Strategy-to-Transform-Your-Business-Decisions.webp" alt="Data Democratization Strategy to Transform Your Business Decisions">
-              <div>
-                <span class="insight-meta">Blog</span>
-                <h3>Data Democratization Strategy to Transform Your Business Decis...</h3>
-                <p>If your organization still waits days or weeks for insights that should shape today's d...</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
 
       <section class="section band-soft" id="faq">
         <div class="container">
@@ -2732,12 +2732,32 @@
       <section class="cta" id="contact">
         <div class="container cta-inner reveal">
           <div class="section-kicker">Ready to Transform</div>
-          <h2>It's Time to <span>Do the Math.</span></h2>
-          <p>Let's turn your data, algorithms, and curiosity into decisions that move the markets.</p>
-          <div class="button-row">
-            <a class="button button-primary" href="mailto:hello@platformplayventure.com">Connect With Us</a>
-            <a class="button button-outline" href="#home">Back to Top</a>
-          </div>
+          <h2>It's Time to <span>Connect.</span></h2>
+          <p>Let's turn your data, algorithms, and curiosity into decisions that move the markets. Fill out the form below and we'll get in touch.</p>
+          
+          <form class="contact-form" action="mailto:hello@platformplayventure.com" method="POST" enctype="text/plain">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="Name" required placeholder="Your Name">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="Email" required placeholder="your.email@example.com">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="Phone" placeholder="Your Phone Number">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="Message" rows="4" required placeholder="How can we help?"></textarea>
+            </div>
+            <div class="button-row form-actions">
+              <button type="submit" class="button button-primary">Send Message</button>
+            </div>
+          </form>
         </div>
       </section>
     </main>
@@ -2751,7 +2771,7 @@
       <div class="container footer-inner">
         <div class="footer-brand">
           <div class="footer-title">Reimagining business through the power of AI, data, and decision science</div>
-          <p class="footer-description">Explore our core thinking, solution areas, principles, and insights from one place. Stay connected with Platform Play Venture for strategic growth updates.</p>
+          <p class="footer-description">Explore our core thinking, solution areas, and principles from one place. Stay connected with Platform Play Venture for strategic growth updates.</p>
           <div class="footer-social" aria-label="Platform Play Venture social links">
             <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.03-1.85-3.03-1.85 0-2.13 1.45-2.13 2.94v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.61 0 4.27 2.38 4.27 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45z"></path></svg>
@@ -2781,7 +2801,6 @@
           <div class="footer-heading">References</div>
           <div class="footer-links">
             <a href="#why">Why Choose Us</a>
-            <a href="#insights">Insights</a>
             <a href="#faq">FAQ</a>
             <a href="#contact">Contact</a>
             <a href="mailto:hello@platformplayventure.com">Email Us</a>
