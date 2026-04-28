@@ -1537,13 +1537,14 @@
 
     @media (max-width: 980px) {
       .nav {
-        border-bottom-color: rgba(17, 17, 17, 0.05);
-        background: rgba(255, 255, 255, 0.98);
+        border-bottom-color: rgba(255, 255, 255, 0.05);
+        background: rgba(16, 17, 17, 0.98);
       }
       .nav.is-scrolled,
       .nav.is-open {
-        border-bottom-color: rgba(17, 17, 17, 0.1);
-        background: rgba(255, 255, 255, 0.98);
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+        background: rgba(16, 17, 17, 0.98);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
       }
       
       .hero {
