@@ -931,15 +931,18 @@
       box-shadow: 0 26px 62px rgba(17, 17, 17, 0.12);
     }
 
-    .feature img {
+    .feature img,
+    .feature svg {
       width: 72px;
       height: 72px;
       object-fit: contain;
       margin-bottom: 34px;
       transition: transform 420ms ease;
+      display: block;
     }
 
-    .feature:hover img {
+    .feature:hover img,
+    .feature:hover svg {
       transform: scale(1.08) rotate(-4deg);
     }
 
@@ -2439,7 +2442,17 @@
             <article class="feature reveal">
               <div>
                 <span class="feature-meta">Solution 01</span>
-                <img class="feature-icon-teal" src="./index2_files/Icons1-02.webp" alt="">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="16" fill="none" stroke="#027d73" stroke-width="6"/>
+                  <circle cx="50" cy="50" r="8" fill="#027d73"/>
+                  <circle cx="22" cy="22" r="8" fill="#0e445b"/>
+                  <circle cx="82" cy="24" r="6" fill="#1ce9b6"/>
+                  <circle cx="24" cy="82" r="10" fill="#1ce9b6"/>
+                  <circle cx="78" cy="78" r="8" fill="#0e445b"/>
+                  <circle cx="12" cy="50" r="6" fill="#0e445b"/>
+                  <circle cx="88" cy="50" r="8" fill="#027d73"/>
+                  <path d="M28 28 L39 39 M78 28 L61 39 M29 77 L39 61 M74 74 L61 61 M18 50 L34 50 M80 50 L66 50" stroke="#027d73" stroke-width="3" stroke-linecap="round"/>
+                </svg>
                 <h3>Strategy & Consulting</h3>
                 <p>We work with brands at the thinking stage first. This includes understanding the current position, aligning growth goals with business reality, defining brand direction, and creating a clear roadmap before anything moves forward.</p>
               </div>
@@ -2448,7 +2461,16 @@
             <article class="feature reveal">
               <div>
                 <span class="feature-meta">Solution 02</span>
-                <img src="./index2_files/Icons1-03.webp" alt="">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="#e79b18" stroke-width="4" stroke-dasharray="8 8"/>
+                  <circle cx="50" cy="50" r="32" fill="none" stroke="#0e445b" stroke-width="2"/>
+                  <path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" fill="#027d73" opacity="0.9"/>
+                  <path d="M50 10 L60 40 L50 50 Z" fill="#1ce9b6"/>
+                  <path d="M50 50 L60 60 L50 90 Z" fill="#1ce9b6"/>
+                  <path d="M10 50 L40 40 L50 50 Z" fill="#0e445b"/>
+                  <path d="M50 50 L40 60 L10 50 Z" fill="#0e445b"/>
+                  <circle cx="50" cy="50" r="6" fill="#fff" stroke="#e79b18" stroke-width="3"/>
+                </svg>
                 <h3>Marketing Governance through a Fractional CMO Approach</h3>
                 <p>We take responsibility for how marketing is planned and executed. As a fractional CMO, we work with the brand's existing agencies, agencies from our network, or any new agency the brand chooses to onboard. Our role is to guide the direction, align execution with strategy, and ensure every campaign, platform, and activity moves the brand towards the same business goal.</p>
               </div>
@@ -2457,7 +2479,15 @@
             <article class="feature reveal">
               <div>
                 <span class="feature-meta">Solution 03</span>
-                <img src="./index2_files/Icons1-04.webp" alt="">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Custom Tech Infinity Loop -->
+                  <path d="M 28 35 C 10 35 10 65 28 65 C 45 65 55 35 72 35 C 90 35 90 65 72 65 C 55 65 45 35 28 35 Z" fill="none" stroke="#d64032" stroke-width="12" stroke-linecap="round"/>
+                  <path d="M 28 35 C 10 35 10 65 28 65 C 45 65 55 35 72 35 C 90 35 90 65 72 65 C 55 65 45 35 28 35 Z" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="10 12" opacity="0.6"/>
+                  <!-- Tech Nodes -->
+                  <circle cx="15" cy="50" r="4" fill="#0e445b"/>
+                  <circle cx="85" cy="50" r="4" fill="#0e445b"/>
+                  <circle cx="50" cy="50" r="5" fill="#fff" stroke="#d64032" stroke-width="3"/>
+                </svg>
                 <h3>Technology Development & Digital Platforms</h3>
                 <p>We analyse the current technology ecosystem, identify gaps that affect performance, and build the right technology assets to support long-term growth. This can include websites, apps, or custom tools based on the brand's requirements.</p>
               </div>
@@ -2466,7 +2496,25 @@
             <article class="feature reveal">
               <div>
                 <span class="feature-meta">Solution 04</span>
-                <img src="./index2_files/order_icon.png" alt="">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Custom Wireframe Cube -->
+                  <path d="M 50 15 L 85 35 L 85 70 L 50 90 L 15 70 L 15 35 Z" fill="none" stroke="#0e445b" stroke-width="3" stroke-linejoin="round"/>
+                  <path d="M 50 15 L 50 50 L 15 35 M 50 50 L 85 35 M 50 50 L 50 90" fill="none" stroke="#0e445b" stroke-width="3" stroke-linejoin="round"/>
+                  
+                  <path d="M 15 70 L 50 50 L 85 70" fill="none" stroke="#027d73" stroke-width="2" stroke-dasharray="4 4"/>
+                  
+                  <!-- Nodes at vertices -->
+                  <circle cx="50" cy="15" r="5" fill="#fff" stroke="#0e445b" stroke-width="2"/>
+                  <circle cx="85" cy="35" r="5" fill="#fff" stroke="#0e445b" stroke-width="2"/>
+                  <circle cx="85" cy="70" r="5" fill="#fff" stroke="#0e445b" stroke-width="2"/>
+                  <circle cx="50" cy="90" r="5" fill="#fff" stroke="#0e445b" stroke-width="2"/>
+                  <circle cx="15" cy="70" r="5" fill="#fff" stroke="#0e445b" stroke-width="2"/>
+                  <circle cx="15" cy="35" r="5" fill="#fff" stroke="#0e445b" stroke-width="2"/>
+                  
+                  <!-- Core Center Node -->
+                  <circle cx="50" cy="50" r="7" fill="#fff" stroke="#1ce9b6" stroke-width="3"/>
+                  <circle cx="50" cy="50" r="3" fill="#1ce9b6"/>
+                </svg>
                 <h3>Training & Capability Development</h3>
                 <p>We help internal marketing and sales teams understand strategy better and work more effectively with partners. The focus is on building long-term clarity so the brand does not become dependent on external execution.</p>
               </div>
