@@ -52,185 +52,125 @@
             <h1>Go Beyond Activity<br>Build Strategic Clarity</h1>
             <p class="hero-copy">Want a clear view of why your brand is growing or why it isn't? We bring together strategy, execution, technology, and consumer understanding to turn scattered efforts into a structured growth system that supports real business outcomes.</p>
           </div>
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-globe">
+              <!-- Outer halo glow -->
+              <span class="globe-halo"></span>
+
+              <!-- The sphere itself: wireframe + dot lattice + inner crystal -->
+              <div class="globe-sphere-wrap">
+                <!-- Latitude / longitude wireframe -->
+                <svg class="globe-wire" viewBox="-260 -260 520 520" xmlns="http://www.w3.org/2000/svg">
+                  <g class="globe-wire-lat">
+                    <ellipse cx="0" cy="0" rx="240" ry="40"/>
+                    <ellipse cx="0" cy="0" rx="232" ry="92"/>
+                    <ellipse cx="0" cy="0" rx="210" ry="140"/>
+                    <ellipse cx="0" cy="0" rx="172" ry="180"/>
+                    <ellipse cx="0" cy="0" rx="120" ry="212"/>
+                    <ellipse cx="0" cy="0" rx="56" ry="234"/>
+                  </g>
+                  <circle class="globe-wire-edge" cx="0" cy="0" r="240"/>
+                </svg>
+
+                <!-- Dot lattice (filled in by inline script) -->
+                <svg class="globe-dots" viewBox="-260 -260 520 520" xmlns="http://www.w3.org/2000/svg"></svg>
+
+                <!-- Inner crystal: octahedron-like with bright nodes -->
+                <svg class="globe-crystal" viewBox="-160 -160 320 320" xmlns="http://www.w3.org/2000/svg">
+                  <g class="crystal-rotor">
+                    <!-- Soft fill -->
+                    <polygon class="crystal-fill" points="0,-110 96,-22 76,86 -76,86 -96,-22"/>
+                    <!-- Outline -->
+                    <polygon class="crystal-edge" points="0,-110 96,-22 76,86 -76,86 -96,-22"/>
+                    <!-- Inner connectors -->
+                    <path class="crystal-edge" d="M 0 -110 L 0 86"/>
+                    <path class="crystal-edge" d="M -96 -22 L 96 -22"/>
+                    <path class="crystal-edge" d="M 0 -110 L -76 86"/>
+                    <path class="crystal-edge" d="M 0 -110 L 76 86"/>
+                    <path class="crystal-edge" d="M -96 -22 L 76 86"/>
+                    <path class="crystal-edge" d="M 96 -22 L -76 86"/>
+                    <!-- Bright nodes at vertices -->
+                    <circle class="crystal-node" cx="0" cy="-110" r="6"/>
+                    <circle class="crystal-node" cx="96" cy="-22" r="6"/>
+                    <circle class="crystal-node" cx="76" cy="86" r="6"/>
+                    <circle class="crystal-node" cx="-76" cy="86" r="6"/>
+                    <circle class="crystal-node" cx="-96" cy="-22" r="6"/>
+                    <circle class="crystal-node crystal-node-core" cx="0" cy="0" r="4"/>
+                  </g>
+                </svg>
+              </div>
+
+              <!-- Glowing projection platform at the base -->
+              <div class="globe-platform">
+                <span class="platform-ring p1"></span>
+                <span class="platform-ring p2"></span>
+                <span class="platform-ring p3"></span>
+                <span class="platform-disc"></span>
+                <span class="platform-beam"></span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="section" id="clarity">
-        <div class="container">
-          <div class="split">
-            <div class="reveal">
-              <div class="section-kicker">About Us</div>
-              <h2 class="section-title">Gain clarity where most brands struggle</h2>
-              <div class="section-lead">
-                <p>Building and growing a brand today takes more than marketing activity. It requires clear thinking, connected strategy, and the ability to align execution, technology, and capability in the right direction.</p>
-              </div>
-              <div class="split-copy" style="margin-top: 24px;">
-                <p>At Platform Play Venture, we work closely with businesses that want more than short-term campaigns. We help bring structure, clarity, and long-term direction so every effort contributes to meaningful business growth.</p>
-              </div>
-              <div class="button-row">
-                <!-- <a class="button button-dark" href="#principles">Learn About Strategic Intelligence</a> -->
-              </div>
+      <section class="section section-no-rpad" id="clarity">
+        <!-- 50/50 split: text aligned to container's left half,
+             image fills the right 50% of the viewport edge-to-edge,
+             no frame, no border-radius, no shadow. -->
+        <div class="clarity-edge-split">
+          <div class="clarity-edge-text reveal">
+            <div class="section-kicker">About Us</div>
+            <h2 class="section-title">Gain clarity where most brands struggle</h2>
+            <div class="section-lead">
+              <p>Building and growing a brand today takes more than marketing activity. It requires clear thinking, connected strategy, and the ability to align execution, technology, and capability in the right direction.</p>
             </div>
-            <div class="image-stage reveal">
-              <div style="width: 100%; aspect-ratio: 4/3; border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; position: relative;">
-                <img src="./index2_files/cybernetic-profile.jpg" alt="AI Cybernetic Profiling" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              </div>
+            <div class="split-copy" style="margin-top: 24px;">
+              <p>At Platform Play Venture, we work closely with businesses that want more than short-term campaigns. We help bring structure, clarity, and long-term direction so every effort contributes to meaningful business growth.</p>
             </div>
           </div>
+          <div class="clarity-edge-image reveal">
+            <img src="./index2_files/cybernetic-profile.jpg" alt="AI Cybernetic Profiling" />
+          </div>
+        </div>
 
-          <div class="help-grid reveal">
-            <div>
-              <div class="section-kicker" style="justify-content: center;">How We Can Help</div>
-              <h2 class="section-title">A sharper path from brand reality to growth</h2>
-              <div class="section-lead">
-                <p>We help brands move from diagnosis to aligned action through four focused interventions that connect strategy, perception, and execution.</p>
-              </div>
+        <!-- 50/50 split: image LEFT, header + 4 mini-cards RIGHT -->
+        <div class="clarity-edge-split clarity-edge-split-reverse reveal">
+          <div class="clarity-edge-image">
+            <img src="./new.png" alt="A sharper path from brand reality to growth" />
+          </div>
+          <div class="clarity-edge-text">
+            <div class="section-kicker">How We Can Help</div>
+            <h2 class="section-title">A sharper path from brand reality to growth</h2>
+            <div class="section-lead">
+              <p>We help brands move from diagnosis to aligned action through four focused interventions that connect strategy, perception, and execution.</p>
             </div>
 
-            <!-- Redesigned journey steps - clean horizontal flow -->
-            <div class="journey-container" style="margin-top: 56px;">
-              
-              <!-- Desktop: Horizontal steps with connectors -->
-              <div class="journey-horizontal">
-                <!-- Connector line (desktop only) -->
-                <div class="journey-connector"></div>
-
-                <!-- Step 1 -->
-                <article class="journey-step-card" style="
-                  flex: 1;
-                  background: #fff;
-                  border-radius: 20px;
-                  padding: 28px 20px;
-                  text-align: center;
-                  position: relative;
-                  z-index: 1;
-                  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-                  transition: transform 0.25s ease, box-shadow 0.25s ease;
-                  cursor: pointer;
-                " onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.06)'">
-                  <div style="
-                    width: 64px;
-                    height: 64px;
-                    margin: 0 auto 20px;
-                    background: linear-gradient(135deg, rgba(2,125,115,0.12), rgba(2,125,115,0.05));
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 1px solid rgba(2,125,115,0.3);
-                  ">
-                    <span style="color: var(--teal); font-size: 1.6rem; font-weight: 800;">01</span>
-                  </div>
-                  <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0 0 12px; color: var(--ink);">Brand Reality Audit</h3>
-                  <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin: 0;">
-                    Understanding how the brand actually exists today in positioning, messaging, perception, and relevance.
-                  </p>
-                </article>
-
-                <!-- Step 2 -->
-                <article class="journey-step-card" style="
-                  flex: 1;
-                  background: #fff;
-                  border-radius: 20px;
-                  padding: 28px 20px;
-                  text-align: center;
-                  position: relative;
-                  z-index: 1;
-                  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-                  transition: transform 0.25s ease, box-shadow 0.25s ease;
-                  cursor: pointer;
-                " onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.06)'">
-                  <div style="
-                    width: 64px;
-                    height: 64px;
-                    margin: 0 auto 20px;
-                    background: linear-gradient(135deg, rgba(120,184,67,0.12), rgba(120,184,67,0.05));
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 1px solid rgba(120,184,67,0.3);
-                  ">
-                    <span style="color: var(--green); font-size: 1.6rem; font-weight: 800;">02</span>
-                  </div>
-                  <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0 0 12px; color: var(--ink);">Consumer Mindset Mapping</h3>
-                  <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin: 0;">
-                    Identifying how the audience thinks, chooses, and responds and whether the brand fits naturally into that mindset.
-                  </p>
-                </article>
-
-                <!-- Step 3 -->
-                <article class="journey-step-card" style="
-                  flex: 1;
-                  background: #fff;
-                  border-radius: 20px;
-                  padding: 28px 20px;
-                  text-align: center;
-                  position: relative;
-                  z-index: 1;
-                  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-                  transition: transform 0.25s ease, box-shadow 0.25s ease;
-                  cursor: pointer;
-                " onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.06)'">
-                  <div style="
-                    width: 64px;
-                    height: 64px;
-                    margin: 0 auto 20px;
-                    background: linear-gradient(135deg, rgba(242,184,75,0.12), rgba(242,184,75,0.05));
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 1px solid rgba(242,184,75,0.3);
-                  ">
-                    <span style="color: var(--yellow); font-size: 1.6rem; font-weight: 800;">03</span>
-                  </div>
-                  <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0 0 12px; color: var(--ink);">Digital & Technology Maturity Review</h3>
-                  <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin: 0;">
-                    Evaluating how well the current platforms, tools, and digital assets support long-term growth and scalability.
-                  </p>
-                </article>
-
-                <!-- Step 4 -->
-                <article class="journey-step-card" style="
-                  flex: 1;
-                  background: #fff;
-                  border-radius: 20px;
-                  padding: 28px 20px;
-                  text-align: center;
-                  position: relative;
-                  z-index: 1;
-                  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-                  transition: transform 0.25s ease, box-shadow 0.25s ease;
-                  cursor: pointer;
-                " onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.06)'">
-                  <div style="
-                    width: 64px;
-                    height: 64px;
-                    margin: 0 auto 20px;
-                    background: linear-gradient(135deg, rgba(214,64,50,0.12), rgba(214,64,50,0.05));
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 1px solid rgba(214,64,50,0.3);
-                  ">
-                    <span style="color: var(--red); font-size: 1.6rem; font-weight: 800;">04</span>
-                  </div>
-                  <h3 style="font-size: 1.2rem; font-weight: 800; margin: 0 0 12px; color: var(--ink);">Growth Alignment Framework</h3>
-                  <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.5; margin: 0;">
-                    Bringing strategy, execution, technology, and internal capability into one clear and consistent direction.
-                  </p>
-                </article>
-              </div>
-
-              <!-- Mobile: Vertical steps (visible only on mobile) -->
-              <div class="journey-vertical" style="display: none; flex-direction: column; gap: 20px;">
-                <!-- Same content as above but stacked - will show via CSS media query -->
-              </div>
+            <!-- 4 mini interventions, 2×2 grid -->
+            <div class="help-mini-grid">
+              <article class="help-mini-card" data-accent="teal">
+                <span class="help-mini-num">01</span>
+                <h3>Brand Reality Audit</h3>
+                <p>How the brand actually exists today in positioning, messaging, perception, and relevance.</p>
+              </article>
+              <article class="help-mini-card" data-accent="green">
+                <span class="help-mini-num">02</span>
+                <h3>Consumer Mindset Mapping</h3>
+                <p>How the audience thinks, chooses, and responds — and whether the brand fits that mindset.</p>
+              </article>
+              <article class="help-mini-card" data-accent="yellow">
+                <span class="help-mini-num">03</span>
+                <h3>Digital &amp; Technology Maturity</h3>
+                <p>How well current platforms, tools, and assets support long-term growth and scalability.</p>
+              </article>
+              <article class="help-mini-card" data-accent="red">
+                <span class="help-mini-num">04</span>
+                <h3>Growth Alignment Framework</h3>
+                <p>Bringing strategy, execution, technology, and capability into one consistent direction.</p>
+              </article>
             </div>
           </div>
         </div>
+
       </section>
 
       <section class="section band-soft" id="who">
@@ -296,10 +236,17 @@
                         }
 
                         /* Initial hidden states */
-                        .bar1, .bar2, .bar3, .bar4 {
+                        .bar1, .bar2, .bar3, .bar4, .bar5, .bar6 {
                           transform: scaleY(0);
                           transform-origin: center 280px;
+                          transform-box: fill-box;
                         }
+                        .bar1 { transform-origin: 65px  280px; }
+                        .bar2 { transform-origin: 125px 280px; }
+                        .bar3 { transform-origin: 185px 280px; }
+                        .bar4 { transform-origin: 245px 280px; }
+                        .bar5 { transform-origin: 320px 280px; }
+                        .bar6 { transform-origin: 420px 280px; }
                         .area-fill {
                           transform: translateY(36px);
                           transform-origin: bottom;
@@ -320,9 +267,11 @@
 
                         /* Reveal-triggered animations */
                         .reveal.is-visible .bar1 { animation: growBar 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) 0s forwards; }
-                        .reveal.is-visible .bar2 { animation: growBar 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) 0.12s forwards; }
-                        .reveal.is-visible .bar3 { animation: growBar 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) 0.24s forwards; }
-                        .reveal.is-visible .bar4 { animation: growBar 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) 0.36s forwards; }
+                        .reveal.is-visible .bar2 { animation: growBar 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) 0.10s forwards; }
+                        .reveal.is-visible .bar3 { animation: growBar 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) 0.20s forwards; }
+                        .reveal.is-visible .bar4 { animation: growBar 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) 0.30s forwards; }
+                        .reveal.is-visible .bar5 { animation: growBar 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) 0.40s forwards; }
+                        .reveal.is-visible .bar6 { animation: growBar 0.85s cubic-bezier(0.34, 1.2, 0.64, 1) 0.50s forwards; }
                         .reveal.is-visible .area-fill { animation: waveRise 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.7s forwards; }
                         .reveal.is-visible .growth-line {
                           animation:
@@ -341,11 +290,13 @@
                     <rect width="100%" height="100%" fill="#ffffff" />
                     <!-- Subtle background curve -->
                     <path d="M 0,312.5 Q 250,250 500,100 L 500,312.5 Z" fill="rgba(2, 125, 115, 0.03)" />
-                    <!-- Bar chart -->
-                    <rect class="bar1" x="50" y="240" width="30" height="40" rx="4" fill="rgba(14, 68, 91, 0.2)" />
-                    <rect class="bar2" x="110" y="210" width="30" height="70" rx="4" fill="rgba(14, 68, 91, 0.4)" />
-                    <rect class="bar3" x="170" y="150" width="30" height="130" rx="4" fill="rgba(2, 125, 115, 0.5)" />
-                    <rect class="bar4" x="230" y="110" width="30" height="170" rx="4" fill="rgba(28, 233, 182, 0.6)" />
+                    <!-- Bar chart — one bar per line data point -->
+                    <rect class="bar1" x="50"  y="240" width="30" height="40"  rx="4" fill="rgba(14, 68, 91, 0.20)" />
+                    <rect class="bar2" x="110" y="210" width="30" height="70"  rx="4" fill="rgba(14, 68, 91, 0.40)" />
+                    <rect class="bar3" x="170" y="150" width="30" height="130" rx="4" fill="rgba(2, 125, 115, 0.50)" />
+                    <rect class="bar4" x="230" y="110" width="30" height="170" rx="4" fill="rgba(2, 125, 115, 0.70)" />
+                    <rect class="bar5" x="305" y="60"  width="30" height="220" rx="4" fill="rgba(28, 233, 182, 0.55)" />
+                    <rect class="bar6" x="405" y="40"  width="30" height="240" rx="4" fill="rgba(28, 233, 182, 0.78)" />
                     <!-- Rising wave area under the line -->
                     <path class="area-fill" d="M 65,240 C 95,225 100,212 125,210 C 155,210 160,182 185,160 C 210,142 222,134 245,120 C 270,108 295,82 320,60 C 350,42 380,40 420,40 L 420,280 L 65,280 Z" fill="url(#growth-fill-grad)" />
                     <!-- Ascending line -->
@@ -419,8 +370,8 @@
                 line-height: 1.6;
                 margin-bottom: 24px;
               ">
-                Platform Play Venture works with businesses that want <strong style="color: var(--ink);">clarity before action</strong>. 
-                We help define growth vision, shape brand and marketing strategy, build the right technology foundation, 
+                Platform Play Venture works with businesses that want <strong style="color: var(--ink);">clarity before action</strong>.
+                We help define growth vision, shape brand and marketing strategy, build the right technology foundation,
                 and bring structure to decision-making through strategic governance.
               </p>
 
@@ -1064,6 +1015,51 @@
     </footer>
   </div>
 
+  <script>
+    /* Hero globe — populate the sphere dot lattice procedurally.
+       Generates ~280 dots positioned on a sphere of radius 240, projected
+       to 2D. z-coordinate drives opacity so dots on the "front" of the
+       sphere are brighter; each dot gets a random twinkle delay. */
+    (function generateGlobeDots() {
+      const svg = document.querySelector('.globe-dots');
+      if (!svg) return;
+      const NS = 'http://www.w3.org/2000/svg';
+      const R = 240;
+      const out = [];
+
+      // Latitude rings — denser near equator, sparser at poles
+      const latStep = 11;
+      for (let lat = -78; lat <= 78; lat += latStep) {
+        const latRad = (lat * Math.PI) / 180;
+        const yProj = R * Math.sin(latRad);
+        const rRing = R * Math.cos(latRad);
+        // Number of dots scales with ring circumference
+        const count = Math.max(10, Math.round((rRing / 240) * 38));
+        for (let i = 0; i < count; i++) {
+          const ang = (i / count) * Math.PI * 2 + (lat % 2 ? 0.18 : 0);
+          const xProj = rRing * Math.cos(ang);
+          const zProj = rRing * Math.sin(ang); // depth
+          // Depth-based opacity: front dots brighter
+          const depth = (zProj + R) / (2 * R); // 0..1
+          const opacity = 0.18 + depth * 0.78;
+          const radius = 1.2 + depth * 1.4;
+          out.push({ x: xProj, y: yProj, o: opacity, r: radius, d: Math.random() * 4 });
+        }
+      }
+
+      const frag = document.createDocumentFragment();
+      out.forEach((d) => {
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('cx', d.x.toFixed(1));
+        c.setAttribute('cy', d.y.toFixed(1));
+        c.setAttribute('r', d.r.toFixed(2));
+        c.setAttribute('opacity', d.o.toFixed(2));
+        c.style.setProperty('--twinkle-delay', d.d.toFixed(2) + 's');
+        frag.appendChild(c);
+      });
+      svg.appendChild(frag);
+    })();
+  </script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

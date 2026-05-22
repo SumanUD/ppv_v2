@@ -338,7 +338,9 @@
     }
 
     .hero {
-      min-height: 100svh;
+      /* Shorter than full viewport so the headline + globe land naturally
+         centered on load instead of feeling lost in tall whitespace. */
+      min-height: 84svh;
       display: grid;
       align-items: end;
       position: relative;
@@ -415,7 +417,7 @@
     .hero-inner {
       width: min(var(--max), calc(100% - 40px));
       margin: 0 auto;
-      padding: calc(var(--nav-h) + 80px) 0 80px;
+      padding: calc(var(--nav-h) + 48px) 0 56px;
     }
 
     .hero-content {
@@ -710,6 +712,182 @@
     .image-stage:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-strong);
+    }
+
+    /* =========================================================
+       Clarity edge-split — 50/50 layout where the right image
+       fills the right half of the viewport edge-to-edge,
+       no frame, no border-radius, no shadow.
+       ========================================================= */
+    .clarity-edge-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;             /* no gap — images need to bleed to centerline */
+      align-items: stretch; /* each cell takes the full row height */
+      width: 100%;
+    }
+    /* Two consecutive splits inside the same section should sit flush
+       so corners touch at the centerline. */
+    .clarity-edge-split + .clarity-edge-split,
+    .clarity-edge-split + .clarity-edge-split-reverse,
+    .clarity-edge-split-reverse + .clarity-edge-split,
+    .clarity-edge-split-reverse + .clarity-edge-split-reverse {
+      margin-top: 0;
+    }
+
+    /* Left column: text spans the left half from container's left edge
+       to close to the centerline (no narrow centered-in-half look),
+       and is vertically centered in its row so it doesn't look "lost"
+       when the image side is taller. */
+    .clarity-edge-text {
+      max-width: 720px;
+      margin-left: 0;
+      padding-left: max(20px, calc((100vw - var(--max)) / 2));
+      padding-right: clamp(24px, 3.5vw, 56px);
+      padding-top: clamp(8px, 1vw, 18px);
+      padding-bottom: clamp(8px, 1vw, 18px);
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Reverse variant: image LEFT, text RIGHT (image-first markup in HTML).
+       Text now sticks to the LEFT of its right-column cell and right-pads
+       to align with the container's right edge. */
+    .clarity-edge-split-reverse .clarity-edge-text {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: clamp(24px, 3.5vw, 56px);
+      padding-right: max(20px, calc((100vw - var(--max)) / 2));
+    }
+
+    /* 4 mini intervention cards (2x2) under the HWCH text */
+    .help-mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .help-mini-card {
+      position: relative;
+      padding: 16px 16px 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 6px 16px rgba(17, 17, 17, 0.04);
+      transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+    }
+    .help-mini-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(17, 17, 17, 0.08);
+    }
+    .help-mini-num {
+      display: inline-block;
+      font-family: Inter, sans-serif;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .help-mini-card[data-accent="green"]  .help-mini-num { color: var(--green); }
+    .help-mini-card[data-accent="yellow"] .help-mini-num { color: var(--yellow); }
+    .help-mini-card[data-accent="red"]    .help-mini-num { color: var(--red); }
+    .help-mini-card[data-accent="teal"]:hover   { border-color: rgba(2, 125, 115, 0.45); }
+    .help-mini-card[data-accent="green"]:hover  { border-color: rgba(120, 184, 67, 0.45); }
+    .help-mini-card[data-accent="yellow"]:hover { border-color: rgba(242, 184, 75, 0.55); }
+    .help-mini-card[data-accent="red"]:hover    { border-color: rgba(214, 64, 50, 0.45); }
+    .help-mini-card h3 {
+      font-size: 0.96rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      color: var(--ink);
+      margin: 0 0 6px;
+    }
+    .help-mini-card p {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0;
+    }
+    @media (max-width: 1200px) {
+      .help-mini-grid { gap: 12px; }
+    }
+    @media (max-width: 900px) {
+      .help-mini-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 520px) {
+      .help-mini-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Right (or left) column: image fills its half edge-to-edge, no frame.
+       align-self: stretch + height: 100% means the image stretches to
+       fill the row's full height — which equals the text column's height —
+       so when two edge-splits stack the images touch at the centerline. */
+    .clarity-edge-image {
+      position: relative;
+      width: 100%;
+      align-self: stretch;
+      display: flex;
+      min-height: 380px;
+      overflow: hidden;
+    }
+    .clarity-edge-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: 0;
+      box-shadow: none;
+      transition: transform 1.2s cubic-bezier(0.2, 0.82, 0.22, 1);
+    }
+    .clarity-edge-image:hover img {
+      transform: scale(1.04);
+    }
+
+    /* The section itself shouldn't have horizontal padding for this layout */
+    .section-no-rpad {
+      padding-right: 0;
+      padding-left: 0;
+      overflow: hidden;
+    }
+
+    /* Section with multiple edge-splits: tighter top padding so the
+       section feels balanced. Bottom padding is 0 so the HWCH image's
+       bottom edge sits flush with the next section's background (no
+       white gap between the topographic image and the band-soft start). */
+    .section.section-no-rpad {
+      padding-top: clamp(40px, 5vw, 72px);
+      padding-bottom: 0;
+    }
+
+    @media (max-width: 900px) {
+      .clarity-edge-split {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .clarity-edge-text {
+        max-width: none;
+        padding-left: max(20px, calc((100vw - var(--max)) / 2));
+        padding-right: max(20px, calc((100vw - var(--max)) / 2));
+      }
+      .clarity-edge-image,
+      .clarity-edge-image img {
+        min-height: 380px;
+      }
+    }
+    @media (max-width: 600px) {
+      .clarity-edge-image,
+      .clarity-edge-image img {
+        min-height: 320px;
+      }
     }
 
     .image-stage img {
@@ -1510,22 +1688,810 @@
       transform: translateY(0);
     }
 
-    /* Custom blocks defined recently */
-    .journey-horizontal {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      position: relative;
+    /* Revamped section treatments */
+    .section-lead p,
+    .split-copy p,
+    .journey-step-card p,
+    .strategy-copy,
+    .strategy-callout p,
+    .feature p,
+    .why-item p,
+    .faq-answer p,
+    .cta p,
+    .footer-description {
+      max-width: 60ch;
     }
-    .journey-connector {
+
+    .hero {
+      align-items: center;
+      background: #050807;
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(circle at 18% 24%, rgba(2, 125, 115, 0.36), transparent 31%),
+        radial-gradient(circle at 74% 18%, rgba(120, 184, 67, 0.22), transparent 34%),
+        radial-gradient(circle at 84% 78%, rgba(2, 125, 115, 0.18), transparent 30%),
+        linear-gradient(124deg, #030504 0%, #07110e 43%, #0b1713 62%, #030504 100%);
+      background-size: 130% 130%, 140% 140%, 130% 130%, 200% 200%;
+      transform: none;
+      animation: heroMesh 20s ease-in-out infinite alternate;
+    }
+
+    .hero-bg::before {
+      inset: -22%;
+      background:
+        radial-gradient(circle at 58% 42%, rgba(255, 255, 255, 0.08), transparent 22%),
+        repeating-linear-gradient(120deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 28px);
+      filter: none;
+      opacity: 0.22;
+      transform: none;
+      animation: heroPatternDrift 28s linear infinite;
+    }
+
+    .hero-bg::after {
+      background:
+        linear-gradient(95deg, rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.42) 55%, rgba(0, 0, 0, 0.16)),
+        radial-gradient(circle at 18% 72%, rgba(120, 184, 67, 0.14), transparent 34%),
+        radial-gradient(circle at 78% 34%, rgba(2, 125, 115, 0.2), transparent 38%);
+    }
+
+    .site-shell.is-ready .hero-bg {
+      transform: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.72fr);
+      align-items: center;
+      gap: clamp(28px, 5vw, 72px);
+      padding: calc(var(--nav-h) + 72px) 0 72px;
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      background: linear-gradient(180deg, #ffffff 12%, #e7ebeb 58%, #aab4b1 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
+    }
+
+    .hero-copy {
+      max-width: 60ch;
+      margin-top: 0;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: min(64vw, 620px);
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      transform: translateY(24px) scale(0.98);
+    }
+
+    .site-shell.is-ready .hero-visual {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition: opacity 900ms ease 320ms, transform 900ms cubic-bezier(0.2, 0.82, 0.22, 1) 320ms;
+    }
+
+    /* =========================================================
+       HERO GLOBE — shining sphere with dot lattice, inner crystal,
+       and a glowing projection platform at the base.
+       ========================================================= */
+    .hero-globe {
+      position: relative;
+      width: min(94%, 620px);
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    /* Outer ambient halo */
+    .globe-halo {
       position: absolute;
-      top: 60px;
-      left: 80px;
-      right: 80px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--teal), var(--green), var(--yellow), var(--teal));
-      opacity: 0.4;
+      inset: 4%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 45%,
+          rgba(2, 125, 115, 0.55) 0%,
+          rgba(120, 184, 67, 0.28) 28%,
+          rgba(120, 184, 67, 0.05) 56%,
+          transparent 78%);
+      filter: blur(60px);
       z-index: 0;
+      animation: globeHalo 6s ease-in-out infinite alternate;
+    }
+    @keyframes globeHalo {
+      0%   { opacity: 0.7; transform: scale(1); }
+      100% { opacity: 1;   transform: scale(1.08); }
+    }
+
+    /* The sphere itself */
+    .globe-sphere-wrap {
+      position: relative;
+      width: 78%;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      z-index: 1;
+      animation: globeBob 8s ease-in-out infinite alternate;
+    }
+    @keyframes globeBob {
+      0%   { transform: translateY(-6px); }
+      100% { transform: translateY(6px); }
+    }
+
+    .globe-wire,
+    .globe-dots,
+    .globe-crystal {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    /* Wireframe: latitude/longitude ellipses */
+    .globe-wire-lat ellipse {
+      fill: none;
+      stroke: rgba(120, 184, 67, 0.30);
+      stroke-width: 0.7;
+    }
+    .globe-wire-lat ellipse:nth-child(odd) {
+      stroke: rgba(2, 200, 175, 0.32);
+    }
+    /* Slow continuous tilt — gives the sphere a subtle rotation feel */
+    .globe-wire-lat {
+      transform-origin: center;
+      animation: wireSpin 36s linear infinite;
+    }
+    @keyframes wireSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .globe-wire-edge {
+      fill: none;
+      stroke: rgba(120, 184, 67, 0.55);
+      stroke-width: 1.4;
+      filter: drop-shadow(0 0 14px rgba(120, 184, 67, 0.45));
+    }
+
+    /* Dot lattice — each dot twinkles independently */
+    .globe-dots {
+      animation: dotsSpin 48s linear infinite reverse;
+      transform-origin: center;
+    }
+    @keyframes dotsSpin {
+      to { transform: rotate(360deg); }
+    }
+    .globe-dots circle {
+      fill: rgba(220, 255, 235, 0.92);
+      filter: drop-shadow(0 0 4px rgba(120, 184, 67, 0.85));
+      animation: dotTwinkle 3.2s ease-in-out infinite;
+      animation-delay: var(--twinkle-delay, 0s);
+    }
+    @keyframes dotTwinkle {
+      0%, 100% { opacity: var(--base-opacity, 0.45); transform: scale(1); }
+      50%      { opacity: 1; transform: scale(1.35); }
+    }
+
+    /* Inner crystal — slowly rotates inside the sphere */
+    .globe-crystal {
+      width: 52%;
+      height: 52%;
+    }
+    .crystal-rotor {
+      transform-origin: center;
+      transform-box: fill-box;
+      animation: crystalSpin 16s linear infinite;
+    }
+    @keyframes crystalSpin {
+      to { transform: rotate(360deg); }
+    }
+    .crystal-fill {
+      fill: rgba(120, 184, 67, 0.14);
+    }
+    .crystal-edge {
+      fill: none;
+      stroke: rgba(225, 255, 235, 0.85);
+      stroke-width: 1.8;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 6px rgba(120, 184, 67, 0.85));
+    }
+    .crystal-node {
+      fill: #ffffff;
+      filter:
+        drop-shadow(0 0 6px rgba(255, 255, 255, 0.95))
+        drop-shadow(0 0 14px rgba(120, 184, 67, 1));
+      animation: nodePulse 2.4s ease-in-out infinite alternate;
+    }
+    .crystal-node:nth-of-type(2) { animation-delay: 0.3s; }
+    .crystal-node:nth-of-type(3) { animation-delay: 0.6s; }
+    .crystal-node:nth-of-type(4) { animation-delay: 0.9s; }
+    .crystal-node:nth-of-type(5) { animation-delay: 1.2s; }
+    .crystal-node-core {
+      fill: rgba(220, 255, 235, 0.65);
+      filter: drop-shadow(0 0 8px rgba(120, 184, 67, 0.9));
+      animation-duration: 1.8s;
+    }
+    @keyframes nodePulse {
+      0%   { opacity: 0.75; transform-origin: center; }
+      100% { opacity: 1; }
+    }
+
+    /* Projection platform at the base */
+    .globe-platform {
+      position: absolute;
+      bottom: 6%;
+      left: 50%;
+      width: 70%;
+      height: 18%;
+      transform: translateX(-50%);
+      display: grid;
+      place-items: end center;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .platform-ring {
+      position: absolute;
+      bottom: 30%;
+      left: 50%;
+      border-radius: 50%;
+      border: 1.5px solid rgba(120, 184, 67, 0.55);
+      transform: translateX(-50%);
+      box-shadow:
+        0 0 18px rgba(120, 184, 67, 0.5),
+        inset 0 0 12px rgba(120, 184, 67, 0.35);
+      animation: platformPulse 3.6s ease-in-out infinite;
+    }
+    .platform-ring.p1 { width: 100%; height: 36%; }
+    .platform-ring.p2 { width: 72%;  height: 26%; animation-delay: 0.8s; }
+    .platform-ring.p3 { width: 46%;  height: 18%; animation-delay: 1.6s; }
+    @keyframes platformPulse {
+      0%, 100% { opacity: 0.65; transform: translateX(-50%) scale(0.96); }
+      50%      { opacity: 1;    transform: translateX(-50%) scale(1.04); }
+    }
+    .platform-disc {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56%;
+      height: 30%;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at center,
+          rgba(220, 255, 235, 0.85) 0%,
+          rgba(120, 184, 67, 0.6) 30%,
+          rgba(2, 125, 115, 0.25) 60%,
+          transparent 85%);
+      filter: blur(10px);
+    }
+    .platform-beam {
+      position: absolute;
+      bottom: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26%;
+      height: 200%;
+      background:
+        linear-gradient(180deg,
+          transparent 0%,
+          rgba(120, 184, 67, 0.10) 50%,
+          rgba(120, 184, 67, 0.40) 92%,
+          rgba(220, 255, 235, 0.55) 100%);
+      filter: blur(14px);
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .globe-halo,
+      .globe-sphere-wrap,
+      .globe-wire-lat,
+      .globe-dots,
+      .globe-dots circle,
+      .crystal-rotor,
+      .crystal-node,
+      .platform-ring {
+        animation: none !important;
+      }
+    }
+
+    @keyframes heroMesh {
+      from {
+        background-position: 0% 20%, 92% 10%, 72% 92%, 0% 50%;
+      }
+      to {
+        background-position: 18% 36%, 70% 28%, 88% 68%, 100% 50%;
+      }
+    }
+
+    @keyframes heroPatternDrift {
+      to {
+        transform: translate3d(44px, 30px, 0);
+      }
+    }
+
+    @keyframes geometryFloat {
+      from {
+        transform: translate3d(0, 0, 0) rotate(-1deg);
+      }
+      to {
+        transform: translate3d(0, -14px, 0) rotate(1deg);
+      }
+    }
+
+    @keyframes ringPulse {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.9;
+        transform: scale(1.045);
+      }
+    }
+
+    .about-section {
+      background-color: #f8f9fa;
+      background-image: url("data:image/svg+xml,%3Csvg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M44 0H0v44' fill='none' stroke='%23027d73' stroke-opacity='0.07'/%3E%3C/svg%3E");
+      background-size: 44px 44px;
+    }
+
+    .about-section .split > .reveal:first-child,
+    .process-section .help-grid > div:first-child,
+    .strategy-section .container > .reveal:first-child,
+    .solutions-section .container > .reveal:first-child {
+      border: 1px solid rgba(229, 231, 235, 0.9);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      padding: clamp(24px, 4vw, 40px);
+    }
+
+    .about-image {
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(229, 231, 235, 0.86);
+      background: #fff;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .about-image img {
+      min-height: 0;
+      height: 100%;
+      border-radius: 12px;
+    }
+
+    .split-copy-offset {
+      margin-top: 24px;
+    }
+
+    .process-section {
+      background: #f3f4f6;
+    }
+
+    .process-section .help-grid {
+      margin-top: 0;
+    }
+
+    .process-section .help-grid > div:first-child {
+      max-width: 880px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .process-section .section-lead {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .process-section .section-lead p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .journey-container {
+      margin-top: 54px;
+    }
+
+    .journey-horizontal {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+      position: relative;
+      align-items: stretch;
+    }
+
+    .journey-connector {
+      display: none;
+    }
+
+    .journey-step-card {
+      --step-color: var(--teal);
+      --step-soft: rgba(2, 125, 115, 0.16);
+      --step-tint: rgba(2, 125, 115, 0.06);
+      position: relative;
+      min-height: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      padding: 48px 22px 24px;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .journey-step-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(2, 125, 115, 0.22);
+      box-shadow: 0 20px 42px rgba(0, 0, 0, 0.1);
+    }
+
+    .journey-number {
+      position: absolute;
+      top: -30px;
+      left: 22px;
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--step-soft);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff, var(--step-tint));
+      color: var(--step-color);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+      font-size: 1.22rem;
+      font-weight: 850;
+    }
+
+    .journey-step-card h3 {
+      margin: 0 0 12px;
+      color: var(--ink);
+      font-size: 1.2rem;
+      font-weight: 800;
+      line-height: 1.22;
+    }
+
+    .journey-step-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .journey-teal {
+      --step-color: var(--teal);
+    }
+
+    .journey-green {
+      --step-color: var(--green);
+      --step-soft: rgba(120, 184, 67, 0.18);
+      --step-tint: rgba(120, 184, 67, 0.08);
+    }
+
+    .journey-yellow {
+      --step-color: #b8860b;
+      --step-soft: rgba(242, 184, 75, 0.24);
+      --step-tint: rgba(242, 184, 75, 0.1);
+    }
+
+    .journey-red {
+      --step-color: var(--red);
+      --step-soft: rgba(214, 64, 50, 0.18);
+      --step-tint: rgba(214, 64, 50, 0.08);
+    }
+
+    .strategy-section {
+      background:
+        radial-gradient(circle at 50% 42%, #ffffff 0%, #ffffff 36%, #f3f4f6 100%);
+    }
+
+    .strategy-section .container > .reveal:first-child {
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .strategy-section .section-lead {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-lead-tight {
+      margin-top: 18px;
+    }
+
+    .strategy-section .section-lead p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .strategy-visual-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.58);
+      box-shadow: 0 24px 64px rgba(17, 17, 17, 0.1);
+      backdrop-filter: blur(16px);
+      padding: clamp(12px, 2vw, 18px);
+    }
+
+    .strategy-visual-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(2, 125, 115, 0.08), transparent 42%),
+        radial-gradient(circle at 88% 12%, rgba(242, 184, 75, 0.14), transparent 30%);
+      pointer-events: none;
+    }
+
+    .custom-svg-art {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid rgba(229, 231, 235, 0.86);
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .graph-badge {
+      position: absolute;
+      left: clamp(24px, 4vw, 38px);
+      bottom: clamp(24px, 4vw, 38px);
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(17, 17, 17, 0.84);
+      color: #fff;
+      padding: 11px 17px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(12px);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .graph-badge span:first-child {
+      width: 10px;
+      height: 10px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 6px rgba(120, 184, 67, 0.18);
+    }
+
+    .strategy-copy-block {
+      border: 1px solid rgba(229, 231, 235, 0.92);
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      padding: clamp(24px, 4vw, 36px);
+    }
+
+    .strategy-truth {
+      margin-bottom: 28px;
+      border-left: 3px solid var(--teal);
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(2, 125, 115, 0.09), rgba(2, 125, 115, 0.025));
+      padding: 18px 22px;
+    }
+
+    .strategy-truth p {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1.12rem;
+      font-weight: 700;
+      line-height: 1.42;
+      max-width: 60ch;
+    }
+
+    .strategy-copy {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .strategy-callout {
+      display: flex;
+      gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      padding: 18px;
+      margin: 26px 0;
+    }
+
+    .strategy-callout-icon {
+      flex: 0 0 auto;
+    }
+
+    .strategy-callout .callout-title {
+      margin: 0 0 6px 0;
+      color: var(--ink);
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .strategy-callout p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .capability-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .capability-pill {
+      --pill-color: var(--teal);
+      --pill-bg: rgba(2, 125, 115, 0.1);
+      --pill-border: rgba(2, 125, 115, 0.18);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--pill-border);
+      border-radius: 999px;
+      background: var(--pill-bg);
+      color: var(--pill-color);
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .capability-pill i {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 4px var(--pill-bg);
+    }
+
+    .pill-teal {
+      --pill-color: var(--teal);
+    }
+
+    .pill-green {
+      --pill-color: var(--green);
+      --pill-bg: rgba(120, 184, 67, 0.12);
+      --pill-border: rgba(120, 184, 67, 0.22);
+    }
+
+    .pill-yellow {
+      --pill-color: #b8860b;
+      --pill-bg: rgba(242, 184, 75, 0.14);
+      --pill-border: rgba(242, 184, 75, 0.26);
+    }
+
+    .pill-red {
+      --pill-color: var(--red);
+      --pill-bg: rgba(214, 64, 50, 0.1);
+      --pill-border: rgba(214, 64, 50, 0.2);
+    }
+
+    .pill-neutral {
+      --pill-color: #5f646c;
+      --pill-bg: rgba(95, 100, 108, 0.09);
+      --pill-border: rgba(95, 100, 108, 0.16);
+    }
+
+    .solutions-section {
+      background: #f8f9fa;
+    }
+
+    .solutions-section .feature-grid {
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .solutions-section .container > .reveal:first-child {
+      max-width: 840px;
+    }
+
+    .feature {
+      min-height: 0;
+      align-items: flex-start;
+      text-align: left;
+      border-color: #e5e7eb;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .feature::before {
+      height: 4px;
+      opacity: 1;
+      background: var(--teal);
+    }
+
+    .feature:nth-child(2)::before {
+      background: var(--green);
+    }
+
+    .feature:nth-child(3)::before {
+      background: var(--yellow);
+    }
+
+    .feature:nth-child(4)::before {
+      background: var(--red);
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 42px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature img,
+    .feature svg {
+      width: 56px;
+      height: 56px;
+      margin: 2px 0 20px;
+    }
+
+    .feature h3 {
+      font-size: 1.28rem;
+      line-height: 1.16;
+    }
+
+    .feature p {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      line-height: 1.56;
+    }
+
+    .feature-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 22px;
+      color: var(--teal);
+      font-size: 0.92rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      transition: color 180ms ease;
+    }
+
+    .feature-link span {
+      display: inline-block;
+      transition: transform 180ms ease;
+    }
+
+    .feature-link:hover,
+    .feature-link:focus-visible {
+      color: var(--ink);
+      outline: none;
+    }
+
+    .feature-link:hover span,
+    .feature-link:focus-visible span {
+      transform: translateX(5px);
     }
 
     .what-we-do-grid {
@@ -1533,7 +2499,13 @@
       grid-template-columns: 1fr 1fr;
       gap: clamp(30px, 5vw, 56px);
       align-items: center;
+      margin-top: 48px;
     }
+    /* Swap graph and text: graph (1st child) → RIGHT column,
+       text (2nd child) → LEFT column. Keeps alternating image pattern
+       (Section 1 image right → Section 2 image left → Section 3 graph right). */
+    .what-we-do-grid > *:first-child  { order: 2; }
+    .what-we-do-grid > *:nth-child(2) { order: 1; }
 
     @media (max-width: 980px) {
       .nav {
@@ -1546,13 +2518,24 @@
         background: rgba(16, 17, 17, 0.98);
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
       }
-      
+
       .hero {
         min-height: auto;
       }
 
       .hero-inner {
+        grid-template-columns: 1fr;
         padding: calc(var(--nav-h) + 60px) 0 40px;
+      }
+
+      .hero-content {
+        max-width: 760px;
+      }
+
+      .hero-visual {
+        width: min(540px, 100%);
+        min-height: 360px;
+        justify-self: center;
       }
 
       .wordmark {
@@ -1670,10 +2653,10 @@
       }
 
       .journey-horizontal {
-        flex-direction: column;
-        gap: 20px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 42px 20px;
       }
-      
+
       .journey-connector {
         display: none;
       }
@@ -1758,6 +2741,10 @@
         padding-bottom: 34px;
       }
 
+      .hero-visual {
+        display: none;
+      }
+
       .hero h1 {
         font-size: 3rem;
       }
@@ -1793,6 +2780,24 @@
 
       .journey-steps {
         grid-template-columns: 1fr;
+      }
+
+      .journey-horizontal {
+        grid-template-columns: 1fr;
+        gap: 42px;
+      }
+
+      .journey-step-card {
+        padding: 46px 20px 22px;
+      }
+
+      .strategy-callout {
+        flex-direction: column;
+      }
+
+      .graph-badge {
+        position: static;
+        margin: 14px 0 2px;
       }
 
       .step-label {
