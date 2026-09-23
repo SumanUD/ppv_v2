@@ -1,0 +1,158 @@
+<section class="section who-section" id="who">
+  <div class="who-ambient" aria-hidden="true">
+    <span class="who-blob who-blob-a"></span>
+    <span class="who-blob who-blob-b"></span>
+    <div class="who-rings">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="reveal who-header">
+      <div class="section-kicker">What We Do</div>
+      <h2 class="section-title">We are a <span class="grad-text">Strategic Growth Company</span></h2>
+      <p class="section-lead">Strategy firm. Consulting partner. Technology company. Governance support through a fractional CMO approach.</p>
+    </div>
+
+    <div class="who-grid">
+      <!-- LEFT — Growth architecture visualization -->
+      <div class="reveal">
+        <div class="who-visual">
+          <div class="who-visual-tag">
+            <span class="pulse-dot"></span>
+            <span>Growth · Architected</span>
+          </div>
+
+          <svg viewBox="0 0 500 360" class="who-chart" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="growLine" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#00C4A7"/>
+                <stop offset="55%" stop-color="#7DD3C0"/>
+                <stop offset="100%" stop-color="#F4D58D"/>
+              </linearGradient>
+              <linearGradient id="growFill" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#00C4A7" stop-opacity="0"/>
+                <stop offset="100%" stop-color="#00C4A7" stop-opacity="0.22"/>
+              </linearGradient>
+              <linearGradient id="growBar" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#7DD3C0" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#00C4A7" stop-opacity="0.95"/>
+              </linearGradient>
+              <filter id="ptGlow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="4" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Subtle grid -->
+            <g stroke="#0B1F2A" stroke-opacity="0.05">
+              <line x1="48" y1="80" x2="476" y2="80"/>
+              <line x1="48" y1="150" x2="476" y2="150"/>
+              <line x1="48" y1="220" x2="476" y2="220"/>
+              <line x1="48" y1="290" x2="476" y2="290"/>
+            </g>
+
+            <!-- Y-axis label -->
+            <text x="58" y="74" font-family="JetBrains Mono" font-size="9" fill="#6B7F8C" letter-spacing="1.2">GROWTH ↑</text>
+            <text x="58" y="312" font-family="JetBrains Mono" font-size="9" fill="#6B7F8C" letter-spacing="1.2">TIME →</text>
+
+            <!-- Bars — one under each line point so the chart reads as a continuous series -->
+            <rect class="bar bar-1" x="68"  y="240" width="34" height="60"  rx="6" fill="url(#growBar)" opacity="0.40"/>
+            <rect class="bar bar-2" x="128" y="200" width="34" height="100" rx="6" fill="url(#growBar)" opacity="0.55"/>
+            <rect class="bar bar-3" x="188" y="148" width="34" height="152" rx="6" fill="url(#growBar)" opacity="0.70"/>
+            <rect class="bar bar-4" x="248" y="100" width="34" height="200" rx="6" fill="url(#growBar)" opacity="0.85"/>
+            <rect class="bar bar-5" x="343" y="55"  width="34" height="245" rx="6" fill="url(#growBar)" opacity="0.95"/>
+            <rect class="bar bar-6" x="443" y="38"  width="34" height="262" rx="6" fill="url(#growBar)"/>
+
+            <!-- Area fill -->
+            <path class="area" d="M 85,260 C 120,240 132,225 145,215 C 175,200 188,165 205,150 C 230,135 245,115 265,100 C 295,85 320,68 360,55 C 400,42 432,40 460,38 L 460,300 L 85,300 Z" fill="url(#growFill)"/>
+
+            <!-- Growth line -->
+            <path class="growth-line" d="M 85,260 L 145,215 L 205,150 L 265,100 L 360,55 L 460,38" fill="none" stroke="url(#growLine)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- Points -->
+            <circle class="pt p1" cx="85"  cy="260" r="6" fill="#FFFFFF" stroke="#00C4A7" stroke-width="3"/>
+            <circle class="pt p2" cx="145" cy="215" r="6" fill="#FFFFFF" stroke="#00C4A7" stroke-width="3"/>
+            <circle class="pt p3" cx="205" cy="150" r="6" fill="#FFFFFF" stroke="#7DD3C0" stroke-width="3"/>
+            <circle class="pt p4" cx="265" cy="100" r="7" fill="#FFFFFF" stroke="#7DD3C0" stroke-width="3"/>
+            <circle class="pt p5" cx="360" cy="55"  r="8" fill="#FFFFFF" stroke="#F4D58D" stroke-width="3"/>
+            <circle class="pulse-ring" cx="460" cy="38" r="14" fill="none" stroke="#FF7A59" stroke-width="2"/>
+            <circle class="pt p6" cx="460" cy="38"  r="10" fill="#FF7A59" filter="url(#ptGlow)"/>
+
+            <!-- Floating annotation -->
+            <g class="who-annotation">
+              <line x1="460" y1="38" x2="408" y2="22" stroke="#0B1F2A" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="3 3"/>
+              <text x="400" y="20" text-anchor="end" font-family="Space Grotesk" font-size="12" font-weight="600" fill="#0B1F2A">Compounding</text>
+            </g>
+          </svg>
+
+          <div class="who-visual-foot">
+            <div class="who-stat">
+              <span class="who-stat-label">Vector</span>
+              <span class="who-stat-val">+247%</span>
+            </div>
+            <div class="who-stat">
+              <span class="who-stat-label">Clarity Index</span>
+              <span class="who-stat-val">9.4</span>
+            </div>
+            <div class="who-stat">
+              <span class="who-stat-label">Status</span>
+              <span class="who-stat-val who-stat-live"><span></span>Live</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — narrative -->
+      <div class="reveal">
+        <div class="truth-card">
+          <span class="truth-quote-mark" aria-hidden="true">"</span>
+          <p>The truth is, we bring all of these together into <span class="grad-text">one connected structure.</span></p>
+        </div>
+
+        <p class="who-copy">
+          Platform Play Venture works with businesses that want <strong>clarity before action</strong>. We help define growth vision, shape brand and marketing strategy, build the right technology foundation, and bring structure to decision-making through strategic governance.
+        </p>
+
+        <div class="diff-callout">
+          <div class="diff-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/>
+            </svg>
+          </div>
+          <div>
+            <strong>Not more activity — more direction.</strong>
+            <p>This is about building a clear, sustainable way for a brand to grow with the right direction, systems, and leadership support.</p>
+          </div>
+        </div>
+
+        <div class="capability-stack">
+          <span class="capability-label">Capabilities</span>
+          <div class="chip-row">
+            <span class="chip" data-accent="teal">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              Growth Vision
+            </span>
+            <span class="chip" data-accent="mint">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              Brand Strategy
+            </span>
+            <span class="chip" data-accent="honey">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+              Technology Foundation
+            </span>
+            <span class="chip" data-accent="coral">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21V13h6v8"/></svg>
+              Strategic Governance
+            </span>
+            <span class="chip" data-accent="slate">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Decision-Making
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

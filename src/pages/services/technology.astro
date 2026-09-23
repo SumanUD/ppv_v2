@@ -1,0 +1,199 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+
+const stats = [
+  { value: '65%', text: 'of organisations say improving digital infrastructure and platform integration is now a top strategic priority.', source: 'PwC Digital Transformation Survey' },
+  { value: '71%', text: 'of business leaders say outdated technology systems limit growth, scalability, and operational efficiency.', source: 'Accenture Technology Vision Report' },
+  { value: '67%', text: 'of enterprise leaders say disconnected systems and fragmented workflows significantly impact operational efficiency.', source: 'Gartner Technology Research' },
+  { value: '53%', text: 'of mobile users abandon digital experiences that take longer than three seconds to load or respond.', source: 'Google Consumer Insights' },
+  { value: '72%', text: 'of businesses say modernising legacy systems has become critical for scalability, security, and future growth.', source: 'KPMG Global Tech Report' },
+  { value: '89%', text: 'of companies have already adopted or are planning a digital-first business strategy.', source: 'IDC Digital Transformation Research' },
+];
+
+const blocks = [
+  {
+    n: '01',
+    title: 'Strong businesses need connected operational systems',
+    headline: 'Operationally Structured Platform Development',
+    opportunity: 'As teams, stakeholders, and operational processes expand, businesses benefit from systems that bring workflows, approvals, communication, and reporting into a more structured digital environment.',
+    approach: 'Before development begins, PPV maps stakeholder movement, approval systems, workflow dependencies, operational flows, reporting requirements, and platform interactions. This structures systems around how the business naturally operates — while supporting future scalability.',
+    implementation: ['Workflow mapping workshops', 'Role-based system structuring', 'Operational dependency planning', 'Custom dashboard planning', 'Scalable backend architecture'],
+    outcome: 'Better operational visibility, reduced manual dependency, faster coordination, and systems that scale more naturally with business growth.',
+  },
+  {
+    n: '02',
+    title: 'Scalable architecture creates long-term flexibility',
+    headline: 'Scalable Architecture & Future-Ready Development',
+    opportunity: 'As digital products evolve, businesses benefit from technology foundations that can support growth, feature expansion, integrations, and changing operational requirements over time.',
+    approach: 'PPV structures digital products with scalability, modularity, and maintainability in mind from the early planning stage. The objective is to ensure the platform remains adaptable as business requirements evolve.',
+    implementation: ['Architecture planning workshops', 'Modular development structures', 'Scalable database and API planning', 'Cloud-ready infrastructure setup', 'Security-conscious development practices'],
+    outcome: 'Platforms become easier to scale, maintain, expand, and integrate — without repeated structural rebuilds.',
+  },
+  {
+    n: '03',
+    title: 'Better user experiences create stronger digital adoption',
+    headline: 'Behaviour-Oriented Product & Experience Structuring',
+    opportunity: 'Digital platforms perform better when interfaces, journeys, and interactions feel intuitive, frictionless, and aligned with how users naturally behave across devices and platforms.',
+    approach: 'PPV approaches UX by understanding user intent, platform movement, interaction behaviour, decision flow, feature priorities, and accessibility expectations — before interfaces are finalised.',
+    implementation: ['User journey workshops', 'Wireflow and interaction planning', 'Prototype development before coding', 'UX refinement iterations', 'Behaviour-led screen structuring'],
+    outcome: 'Clearer user journeys, stronger adoption, smoother interaction behaviour, and more intuitive digital experiences across devices and user types.',
+  },
+  {
+    n: '04',
+    title: 'Clear product structuring improves development clarity',
+    headline: 'Workshop-Led Product Discovery & Structuring',
+    opportunity: 'Technology projects become significantly more efficient when business logic, workflows, user movement, ecosystem dependencies, and scalability expectations are clearly structured before development begins.',
+    approach: 'Every PPV technology project begins through structured workshops focused on understanding business objectives, operational processes, user behaviour, ecosystem dependencies, market realities, and scalability expectations — before scope is finalised.',
+    implementation: ['Multi-stage discovery workshops', 'BRD documentation', 'User flow structuring', 'Architecture documentation', 'Feature prioritisation and scope planning'],
+    outcome: 'Sharper product clarity, better development alignment, reduced execution confusion, and more efficient technology decision-making across the project lifecycle.',
+  },
+];
+---
+
+<Base title="Technology & Digital Platforms · Platform Play Venture" description="Technology becomes significantly more valuable when it is built around how the business actually operates, scales, communicates, and delivers experiences.">
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="service-page">
+      <section class="service-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <a class="service-hero-back reveal" href="/">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back to Home</span>
+          </a>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Service · 02</span></div>
+          <h1 class="service-hero-title reveal">Technology & <span class="grad-text">Digital Platforms</span></h1>
+          <p class="service-hero-lead reveal">Built around how the business actually operates, scales, communicates, and delivers experiences — not as isolated development execution.</p>
+        </div>
+      </section>
+
+      <!-- ============== STATS ============== -->
+      <section class="section stats-section">
+        <div class="container">
+          <div class="reveal stats-header">
+            <div class="section-kicker">The Digital Reality</div>
+            <h2 class="section-title">Six signals that <span class="grad-text">technology is now business infrastructure</span></h2>
+          </div>
+          <div class="stats-grid">
+            {stats.map((s) => (
+              <article class="stat-card reveal">
+                <div class="stat-card-top">
+                  <span class="stat-card-value">{s.value}</span>
+                  <span class="stat-card-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                  </span>
+                </div>
+                <p class="stat-card-text">{s.text}</p>
+                <div class="stat-card-source">{s.source}</div>
+                <span class="stat-card-line" aria-hidden="true"></span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== TECH IS INFRASTRUCTURE ============== -->
+      <section class="section system-section">
+        <div class="container system-inner">
+          <div class="reveal system-copy">
+            <div class="section-kicker">Why Technology Now</div>
+            <h2 class="section-title">Technology is becoming <span class="grad-text">business infrastructure</span>.</h2>
+            <p>The way businesses operate, scale, communicate, and compete is increasingly shaped by the digital systems working underneath them.</p>
+            <p>Websites are no longer only brand assets. Applications are no longer only technology products. Platforms now influence customer expectations, operational efficiency, scalability, internal workflows, stakeholder coordination, and long-term adaptability.</p>
+            <p><strong>Technology is moving closer to the centre of how modern businesses function — and how markets respond to them.</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== 4 BLOCKS ============== -->
+      <section class="section tech-blocks-section">
+        <div class="container">
+          <div class="reveal tech-blocks-header">
+            <div class="section-kicker">Technology Designed Around Real Business Behaviour</div>
+            <h2 class="section-title">Four opportunities where <span class="grad-text">platforms create real leverage</span></h2>
+          </div>
+
+          {blocks.map((b) => (
+            <article class="tech-block reveal">
+              <header class="tech-block-head">
+                <div class="tech-block-num">{b.n}</div>
+                <div>
+                  <div class="tech-block-eyebrow">{b.headline}</div>
+                  <h3>{b.title}</h3>
+                </div>
+              </header>
+              <div class="tech-block-grid">
+                <div class="tech-block-col">
+                  <div class="tech-block-label">The Opportunity</div>
+                  <p>{b.opportunity}</p>
+                </div>
+                <div class="tech-block-col">
+                  <div class="tech-block-label">Our Approach</div>
+                  <p>{b.approach}</p>
+                </div>
+                <div class="tech-block-col">
+                  <div class="tech-block-label">Implementation Includes</div>
+                  <ul class="tech-block-checks">
+                    {b.implementation.map((i) => <li><span aria-hidden="true">✓</span>{i}</li>)}
+                  </ul>
+                </div>
+                <div class="tech-block-col tech-block-col-outcome">
+                  <div class="tech-block-label">Expected Outcome</div>
+                  <p>{b.outcome}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============== TECH AT PPV ============== -->
+      <section class="section approach-section">
+        <div class="container approach-inner">
+          <div class="approach-side reveal">
+            <div class="section-kicker">Technology Development At PPV</div>
+            <h2 class="section-title">A combination of business understanding, product thinking, and <span class="grad-text">scalable engineering</span></h2>
+          </div>
+          <div class="approach-body reveal">
+            <p>Technology becomes significantly more valuable when it is built around how the business actually operates, scales, communicates, and delivers experiences.</p>
+            <p>At PPV, technology development is approached as a combination of <strong>business understanding, product thinking, operational structuring, user behaviour, and scalable engineering</strong> — rather than isolated development execution.</p>
+            <p>This can involve building customer-facing platforms, internal operational systems, mobile applications, websites, ecommerce ecosystems, or customised digital products designed around specific business requirements.</p>
+            <p>Every technology engagement begins with understanding what the business is trying to solve, improve, simplify, or scale — before defining how the platform should be structured technically and behaviourally.</p>
+            <p>The focus is not only on developing digital products that function well, but on building systems that remain <strong>usable, scalable, adaptable, and operationally relevant</strong> as the business evolves over time.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== CTA ============== -->
+      <section class="section service-cta-section">
+        <div class="container">
+          <div class="service-cta-card reveal">
+            <div class="service-cta-eyebrow"><span class="pulse-dot"></span><span>Build the foundation right</span></div>
+            <h2 class="service-cta-title">Strong technology isn't built around features. <br/> It's built around <span class="grad-text">how the business actually works</span>.</h2>
+            <a class="service-cta-btn" href="/#contact">
+              <span>Start a technology conversation</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>

@@ -1,0 +1,163 @@
+<section class="section why-section" id="why">
+  <div class="why-ambient" aria-hidden="true">
+    <span class="why-blob why-blob-a"></span>
+    <span class="why-blob why-blob-b"></span>
+    <span class="why-blob why-blob-c"></span>
+    <svg class="why-topo" viewBox="0 0 1600 1200" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <pattern id="topoLines" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(8)">
+          <path d="M 0 30 Q 15 22 30 30 T 60 30" stroke="#0B1F2A" stroke-opacity="0.06" stroke-width="1" fill="none"/>
+        </pattern>
+      </defs>
+      <rect width="1600" height="1200" fill="url(#topoLines)"/>
+    </svg>
+  </div>
+
+  <div class="container">
+    <div class="reveal why-header">
+      <div class="section-kicker">Why Choose Us</div>
+      <h2 class="section-title">Your partner in <span class="grad-text">transforming complexity into clarity</span></h2>
+      <p class="section-lead">Six reasons brands choose Platform Play Venture as the thinking layer beneath their growth — from clarity at the start, to real business impact over time.</p>
+    </div>
+
+    <!-- The strategic map -->
+    <div class="strategic-map" data-strategic-map>
+      <!-- The winding path between stops -->
+      <svg class="strategic-map-path" viewBox="0 0 1200 1800" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="mapPathGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#EE5A18"/>
+            <stop offset="35%"  stop-color="#FF8A3D"/>
+            <stop offset="70%"  stop-color="#FFB066"/>
+            <stop offset="100%" stop-color="#EE5A18"/>
+          </linearGradient>
+          <filter id="mapPathGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Soft underlay -->
+        <path
+          d="M 600 78 C 820 160, 820 290, 600 368 C 380 450, 380 580, 600 658 C 820 740, 820 870, 600 948 C 380 1030, 380 1160, 600 1238 C 820 1320, 820 1450, 600 1528"
+          stroke="rgba(14, 14, 14, 0.06)"
+          stroke-width="22"
+          stroke-linecap="round"
+          fill="none"
+        />
+        <!-- Main animated path -->
+        <path
+          class="strategic-path"
+          d="M 600 78 C 820 160, 820 290, 600 368 C 380 450, 380 580, 600 658 C 820 740, 820 870, 600 948 C 380 1030, 380 1160, 600 1238 C 820 1320, 820 1450, 600 1528"
+          stroke="url(#mapPathGrad)"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-dasharray="12 10"
+          fill="none"
+          filter="url(#mapPathGlow)"
+        />
+        <!-- Particles traveling the path -->
+        <circle r="6" fill="#EE5A18" filter="url(#mapPathGlow)">
+          <animateMotion dur="22s" repeatCount="indefinite"
+            path="M 600 78 C 820 160, 820 290, 600 368 C 380 450, 380 580, 600 658 C 820 740, 820 870, 600 948 C 380 1030, 380 1160, 600 1238 C 820 1320, 820 1450, 600 1528"
+          />
+        </circle>
+        <circle r="5" fill="#FFB066" filter="url(#mapPathGlow)">
+          <animateMotion dur="22s" begin="-8s" repeatCount="indefinite"
+            path="M 600 78 C 820 160, 820 290, 600 368 C 380 450, 380 580, 600 658 C 820 740, 820 870, 600 948 C 380 1030, 380 1160, 600 1238 C 820 1320, 820 1450, 600 1528"
+          />
+        </circle>
+        <circle r="4" fill="#FF8A3D" filter="url(#mapPathGlow)">
+          <animateMotion dur="22s" begin="-15s" repeatCount="indefinite"
+            path="M 600 78 C 820 160, 820 290, 600 368 C 380 450, 380 580, 600 658 C 820 740, 820 870, 600 948 C 380 1030, 380 1160, 600 1238 C 820 1320, 820 1450, 600 1528"
+          />
+        </circle>
+      </svg>
+
+      <!-- 6 stops, alternating sides -->
+      <article class="map-stop map-stop-1 reveal" data-side="right" data-accent="teal">
+        <div class="map-stop-marker">
+          <span class="map-stop-pulse"></span>
+          <span class="map-stop-num">01</span>
+        </div>
+        <div class="map-stop-card">
+          <div class="map-stop-meta"><span>Stop 01</span> · Partner</div>
+          <h3>A partner that brings clarity where brands feel complexity the most</h3>
+          <p>We work with businesses that want to move beyond fragmented marketing and unclear decision-making. PPV partners with brands that want structure, strategic clarity, and a long-term way to grow — rather than short-term activity.</p>
+        </div>
+      </article>
+
+      <article class="map-stop map-stop-2 reveal" data-side="left" data-accent="mint">
+        <div class="map-stop-marker">
+          <span class="map-stop-pulse"></span>
+          <span class="map-stop-num">02</span>
+        </div>
+        <div class="map-stop-card">
+          <div class="map-stop-meta"><span>Stop 02</span> · Thinking Layer</div>
+          <h3>We work on thinking, not just marketing</h3>
+          <p>While others focus on campaigns, content, ads, or platforms — we focus on the thinking behind them. From brand positioning, consumer mindset mapping, and growth direction to technology alignment and governance, every decision supports the business goal, not just the marketing plan.</p>
+        </div>
+      </article>
+
+      <article class="map-stop map-stop-3 reveal" data-side="right" data-accent="honey">
+        <div class="map-stop-marker">
+          <span class="map-stop-pulse"></span>
+          <span class="map-stop-num">03</span>
+        </div>
+        <div class="map-stop-card">
+          <div class="map-stop-meta"><span>Stop 03</span> · Structure</div>
+          <h3>We bring structure where most brands feel chaos</h3>
+          <p>Many businesses work with multiple agencies, multiple platforms, and multiple ideas at the same time. We help bring clarity to priorities, structure to decision-making, and consistency to how the brand moves forward.</p>
+        </div>
+      </article>
+
+      <article class="map-stop map-stop-4 reveal" data-side="left" data-accent="coral">
+        <div class="map-stop-marker">
+          <span class="map-stop-pulse"></span>
+          <span class="map-stop-num">04</span>
+        </div>
+        <div class="map-stop-card">
+          <div class="map-stop-meta"><span>Stop 04</span> · Connected System</div>
+          <h3>We connect strategy, technology, and governance</h3>
+          <p>Instead of treating strategy, digital platforms, and decision-making as separate pieces, we bring them together into one structured system. This helps brands move with more confidence and less confusion.</p>
+        </div>
+      </article>
+
+      <article class="map-stop map-stop-5 reveal" data-side="right" data-accent="teal">
+        <div class="map-stop-marker">
+          <span class="map-stop-pulse"></span>
+          <span class="map-stop-num">05</span>
+        </div>
+        <div class="map-stop-card">
+          <div class="map-stop-meta"><span>Stop 05</span> · Long-Term Partner</div>
+          <h3>We work as a long-term strategic partner</h3>
+          <p>We work closely with brand teams to help brands make stronger decisions, build better systems, and grow in a more structured and sustainable way — not as a vendor that disappears after a deck, but as part of the brand's thinking process.</p>
+        </div>
+      </article>
+
+      <article class="map-stop map-stop-6 reveal" data-side="left" data-accent="mint">
+        <div class="map-stop-marker">
+          <span class="map-stop-pulse"></span>
+          <span class="map-stop-num">06</span>
+        </div>
+        <div class="map-stop-card map-stop-card-final">
+          <div class="map-stop-meta"><span>Destination</span> · Real Impact</div>
+          <h3>We focus on real business impact</h3>
+          <p>The objective is not only visibility or activity. The focus is on helping the brand become stronger in its positioning, clearer in its direction, and more confident in its decision-making — so it occupies a real space in consumers' mindspace.</p>
+          <a class="button button-primary map-stop-cta" href="#contact">
+            <span>Begin the Journey</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- START + END markers -->
+      <div class="map-marker-tag map-marker-start" aria-hidden="true">
+        <span class="dot"></span><span>START · Brand Reality</span>
+      </div>
+      <div class="map-marker-tag map-marker-end" aria-hidden="true">
+        <span class="dot teal"></span><span>END · Aligned Growth</span>
+      </div>
+    </div>
+  </div>
+</section>

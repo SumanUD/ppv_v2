@@ -1,0 +1,30 @@
+---
+import LabAccordion from '@/components/LabAccordion.astro';
+---
+
+<section class="section best-with-section">
+  <div class="best-with-ambient" aria-hidden="true">
+    <span class="best-with-blob a"></span>
+    <span class="best-with-blob b"></span>
+  </div>
+
+  <div class="container">
+    <div class="reveal best-with-header">
+      <div class="section-kicker">Who We Work Best With</div>
+      <h2 class="section-title">Businesses entering the stage where <span class="grad-text">strategic alignment becomes essential</span>.</h2>
+      <p class="section-lead">PPV works best with businesses entering a stage where greater market ambition, increasing complexity, and the need for stronger strategic alignment start becoming essential.</p>
+    </div>
+
+    <div class="reveal">
+      <LabAccordion
+        theme="light"
+        panels={[
+          { num: '01', title: 'Founder-Led Businesses', img: '/labs/founder.jpg', body: 'Brands entering a more serious phase of expansion — where instinct alone is no longer enough, and strategic structure starts becoming critical.' },
+          { num: '02', title: 'Repositioning Brands', img: '/labs/reposition.jpg', body: 'Businesses re-evaluating how they are perceived, differentiated, or understood within a changing market or consumer landscape.' },
+          { num: '03', title: 'Fragmented Ecosystems', img: '/labs/fragmented.jpg', body: 'Companies managing multiple agencies, platforms, teams, or disconnected decisions — that no longer feel strategically aligned.' },
+          { num: '04', title: 'Leadership-Led Transformation', img: '/labs/leadership.jpg', body: 'Businesses looking for stronger strategic guidance before scaling operations, communication, technology, or market presence further.' },
+        ]}
+      />
+    </div>
+  </div>
+</section>

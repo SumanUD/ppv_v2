@@ -1,0 +1,32 @@
+---
+interface Panel {
+  num: string;
+  title: string;
+  body: string;
+  img: string;
+}
+interface Props {
+  panels: Panel[];
+  theme?: 'dark' | 'light';
+}
+const { panels, theme = 'dark' } = Astro.props;
+---
+<div class:list={["lab-accordion", `lab-accordion-${theme}`]} data-lab-accordion>
+  {panels.map((p, i) => (
+    <article
+      class:list={["lab-panel", i === 0 && "is-active"]}
+      data-lab-panel
+      tabindex="0"
+      style={`background-image:url('${p.img}')`}
+    >
+      <span class="lab-panel-scrim" aria-hidden="true"></span>
+      <span class="lab-panel-rail" aria-hidden="true">{p.title}</span>
+      <div class="lab-panel-content">
+        <span class="lab-panel-num">{p.num}</span>
+        <h3 class="lab-panel-title">{p.title}</h3>
+        <p class="lab-panel-body">{p.body}</p>
+      </div>
+      <span class="lab-panel-accent" aria-hidden="true"></span>
+    </article>
+  ))}
+</div>

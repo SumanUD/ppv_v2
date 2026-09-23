@@ -1,0 +1,55 @@
+---
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isHome = pathname === '/';
+const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
+---
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="/" aria-label="Platform Play Venture home">
+      <img src="/newlogo.png" alt="Platform Play Venture maze" width="240" height="220" />
+      <span class="wordmark-name" aria-hidden="true">
+        <span>PLATFORM</span><span class="play">PLAY</span><span>VENTURE</span>
+      </span>
+    </a>
+    <button class="mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="/about" class:list={["nav-link", pathname === "/about" && "is-active"]}>About</a>
+      <div class="nav-dropdown" data-nav-dropdown>
+        <button class="nav-link nav-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+          Services
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu" role="menu">
+          <a href="/services/strategy-consulting" role="menuitem">
+            <span class="nav-dd-title">Strategy &amp; Consulting</span>
+            <span class="nav-dd-sub">Thinking, positioning, and growth direction.</span>
+          </a>
+          <a href="/services/technology" role="menuitem">
+            <span class="nav-dd-title">Technology &amp; Digital Platforms</span>
+            <span class="nav-dd-sub">Operational systems, products, and scale.</span>
+          </a>
+          <a href="/technology" role="menuitem">
+            <span class="nav-dd-title">Digital &amp; Technology</span>
+            <span class="nav-dd-sub">What we build, and the products already live.</span>
+          </a>
+          <a href="/services/marketing-governance" role="menuitem">
+            <span class="nav-dd-title">Marketing Governance</span>
+            <span class="nav-dd-sub">Fractional CMO oversight and alignment.</span>
+          </a>
+          <a href="/services/training" role="menuitem">
+            <span class="nav-dd-title">Training &amp; Capability</span>
+            <span class="nav-dd-sub">Building internal clarity and depth.</span>
+          </a>
+        </div>
+      </div>
+      <a href="/products" class:list={["nav-link", (pathname === "/products" || pathname.startsWith("/product/")) && "is-active"]}>Products</a>
+      <a href={h('principles')} class="nav-link">Belief System</a>
+      <a href={h('why')} class="nav-link">Why Us</a>
+      <a href="/insights" class:list={["nav-link", pathname.startsWith("/insights") && "is-active"]}>Insights</a>
+      <a href={h('faq')} class="nav-link">FAQ</a>
+      <a class="nav-cta" href={h('contact')}>Contact <span aria-hidden="true">→</span></a>
+    </nav>
+  </div>
+</header>

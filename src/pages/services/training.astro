@@ -1,0 +1,71 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<Base title="Training & Capability Development · Platform Play Venture" description="We help internal marketing and sales teams understand strategy better and work more effectively with partners — building long-term clarity so the brand does not become dependent on external execution.">
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="service-page">
+      <section class="service-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <a class="service-hero-back reveal" href="/">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back to Home</span>
+          </a>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Service · 04</span></div>
+          <h1 class="service-hero-title reveal">Training & <span class="grad-text">Capability Development</span></h1>
+          <p class="service-hero-lead reveal">Building long-term clarity inside the brand — so the brand does not become dependent on external execution.</p>
+        </div>
+      </section>
+
+      <section class="section system-section">
+        <div class="container system-inner">
+          <div class="reveal system-copy">
+            <div class="section-kicker">Why Internal Capability</div>
+            <h2 class="section-title">Stronger brand teams make <span class="grad-text">stronger long-term decisions</span>.</h2>
+            <p>We help internal marketing and sales teams understand strategy better and work more effectively with partners. The focus is on building <strong>long-term clarity</strong> so the brand does not become dependent on external execution.</p>
+            <p>Capability development sits alongside the rest of PPV's work — strategy, governance, and technology — so internal teams can take stronger ownership of every decision over time.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section service-placeholder-section">
+        <div class="container">
+          <div class="service-placeholder reveal">
+            <div class="service-placeholder-tag">Detailed page in progress</div>
+            <h2>Full Training & Capability programmes — coming soon.</h2>
+            <p>Workshop tracks, leadership programmes, marketing-team enablement, and partner-collaboration playbooks will be detailed here as we publish the full curriculum. In the meantime — happy to walk you through it directly.</p>
+            <div class="service-placeholder-actions">
+              <a class="service-cta-btn" href="/#contact">
+                <span>Talk to us about training engagements</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <a class="service-placeholder-link" href="/services/marketing-governance">
+                <span>Explore Marketing Governance</span>
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>

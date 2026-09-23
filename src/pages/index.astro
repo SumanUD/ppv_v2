@@ -1,0 +1,44 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+
+import Hero from '@/components/sections/Hero.astro';
+import Clarity from '@/components/sections/Clarity.astro';
+import WhoWeAre from '@/components/sections/WhoWeAre.astro';
+import Solutions from '@/components/sections/Solutions.astro';
+import Principles from '@/components/sections/Principles.astro';
+import WhyUs from '@/components/sections/WhyUs.astro';
+import Insights from '@/components/sections/Insights.astro';
+import Faq from '@/components/sections/Faq.astro';
+import Contact from '@/components/sections/Contact.astro';
+---
+
+<Base>
+  <ScrollProgress />
+
+  <div class="site-shell">
+    <PageAurora />
+    <Nav />
+
+    <main>
+      <Hero />
+      <Clarity />
+      <WhoWeAre />
+      <Solutions />
+      <Principles />
+      <WhyUs />
+      <Insights />
+      <Faq />
+      <Contact />
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>

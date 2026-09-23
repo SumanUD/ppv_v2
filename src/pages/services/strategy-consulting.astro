@@ -1,0 +1,413 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+
+const stats = [
+  { value: '81%', text: 'of consumers say trust influences purchase decisions before consideration even begins.', source: 'Edelman Trust Barometer' },
+  { value: '23%', text: 'higher revenue potential through consistent brand presentation across channels.', source: 'Lucidpress / Demand Metric' },
+  { value: '60%', text: 'of marketers say unclear positioning is one of the biggest barriers to effective marketing performance and differentiation.', source: 'Gartner Marketing Research' },
+  { value: '59%', text: 'of consumers prefer buying from brands they already recognise — even when newer alternatives are available.', source: 'Nielsen' },
+  { value: '64%', text: 'of consumers say shared values are the primary reason they build relationships with brands.', source: 'Harvard Business Review' },
+  { value: '75%', text: 'of consumers are more likely to remain loyal to brands that consistently deliver meaningful brand experiences.', source: 'Kantar BrandZ' },
+];
+
+const coverage = [
+  { name: 'Brand Strategy', sub: 'Positioning · Architecture · Identity', body: 'Defining how the brand should be positioned, differentiated, interpreted, and remembered within the market. May include brand architecture, positioning systems, messaging logic, perception mapping, personality definition, and strategic identity frameworks — Aaker, Kapferer, or Archetype Mapping where relevant.' },
+  { name: 'Go-To-Market Strategy', sub: 'Launch · Adoption · Sequencing', body: 'Structuring how a product, service, or new business enters the market with stronger alignment between audience behaviour, communication, channels, pricing logic, and launch sequencing. May involve STP modelling, category mapping, launch planning, adoption strategy, and competitive positioning.' },
+  { name: 'Content & Communication Strategy', sub: 'Storytelling · Platform Logic · Flow', body: 'Designing communication systems that create consistency across campaigns, platforms, storytelling, and audience interaction. Includes communication hierarchy, platform-role definition, content ecosystems, attention flow, and behavioural models such as AIDA or customer journey frameworks where strategically relevant.' },
+  { name: 'Digital Marketing Strategy', sub: 'Channel mix · Funnel · Measurement', body: 'Building structured digital growth systems aligned with business priorities instead of fragmented platform activity. May involve channel mix strategy, performance roadmap, funnel planning, paid-organic alignment, analytics structure, and growth measurement systems.' },
+  { name: 'Product & Experience Strategy', sub: 'BRD · UX · Ecosystem planning', body: 'Before digital products are built, strategic clarity is required around user behaviour, feature logic, experience architecture, stakeholder flows, and platform objectives. Approached through workshop-led discovery that shapes BRDs, UX structures, user journeys, and ecosystem planning before development begins.' },
+  { name: 'Growth Strategy', sub: 'Expansion · Retention · Whitespace', body: 'Identifying where future growth can emerge and what strategic shifts are required to support it sustainably. Includes market expansion direction, customer lifecycle planning, retention thinking, growth bottleneck analysis, and opportunity mapping across business, communication, and experience layers.' },
+  { name: 'Product Marketing Strategy', sub: 'Positioning · Launch · Adoption', body: 'Structuring how products are introduced, positioned, communicated, and adopted within the market. Especially relevant for technology products, healthcare ecosystems, consumer launches, platform businesses, and evolving service models.' },
+];
+
+const workshops = [
+  { n: '01', title: 'Business Context & Vision', bullets: ['the business model', 'market realities', 'founder intent', 'operational structure', 'offerings', 'current challenges', 'long-term ambition'], note: 'Creates strategic context before positioning decisions begin.' },
+  { n: '02', title: 'Brand Personality & Strategic Identity', bullets: ['brand personality', 'emotional positioning', 'tone direction', 'identity perception', 'market character'], note: 'Where Aaker Brand Personality, Archetype Mapping, or identity systems may become part of the process.' },
+  { n: '03', title: 'Consumer, Market & Competitive Understanding', bullets: ['target audience behaviour', 'market perception', 'decision drivers', 'competitive whitespace', 'category patterns'], note: 'Followed by secondary research, persona building, positioning work, and strategic interpretation.' },
+  { n: '04', title: 'Communication & Growth Structure', bullets: ['communication systems', 'content direction', 'platform strategy', 'channel mix', 'launch thinking', 'behavioural flows', 'marketing structure'], note: 'Where frameworks such as AIDA, journey mapping, or funnel logic may become strategically relevant.' },
+  { n: '05', title: 'Strategic Integration & Execution Blueprint', bullets: ['growth direction', 'communication systems', 'activity structure', 'rollout logic', 'budgeting', 'content ecosystems', 'platform priorities', 'projected strategic movement'], note: 'Ensures execution moves with clarity instead of fragmented decision-making.' },
+];
+---
+
+<Base title="Strategy & Consulting · Platform Play Venture" description="At PPV, strategy and consulting is approached as a structured decision-making process built around the realities of the business, the behaviour of the market, and the direction the brand intends to grow towards.">
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="service-page">
+      <!-- ============== PAGE HERO ============== -->
+      <section class="service-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <a class="service-hero-back reveal" href="/">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back to Home</span>
+          </a>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Service · 01</span></div>
+          <h1 class="service-hero-title reveal">Strategy & <span class="grad-text">Consulting</span></h1>
+          <p class="service-hero-lead reveal">Structured decision-making built around the realities of the business, the behaviour of the market, and the direction the brand intends to grow towards.</p>
+        </div>
+      </section>
+
+      <!-- ============== STATS SCROLL ============== -->
+      <section class="section stats-section">
+        <div class="container">
+          <div class="reveal stats-header">
+            <div class="section-kicker">The Market Tells the Story</div>
+            <h2 class="section-title">Six numbers behind <span class="grad-text">why strategy matters</span></h2>
+          </div>
+          <div class="stats-grid">
+            {stats.map((s) => (
+              <article class="stat-card reveal">
+                <div class="stat-card-top">
+                  <span class="stat-card-value">{s.value}</span>
+                  <span class="stat-card-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                  </span>
+                </div>
+                <p class="stat-card-text">{s.text}</p>
+                <div class="stat-card-source">{s.source}</div>
+                <span class="stat-card-line" aria-hidden="true"></span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== STRATEGY IS THE SYSTEM ============== -->
+      <section class="section system-section">
+        <div class="container system-inner">
+          <div class="reveal system-copy">
+            <div class="section-kicker">Why Strategy Now</div>
+            <h2 class="section-title">In a market shaped by constant change, strategy becomes the system <span class="grad-text">behind consistency</span>.</h2>
+            <p>Trust, recognition, differentiation, recall, loyalty, and long-term brand preference rarely happen accidentally. They are usually the outcome of businesses making clearer strategic decisions consistently over time.</p>
+            <p>As markets become more dynamic and consumer behaviour keeps evolving, brands can no longer rely only on execution, visibility, or short-term marketing activity. What creates stronger market presence today is the ability to align <strong>positioning, communication, perception, and business direction</strong> into one coherent strategic system.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== THE STRATEGY SHIFT (CASE STUDIES) ============== -->
+      <section class="section shift-section">
+        <div class="container">
+          <div class="reveal shift-header">
+            <div class="section-kicker">The Strategy Shift</div>
+            <h2 class="section-title">Brand breakthroughs that began with <span class="grad-text">sharper understanding</span> — not bigger budgets</h2>
+            <p class="section-lead">Some of the most significant brand breakthroughs began not with bigger marketing budgets, but with sharper strategic understanding of culture, behaviour, positioning, and market psychology.</p>
+          </div>
+
+          <!-- ===== DOMINO'S ===== -->
+          <article class="case-card reveal" data-case-card>
+            <header class="case-card-head">
+              <div class="case-card-num">01</div>
+              <div>
+                <div class="case-card-tag">Trust · Transparency</div>
+                <h3>Domino's — Radical Transparency Rebuilt Consumer Trust</h3>
+              </div>
+            </header>
+
+            <div class="case-tabs" role="tablist" aria-label="Domino's case study sections">
+              <button class="case-tab is-active" type="button" role="tab" data-case-tab="0">Before The Shift</button>
+              <button class="case-tab" type="button" role="tab" data-case-tab="1">The Strategic Realisation</button>
+              <button class="case-tab" type="button" role="tab" data-case-tab="2">The Strategic Shift</button>
+              <button class="case-tab" type="button" role="tab" data-case-tab="3">What Happened Next</button>
+            </div>
+
+            <div class="case-panels">
+              <div class="case-panel is-active" data-case-panel="0" role="tabpanel">
+                <p>By the late 2000s, Domino's globally faced growing criticism around pizza quality, taste perception, and overall brand credibility. Consumers frequently described the product negatively, and the brand had become associated more with convenience than quality.</p>
+              </div>
+              <div class="case-panel" data-case-panel="1" role="tabpanel">
+                <p>Domino's recognised that the issue was not visibility. The deeper issue was <strong>consumer perception</strong>. Instead of hiding criticism behind advertising, the company identified an opportunity to rebuild trust through <strong>radical transparency</strong> — openly acknowledging customer complaints and rebuilding the product experience publicly.</p>
+              </div>
+              <div class="case-panel" data-case-panel="2" role="tabpanel">
+                <p>Domino's completely reformulated its pizza recipe, redesigned ingredients, and rebuilt communication around honesty and improvement. The company publicly featured harsh customer feedback in campaigns and documented the transformation process openly — something extremely unusual for a global food brand at the time.</p>
+                <p>This shifted the brand narrative: from defensive marketing to <strong>visible accountability and customer-led improvement</strong>.</p>
+              </div>
+              <div class="case-panel" data-case-panel="3" role="tabpanel">
+                <p>The strategy became culturally disruptive because consumers were not expecting a large brand to admit flaws publicly. The honesty itself became the campaign. Consumer perception started changing rapidly, helping Domino's regain trust, relevance, and market attention globally.</p>
+                <p>The transformation later extended beyond communication into:</p>
+                <ul class="case-bullets">
+                  <li>Digital ordering innovation</li>
+                  <li>Delivery technology</li>
+                  <li>App ecosystems</li>
+                  <li>Operational efficiency</li>
+                </ul>
+                <p>— which further strengthened the brand's market position.</p>
+              </div>
+            </div>
+
+            <div class="case-impact">
+              <div class="case-impact-head">Business Impact</div>
+              <ul>
+                <li>Domino's reported a <strong>14.3% increase in same-store sales</strong> shortly after the repositioning campaign — one of the strongest jumps in the company's history.</li>
+                <li>Between 2009 and 2019, Domino's global revenue reportedly grew from approximately <strong>$1.5 billion to $3.6 billion</strong>, while digital sales became a dominant part of the business.</li>
+                <li>In India, Domino's operator Jubilant FoodWorks continued building on this trust-and-convenience-led positioning through aggressive digital adoption, value innovation, and delivery ecosystem expansion.</li>
+                <li>Domino's India reported: <strong>56% YoY</strong> revenue growth in Q3 FY25, <strong>23.9% YoY</strong> in Q4 FY24, and a <strong>190%</strong> jump in quarterly profit in Q2 FY26 — driven by delivery growth and expansion.</li>
+                <li>The turnaround became one of the most referenced global business transformation case studies across marketing, consumer trust, and strategic brand repositioning.</li>
+              </ul>
+              <div class="case-impact-sources">Sources: Harvard Business Review · Domino's Investor Reports · Forbes · Business Insider · Jubilant FoodWorks Reports · Reuters</div>
+            </div>
+          </article>
+
+          <!-- ===== DOVE ===== -->
+          <article class="case-card reveal" data-case-card>
+            <header class="case-card-head">
+              <div class="case-card-num">02</div>
+              <div>
+                <div class="case-card-tag">Perception · Repositioning</div>
+                <h3>Dove — Redefining Beauty Changed The Brand's Global Relevance</h3>
+              </div>
+            </header>
+
+            <div class="case-tabs" role="tablist" aria-label="Dove case study sections">
+              <button class="case-tab is-active" type="button" role="tab" data-case-tab="0">Before The Shift</button>
+              <button class="case-tab" type="button" role="tab" data-case-tab="1">The Strategic Realisation</button>
+              <button class="case-tab" type="button" role="tab" data-case-tab="2">The Strategic Shift</button>
+              <button class="case-tab" type="button" role="tab" data-case-tab="3">What Happened Next</button>
+            </div>
+
+            <div class="case-panels">
+              <div class="case-panel is-active" data-case-panel="0" role="tabpanel">
+                <p>For years, beauty advertising across the category was dominated by highly idealised portrayals of women — young, conventionally attractive, heavily retouched, and aspirational in a very narrow way. Dove operated within the same crowded personal care market without strong emotional differentiation.</p>
+              </div>
+              <div class="case-panel" data-case-panel="1" role="tabpanel">
+                <p>Research commissioned by Dove revealed a major disconnect between how women were represented in advertising and how they actually saw themselves. One widely referenced insight from the research:</p>
+                <blockquote class="case-quote">"Only a very small percentage of women globally described themselves as <strong>beautiful</strong>."</blockquote>
+                <p>Dove recognised that the category was selling perfection while consumers were increasingly seeking <strong>authenticity, relatability, and representation</strong>.</p>
+              </div>
+              <div class="case-panel" data-case-panel="2" role="tabpanel">
+                <p>Instead of positioning beauty as aspiration alone, Dove repositioned the brand around:</p>
+                <ul class="case-bullets">
+                  <li>Real women</li>
+                  <li>Self-esteem</li>
+                  <li>Authenticity</li>
+                  <li>Inclusivity</li>
+                  <li>Emotional relatability</li>
+                </ul>
+                <p>This became the foundation of the <strong>"Campaign for Real Beauty."</strong> The shift was not just communication. It influenced:</p>
+                <ul class="case-bullets">
+                  <li>Casting</li>
+                  <li>Storytelling</li>
+                  <li>Visual identity</li>
+                  <li>Messaging tone</li>
+                  <li>Long-term brand philosophy</li>
+                </ul>
+              </div>
+              <div class="case-panel" data-case-panel="3" role="tabpanel">
+                <p>The campaign generated massive global conversation and media coverage because it challenged existing beauty category conventions. Dove became <strong>culturally differentiated</strong> instead of functionally differentiated — and became more than a soap. The strategy significantly strengthened emotional relevance and long-term brand recall.</p>
+              </div>
+            </div>
+
+            <div class="case-impact">
+              <div class="case-impact-head">Business Impact</div>
+              <ul>
+                <li>Dove's sales reportedly grew from around <strong>$2.5 billion to over $4 billion</strong> during the years following the launch of the "Real Beauty" platform.</li>
+                <li>The campaign became one of the most cited examples of <strong>purpose-led brand repositioning</strong> globally.</li>
+                <li>Dove also achieved substantially higher earned media visibility and long-term consumer engagement compared to traditional beauty campaigns.</li>
+              </ul>
+              <div class="case-impact-sources">Sources: Harvard Business Review · Unilever brand case studies · Ogilvy campaign analysis</div>
+            </div>
+          </article>
+
+          <!-- ===== NETFLIX ===== -->
+          <article class="case-card reveal" data-case-card>
+            <header class="case-card-head">
+              <div class="case-card-num">03</div>
+              <div>
+                <div class="case-card-tag">Behaviour · Platform Shift</div>
+                <h3>Netflix — Behavioural Understanding Changed The Entertainment Industry</h3>
+              </div>
+            </header>
+
+            <div class="case-tabs" role="tablist" aria-label="Netflix case study sections">
+              <button class="case-tab is-active" type="button" role="tab" data-case-tab="0">Before The Shift</button>
+              <button class="case-tab" type="button" role="tab" data-case-tab="1">The Strategic Realisation</button>
+              <button class="case-tab" type="button" role="tab" data-case-tab="2">The Strategic Shift</button>
+              <button class="case-tab" type="button" role="tab" data-case-tab="3">What Happened Next</button>
+            </div>
+
+            <div class="case-panels">
+              <div class="case-panel is-active" data-case-panel="0" role="tabpanel">
+                <p>Netflix originally operated as a DVD rental-by-mail company. At the time, entertainment consumption was still largely structured around:</p>
+                <ul class="case-bullets">
+                  <li>Physical rentals</li>
+                  <li>Television schedules</li>
+                  <li>Cable programming</li>
+                  <li>Delayed access to content</li>
+                </ul>
+                <p>The company competed in a transactional rental market dominated by players like Blockbuster.</p>
+              </div>
+              <div class="case-panel" data-case-panel="1" role="tabpanel">
+                <p>Netflix recognised a much larger <strong>behavioural shift</strong> before most competitors did. They understood that consumers increasingly wanted:</p>
+                <ul class="case-bullets">
+                  <li>Convenience</li>
+                  <li>Control</li>
+                  <li>Instant access</li>
+                  <li>Personalised recommendations</li>
+                  <li>On-demand viewing</li>
+                </ul>
+                <p>The insight was not about DVDs. It was about <strong>changing consumer behaviour</strong>.</p>
+              </div>
+              <div class="case-panel" data-case-panel="2" role="tabpanel">
+                <p>Netflix strategically transformed itself from a distribution business into a <strong>technology-driven entertainment platform</strong>.</p>
+                <p>The company invested heavily in:</p>
+                <ul class="case-bullets">
+                  <li>Streaming infrastructure</li>
+                  <li>Recommendation algorithms</li>
+                  <li>Behavioural data analysis</li>
+                  <li>Personalised interfaces</li>
+                  <li>Original content ecosystems</li>
+                </ul>
+                <p>It also changed how audiences consumed entertainment through <strong>binge viewing</strong> and personalised discovery.</p>
+              </div>
+              <div class="case-panel" data-case-panel="3" role="tabpanel">
+                <p>Netflix fundamentally changed viewing behaviour globally. Streaming moved from an alternative behaviour to mainstream consumption. The company became associated not with renting content, but with <strong>convenience, personalisation, and modern entertainment culture itself</strong>.</p>
+              </div>
+            </div>
+
+            <div class="case-impact">
+              <div class="case-impact-head">Business Impact</div>
+              <ul>
+                <li>Netflix grew from approximately <strong>7.5 million subscribers in 2007 to over 260 million global subscribers by 2024</strong>.</li>
+                <li>Its streaming-led transformation helped turn Netflix into one of the most valuable entertainment companies globally.</li>
+                <li>Blockbuster, meanwhile, collapsed as consumer behaviour shifted toward streaming.</li>
+              </ul>
+              <div class="case-impact-sources">Sources: Netflix shareholder reports · McKinsey digital transformation studies · Harvard Business Review · Statista</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============== STRATEGY AT PPV ============== -->
+      <section class="section approach-section">
+        <div class="container approach-inner">
+          <div class="approach-side reveal">
+            <div class="section-kicker">Strategy & Consulting At PPV</div>
+            <h2 class="section-title">Built around the <span class="grad-text">realities of the business</span> — not pre-packaged frameworks</h2>
+          </div>
+          <div class="approach-body reveal">
+            <p>At PPV, strategy and consulting is approached as a structured decision-making process built around the realities of the business, the behaviour of the market, and the direction the brand intends to grow towards.</p>
+            <p>The work can involve defining market positioning, shaping launch direction, building communication systems, planning growth roadmaps, structuring digital ecosystems, or helping leadership teams make stronger strategic decisions during important phases of business evolution.</p>
+            <p><strong>Every engagement is designed differently</strong> — because no two businesses operate within the same market conditions, consumer behaviour patterns, growth ambitions, or operational realities.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== WHAT WE COVER ============== -->
+      <section class="section coverage-section">
+        <div class="container">
+          <div class="reveal coverage-header">
+            <div class="section-kicker">What We Cover</div>
+            <h2 class="section-title">Seven strategic surfaces, <span class="grad-text">one integrated way of thinking</span></h2>
+          </div>
+          <div class="coverage-grid">
+            {coverage.map((c, i) => (
+              <article class="coverage-card reveal">
+                <div class="coverage-card-top">
+                  <span class="coverage-card-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="coverage-card-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                  </span>
+                </div>
+                <h3>{c.name}</h3>
+                <div class="coverage-card-sub">{c.sub}</div>
+                <p>{c.body}</p>
+                <span class="coverage-card-line" aria-hidden="true"></span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== HOW STRATEGY IS BUILT ============== -->
+      <section class="section workshops-section">
+        <div class="container">
+          <div class="reveal workshops-header">
+            <div class="section-kicker">How Strategy Is Built At PPV</div>
+            <h2 class="section-title">Strategy is <span class="grad-text">extracted, not imposed</span></h2>
+            <p class="section-lead">Every strategy engagement is built through structured workshops. The objective is not to apply pre-made frameworks — it is to extract sharper clarity directly from the people building the business. Some engagements may require two workshops. Others may evolve across five or more depending on complexity.</p>
+          </div>
+
+          <ol class="workshops-list">
+            {workshops.map((w) => (
+              <li class="workshop reveal">
+                <div class="workshop-num">{w.n}</div>
+                <div class="workshop-body">
+                  <h3>{w.title}</h3>
+                  <ul class="workshop-bullets">
+                    {w.bullets.map((b) => <li>{b}</li>)}
+                  </ul>
+                  <p class="workshop-note">{w.note}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <p class="workshops-closer reveal">
+            Some projects may focus on brand positioning. Others on digital products, healthcare ecosystems, launch strategy, or growth direction. <strong>The workshop structure evolves with what the business actually needs.</strong>
+          </p>
+        </div>
+      </section>
+
+      <!-- ============== INSIGHTS TEASER ============== -->
+      <section class="section service-teaser-section">
+        <div class="container service-teaser-inner">
+          <article class="service-teaser-card reveal">
+            <div class="service-teaser-tag">Case Studies</div>
+            <h3>Real strategic shifts, from inside the engagement.</h3>
+            <p>A growing library of repositioning, GTM, and decision-making case work — updated as engagements wrap.</p>
+            <a class="service-teaser-cta" href="/insights">View case studies →</a>
+          </article>
+          <article class="service-teaser-card reveal">
+            <div class="service-teaser-tag">PPV Articles</div>
+            <h3>Field notes from the thinking layer.</h3>
+            <p>Articles on perception, positioning, governance, and the strategic patterns we keep seeing across categories.</p>
+            <a class="service-teaser-cta" href="/insights">Read articles →</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============== CTA ============== -->
+      <section class="section service-cta-section">
+        <div class="container">
+          <div class="service-cta-card reveal">
+            <div class="service-cta-eyebrow"><span class="pulse-dot"></span><span>Strategic conversation</span></div>
+            <h2 class="service-cta-title">Sometimes the next stage of growth does not begin with more activity. <br/> It begins with <span class="grad-text">sharper strategic direction</span>.</h2>
+            <a class="service-cta-btn" href="/#contact">
+              <span>Start a strategic conversation</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+
+    // Case study tabs (Domino's, Dove, Netflix)
+    document.querySelectorAll<HTMLElement>('[data-case-card]').forEach((card) => {
+      const tabs = card.querySelectorAll<HTMLButtonElement>('[data-case-tab]');
+      const panels = card.querySelectorAll<HTMLElement>('[data-case-panel]');
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const idx = tab.dataset.caseTab || '0';
+          tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.caseTab === idx));
+          panels.forEach((p) => p.classList.toggle('is-active', p.dataset.casePanel === idx));
+        });
+      });
+    });
+  </script>
+</Base>

@@ -1,0 +1,427 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { products } from '@/data/products';
+
+const journey = [
+  {
+    n: '01',
+    title: 'Attract',
+    text: 'Bring audiences and prospects into the ecosystem.',
+    items: ['Campaign platforms', 'Landing pages', 'Lead capture', 'Registration systems'],
+  },
+  {
+    n: '02',
+    title: 'Engage',
+    text: 'Create meaningful, continuous customer interaction.',
+    items: ['WhatsApp automation', 'Mobile applications', 'Customer portals', 'Notifications'],
+  },
+  {
+    n: '03',
+    title: 'Sell',
+    text: 'Turn digital interest into transactions.',
+    items: ['E-commerce platforms', 'Payments', 'Order management', 'Product catalogues'],
+  },
+  {
+    n: '04',
+    title: 'Operate',
+    text: 'Digitize the systems that run the business.',
+    items: ['HRMS', 'Dealer management', 'Workflow automation', 'Internal portals'],
+  },
+  {
+    n: '05',
+    title: 'Connect',
+    text: 'Make different systems work together.',
+    items: ['ERP & CRM integration', 'APIs', 'Payment systems', 'Third-party platforms'],
+  },
+  {
+    n: '06',
+    title: 'Measure',
+    text: 'Turn business activity into actionable information.',
+    items: ['Dashboards', 'Reports & analytics', 'Performance tracking', 'MIS'],
+  },
+];
+
+const portfolio = [
+  { n: '01', title: 'HR & Workforce Management', text: 'Software for employee and HR operations, end to end.' },
+  { n: '02', title: 'Dealer & Distributor Management', text: 'Digital infrastructure for channel-partner led businesses.' },
+  { n: '03', title: 'E-Commerce & Digital Commerce', text: 'Ready-to-use and customized online selling platforms.' },
+  { n: '04', title: 'WhatsApp Business Automation', text: 'Conversational journeys for customers, partners and campaigns.' },
+  { n: '05', title: 'Web & Mobile Applications', text: 'Customer-facing, partner-facing and internal applications.' },
+  { n: '06', title: 'Business Dashboards & Analytics', text: 'Decision-making systems built around business data.' },
+  { n: '07', title: 'Custom Business Software', text: 'Purpose-built platforms for unique operational requirements.' },
+  { n: '08', title: 'Technology Integration', text: 'Connecting the systems that already exist in a business.' },
+];
+
+const funnel = ['Audience', 'Campaign', 'Lead', 'Engagement', 'Conversion', 'Customer', 'Retention'];
+const campaignStack = [
+  'Landing page',
+  'Lead capture',
+  'WhatsApp journey',
+  'Lead management',
+  'Conversion',
+  'Communication',
+  'Analytics',
+];
+
+const pillars = [
+  {
+    n: '01',
+    title: 'Automate',
+    head: 'Replace repetitive work with connected workflows.',
+    beforeLabel: 'Today',
+    before: ['Spreadsheets', 'Manual data entry', 'Repeated follow-ups', 'Paper-based approvals', 'Manual reporting'],
+    afterLabel: 'With PPV',
+    after: ['Digital workflows', 'Automated notifications', 'Approval systems', 'Centralized data', 'Role-based access'],
+    note: 'The goal is not to automate everything — it is to remove unnecessary friction.',
+  },
+  {
+    n: '02',
+    title: 'Measure',
+    head: 'Turn business activity into decisions.',
+    beforeLabel: 'Visibility into',
+    before: [
+      'Sales & orders',
+      'Customers & leads',
+      'Dealer activity',
+      'Employee activity',
+      'Campaign performance',
+      'Product performance',
+      'Operational KPIs',
+    ],
+    afterLabel: 'From data to decisions',
+    after: ['Raw data', 'Information', 'Insight', 'Action'],
+    afterIsChain: true,
+    note: 'Different users see different information, based on their role and responsibility.',
+  },
+  {
+    n: '03',
+    title: 'Connect',
+    head: 'Your systems should talk to each other.',
+    beforeLabel: 'The problem',
+    before: [
+      'Website apart from the CRM',
+      'CRM apart from the ERP',
+      'DMS apart from e-commerce',
+      'Communication happening elsewhere',
+    ],
+    afterLabel: 'We work with',
+    after: [
+      'ERP systems',
+      'CRM systems',
+      'E-commerce platforms',
+      'DMS & HRMS',
+      'Payment gateways',
+      'WhatsApp platforms',
+      'Logistics platforms',
+      'Cloud services & APIs',
+    ],
+    note: 'One connected ecosystem instead of multiple disconnected tools.',
+  },
+];
+
+const stack = [
+  { title: 'Frontend', items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Vite'] },
+  { title: 'Backend', items: ['Node.js', 'Express', 'Python', 'Django / FastAPI', 'PHP / Laravel'] },
+  { title: 'Data & storage', items: ['PostgreSQL', 'MySQL / MariaDB', 'MongoDB', 'Redis'] },
+  { title: 'Cloud & infrastructure', items: ['AWS', 'VPS infrastructure', 'CDN & APIs', 'Security & performance'] },
+  { title: 'Mobile', items: ['React Native', 'iOS & Android delivery'] },
+];
+
+const engagement = [
+  { n: '01', title: 'Deploy', text: 'Use an existing PPV solution and get operational quickly.' },
+  { n: '02', title: 'Customize', text: 'Adapt a PPV platform to match your processes.' },
+  { n: '03', title: 'Integrate', text: 'Connect PPV solutions with ERP, CRM, e-commerce or existing systems.' },
+  { n: '04', title: 'Build', text: 'Create a completely custom application or platform.' },
+  { n: '05', title: 'Scale', text: 'Add functionality and expand the digital ecosystem.' },
+];
+---
+
+<Base
+  title="Digital & Technology · Platform Play Venture"
+  description="Platform Play Venture is a marketing-led organization that uses technology to help businesses reach customers, sell products, manage operations and automate how they work."
+>
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="service-page">
+      <!-- ============== HERO ============== -->
+      <section class="service-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <a class="service-hero-back reveal" href="/">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back to Home</span>
+          </a>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Digital &amp; Technology</span></div>
+          <h1 class="service-hero-title reveal">Marketing builds the opportunity. <span class="grad-text">Technology builds the engine.</span></h1>
+          <p class="service-hero-lead reveal">We build the digital infrastructure behind business growth — platforms that help businesses reach customers, sell products, manage operations, automate processes and create better digital experiences.</p>
+          <div class="pv-hero-actions reveal">
+            <a class="pv-btn pv-btn-primary" href="/products">
+              <span>See our live products</span>
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a class="pv-btn pv-btn-ghost" href="/#contact"><span>Start a conversation</span></a>
+          </div>
+          <ul class="pv-hero-strip reveal">
+            <li>Strategy</li><li>Business software</li><li>Commerce</li><li>Automation</li><li>Applications</li><li>Integration</li><li>Analytics</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============== APPROACH ============== -->
+      <section class="section pv-approach-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">The PPV Approach</div>
+            <h2 class="section-title">Technology should make <span class="grad-text">the business better</span>.</h2>
+          </div>
+
+          <div class="pv-approach-grid">
+            <div class="pv-approach-copy reveal">
+              <p>We do not approach technology as a standalone IT service. We look at the business first.</p>
+              <p>Most businesses do not wake up needing a new application. They need to sell more, work faster, reduce manual effort, serve customers better, manage partners more effectively and understand their own business — without adding complexity.</p>
+              <p><strong>Technology is simply the mechanism that makes those outcomes possible. That is where PPV sits.</strong></p>
+            </div>
+            <div class="pv-approach-card reveal">
+              <div class="pv-card-kicker">We look at the business first</div>
+              <ul class="pv-tick-list">
+                <li>What is the company trying to achieve?</li>
+                <li>Where is the friction?</li>
+                <li>What is still being managed manually?</li>
+                <li>Where are customers, dealers or partners being lost?</li>
+                <li>What can be automated, connected or made simpler?</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pv-chain reveal" role="list">
+            <div class="pv-chain-item" role="listitem"><span>Business objective</span></div>
+            <div class="pv-chain-item" role="listitem"><span>Digital strategy</span></div>
+            <div class="pv-chain-item" role="listitem"><span>Technology</span></div>
+            <div class="pv-chain-item" role="listitem"><span>Business outcome</span></div>
+          </div>
+          <p class="pv-chain-note reveal">We start with the objective, identify the right digital intervention, then decide whether that means deploying an existing PPV platform, customizing a solution, integrating multiple systems — or building something completely new.</p>
+        </div>
+      </section>
+
+      <!-- ============== WHAT WE BUILD ============== -->
+      <section class="section pv-journey-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">What PPV Builds</div>
+            <h2 class="section-title">Technology across <span class="grad-text">the complete business journey</span></h2>
+            <p class="pv-head-lead">Six places where a digital intervention changes the business outcome.</p>
+          </div>
+          <div class="pv-journey-grid">
+            {journey.map((j) => (
+              <article class="pv-journey-card reveal">
+                <div class="pv-journey-num">{j.n}</div>
+                <h3>{j.title}</h3>
+                <p>{j.text}</p>
+                <ul class="pv-tick-list pv-tick-sm">
+                  {j.items.map((i) => <li>{i}</li>)}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== LIVE PRODUCTS ============== -->
+      <section class="section pv-live-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">Live Products</div>
+            <h2 class="section-title">Businesses do not always need to <span class="grad-text">start from zero</span></h2>
+            <p class="pv-head-lead">Two platforms are already built and running. They can be deployed as they are, configured to your processes, or connected into the systems you already use.</p>
+          </div>
+          <div class="pv-live-grid">
+            {products.map((p) => (
+              <article class="pv-live-card reveal">
+                <div class="pv-live-top">
+                  <div>
+                    <div class="pv-live-name">{p.name}</div>
+                    <div class="pv-live-full">{p.fullName}</div>
+                  </div>
+                  <span class="pv-badge">Live</span>
+                </div>
+                <p class="pv-live-tagline">{p.tagline}</p>
+                <ul class="pv-chip-row">
+                  {p.highlights.slice(0, 4).map((h) => <li>{h}</li>)}
+                </ul>
+                <a class="pv-inline-link" href={`/product/${p.slug}`}>
+                  <span>Explore {p.name}</span>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== PORTFOLIO ============== -->
+      <section class="section pv-portfolio-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">Digital Solution Portfolio</div>
+            <h2 class="section-title">A portfolio of <span class="grad-text">business-ready digital solutions</span></h2>
+            <p class="pv-head-lead">Not standalone software products. Platforms that can be deployed, configured, customized and connected around the business requirement.</p>
+          </div>
+          <div class="pv-portfolio-grid">
+            {portfolio.map((p) => (
+              <article class="pv-portfolio-card reveal">
+                <div class="pv-portfolio-num">{p.n}</div>
+                <h3>{p.title}</h3>
+                <p>{p.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== MARKETING x TECHNOLOGY ============== -->
+      <section class="section pv-dark-section">
+        <div class="container">
+          <div class="reveal pv-head pv-head-dark">
+            <div class="section-kicker">Marketing Technology</div>
+            <h2 class="section-title">Where PPV becomes <span class="grad-text">different</span></h2>
+            <p class="pv-head-lead">Technology at PPV does not operate separately from marketing. The same organization that creates the demand builds the system that captures it.</p>
+          </div>
+
+          <div class="pv-flow-block reveal">
+            <div class="pv-card-kicker pv-card-kicker-dark">The digital journey</div>
+            <div class="pv-flow">
+              {funnel.map((f) => <span class="pv-flow-node">{f}</span>)}
+            </div>
+          </div>
+
+          <div class="pv-flow-block reveal">
+            <div class="pv-card-kicker pv-card-kicker-dark">Example — one campaign, one connected stack</div>
+            <div class="pv-flow">
+              {campaignStack.map((f) => <span class="pv-flow-node">{f}</span>)}
+            </div>
+          </div>
+
+          <div class="pv-quote-grid">
+            <blockquote class="pv-quote reveal">
+              <p>Most technology companies ask what software you need.</p>
+              <p class="pv-quote-accent">PPV asks what you are trying to achieve.</p>
+            </blockquote>
+            <div class="pv-quote-side reveal">
+              <div class="pv-card-kicker pv-card-kicker-dark">That difference changes</div>
+              <p>The solution we recommend. What we build. How we integrate it. And the business value the technology finally creates.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== AUTOMATE / MEASURE / CONNECT ============== -->
+      <section class="section pv-pillars-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">Automation, Data &amp; Integration</div>
+            <h2 class="section-title">Remove the friction. See the business. <span class="grad-text">Connect the systems.</span></h2>
+            <p class="pv-head-lead">A large part of digital transformation is simply making everyday business processes easier.</p>
+          </div>
+          <div class="pv-pillars-grid">
+            {pillars.map((p) => (
+              <article class="pv-pillar-card reveal">
+                <div class="pv-card-kicker">{p.n} / {p.title}</div>
+                <h3>{p.head}</h3>
+                <div class="pv-pillar-sub">{p.beforeLabel}</div>
+                <ul class="pv-tick-list pv-tick-sm">
+                  {p.before.map((b) => <li>{b}</li>)}
+                </ul>
+                <div class="pv-pillar-sub">{p.afterLabel}</div>
+                {p.afterIsChain ? (
+                  <div class="pv-mini-chain">
+                    {p.after.map((a) => <span>{a}</span>)}
+                  </div>
+                ) : (
+                  <ul class="pv-tick-list pv-tick-sm">
+                    {p.after.map((a) => <li>{a}</li>)}
+                  </ul>
+                )}
+                <p class="pv-pillar-note">{p.note}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== CAPABILITY ============== -->
+      <section class="section pv-stack-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">Technology Capability</div>
+            <h2 class="section-title">The engine behind <span class="grad-text">the experience</span></h2>
+            <p class="pv-head-lead">We do not choose technology because it is popular. We choose it because it is right for the business.</p>
+          </div>
+          <div class="pv-stack-grid">
+            {stack.map((s) => (
+              <div class="pv-stack-col reveal">
+                <div class="pv-stack-head">{s.title}</div>
+                <ul>
+                  {s.items.map((i) => <li>{i}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== ENGAGEMENT ============== -->
+      <section class="section pv-engage-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">How We Engage</div>
+            <h2 class="section-title">There is no single <span class="grad-text">PPV technology model</span></h2>
+          </div>
+          <div class="pv-engage-grid">
+            {engagement.map((e) => (
+              <article class="pv-engage-card reveal">
+                <div class="pv-engage-num">{e.n}</div>
+                <h3>{e.title}</h3>
+                <p>{e.text}</p>
+              </article>
+            ))}
+          </div>
+          <div class="pv-balance reveal">
+            <span class="pv-balance-label">Balancing</span>
+            <span>Speed</span><span>Cost</span><span>Customization</span><span>Scalability</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== CTA ============== -->
+      <section class="section service-cta-section">
+        <div class="container">
+          <div class="service-cta-card reveal">
+            <div class="service-cta-eyebrow"><span class="pulse-dot"></span><span>From one solution to an entire ecosystem</span></div>
+            <h2 class="service-cta-title">A client may come to PPV for one requirement. <br/> The opportunity is usually <span class="grad-text">bigger than the first one</span>.</h2>
+            <a class="service-cta-btn" href="/#contact">
+              <span>Let's build what your business needs next</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>

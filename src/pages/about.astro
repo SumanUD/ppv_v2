@@ -1,0 +1,45 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+
+import AboutHero from '@/components/sections/about/AboutHero.astro';
+import GoldenCircle from '@/components/sections/about/GoldenCircle.astro';
+import WhyHowWhat from '@/components/sections/about/WhyHowWhat.astro';
+import WayWeSeeBrands from '@/components/sections/about/WayWeSeeBrands.astro';
+import MarketChanging from '@/components/sections/about/MarketChanging.astro';
+import Vector from '@/components/sections/about/Vector.astro';
+import PartnershipPhilosophy from '@/components/sections/about/PartnershipPhilosophy.astro';
+import WhoWeWorkBestWith from '@/components/sections/about/WhoWeWorkBestWith.astro';
+import AboutCta from '@/components/sections/about/AboutCta.astro';
+---
+
+<Base title="About · Platform Play Venture" description="We work on the thinking that shapes everything a brand does next. PPV is a strategic growth company that brings brand, marketing, technology, and governance into one integrated way of thinking.">
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="about-page">
+      <AboutHero />
+      <GoldenCircle />
+      <WhyHowWhat />
+      <WayWeSeeBrands />
+      <MarketChanging />
+      <Vector />
+      <PartnershipPhilosophy />
+      <WhoWeWorkBestWith />
+      <AboutCta />
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+    import '@/scripts/about.ts';
+  </script>
+</Base>

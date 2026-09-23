@@ -1,0 +1,100 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+
+const entries = [
+  { kind: 'case', tag: 'Case Study', title: 'Rebuilding trust before visibility: a brand reality audit for a category leader navigating perception decline.', meta: 'Repositioning · 12 min read', slug: 'brand-reality-audit-case' },
+  { kind: 'article', tag: 'Article', title: 'Perception is built before visibility, not after', meta: '7 min read', slug: 'perception-before-visibility' },
+  { kind: 'article', tag: 'Article', title: 'What a fractional CMO actually does (and why founders bring one in)', meta: '5 min read', slug: 'fractional-cmo-explained' },
+  { kind: 'case', tag: 'Case Study', title: 'From scattered campaigns to a structured growth engine', meta: '9 min read', slug: 'growth-engine-alignment' },
+  { kind: 'article', tag: 'Article', title: 'Why differentiation now comes from interpretation, not exposure', meta: '6 min read', slug: 'differentiation-interpretation' },
+  { kind: 'article', tag: 'Article', title: 'The thinking layer beneath marketing — and why it changes outcomes', meta: '8 min read', slug: 'thinking-layer-marketing' },
+];
+---
+
+<Base title="Insights · Platform Play Venture" description="Perspectives shaped by real brand experience — field notes from working with brands at the thinking layer.">
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="insights-page">
+      <section class="service-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <a class="service-hero-back reveal" href="/">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back to Home</span>
+          </a>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Insights · PPV</span></div>
+          <h1 class="service-hero-title reveal">Perspectives shaped by <span class="grad-text">real brand experience</span></h1>
+          <p class="service-hero-lead reveal">Field notes from working with brands at the thinking layer — what we observe, what we test, and what we learn while shaping strategy, perception, and decisions.</p>
+        </div>
+      </section>
+
+      <section class="section insights-index-section">
+        <div class="container">
+          <div class="reveal insights-index-tabs" role="tablist" aria-label="Filter insights">
+            <button class="insights-tab is-active" type="button" data-insight-filter="all">All</button>
+            <button class="insights-tab" type="button" data-insight-filter="article">Articles</button>
+            <button class="insights-tab" type="button" data-insight-filter="case">Case Studies</button>
+            <span class="insights-tab is-disabled" aria-disabled="true" title="Coming soon">Whitepapers · Coming soon</span>
+          </div>
+
+          <div class="insights-index-grid" data-insights-grid>
+            {entries.map((e, i) => (
+              <article class="insight-index-card reveal" data-insight-kind={e.kind}>
+                <a class="insight-index-card-link" href={`/insights/${e.slug}`} aria-label={e.title}>
+                  <div class="insight-index-card-media">
+                    <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <defs>
+                        <linearGradient id={`gradInsight${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color={e.kind === 'case' ? '#EE5A18' : '#FFB066'} stop-opacity="0.25"/>
+                          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+                        </linearGradient>
+                      </defs>
+                      <rect width="480" height="220" fill={`url(#gradInsight${i})`}/>
+                      <g stroke="#EE5A18" stroke-width="1.4" fill="none" opacity="0.55">
+                        <path d={i % 2 === 0 ? 'M 60 160 Q 140 60, 240 110 T 420 80' : 'M 60 80 L 140 140 L 240 80 L 320 140 L 420 80'}/>
+                      </g>
+                      <g fill="#EE5A18" opacity="0.85">
+                        <circle cx="60" cy={i % 2 === 0 ? 160 : 80} r="5"/>
+                        <circle cx="420" cy="80" r="6"/>
+                      </g>
+                      <text x="36" y="200" font-family="JetBrains Mono" font-size="10" font-weight="500" fill="#1a1a1a" letter-spacing="2">{e.tag.toUpperCase()} · {String(i + 1).padStart(2, '0')}</text>
+                    </svg>
+                  </div>
+                  <div class="insight-index-card-body">
+                    <div class="insight-card-tag">
+                      <span class="insight-card-kind">{e.tag}</span>
+                      <span class="insight-card-meta">{e.meta}</span>
+                    </div>
+                    <h3>{e.title}</h3>
+                    <span class="insight-index-card-cta">Read <span aria-hidden="true">→</span></span>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+
+          <div class="insights-index-note reveal">
+            <p>Whitepapers, deep-dives, and longer strategic documents are coming soon. Want to be notified when they drop? <a href="/#contact">Get in touch.</a></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>

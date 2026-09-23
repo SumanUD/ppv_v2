@@ -1,0 +1,598 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import {
+  products,
+  hrmsChallenges,
+  hrmsCapabilities,
+  hrmsLifecycle,
+  hrmsCategories,
+  hrmsRoles,
+  hrmsIntegrations,
+  hrmsMigration,
+  hrmsPhases,
+  hrmsWhy,
+  hrmsOnboardingInputs,
+  dmsPillars,
+  dmsRoles,
+  dmsModules,
+  dmsMatrix,
+  dmsOrderStatus,
+  dmsChannels,
+  dmsFoundations,
+  dmsAiPhases,
+  dmsDifferentiators,
+} from '@/data/products';
+
+export function getStaticPaths() {
+  return products.map((p) => ({ params: { slug: p.slug }, props: { product: p } }));
+}
+
+const { product } = Astro.props;
+const isDms = product.slug === 'dms';
+---
+
+<Base
+  title={`${product.name} · ${product.fullName} · Platform Play Venture`}
+  description={product.tagline}
+>
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="service-page">
+      <!-- ============== HERO ============== -->
+      <section class="service-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <a class="service-hero-back reveal" href="/products">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>All Products</span>
+          </a>
+          <div class="service-hero-eyebrow reveal">
+            <span class="pulse-dot"></span>
+            <span>{product.fullName}{product.status === 'live' ? ' · Live' : ''}</span>
+          </div>
+          <h1 class="service-hero-title reveal">{product.name} — <span class="grad-text">{product.positioning}</span></h1>
+          <p class="service-hero-lead reveal">{product.tagline}</p>
+
+          <div class="pv-hero-metrics reveal">
+            {product.metrics.map((m) => (
+              <div class="pv-metric">
+                <div class="pv-metric-value">{m.value}</div>
+                <div class="pv-metric-label">{m.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== OVERVIEW ============== -->
+      <section class="section pv-overview-section">
+        <div class="container pv-overview-inner">
+          <div class="reveal pv-overview-side">
+            <div class="section-kicker">Overview</div>
+            <h2 class="section-title">What {product.name} <span class="grad-text">actually is</span></h2>
+          </div>
+          <div class="pv-overview-body reveal">
+            <p>{product.summary}</p>
+            {isDms ? (
+              <ul class="pv-num-list">
+                {dmsPillars.map((p) => (
+                  <li><span class="pv-num-list-n">{p.n}</span><span>{p.text}</span></li>
+                ))}
+              </ul>
+            ) : (
+              <div class="pv-inline-block">
+                <div class="pv-card-kicker">The challenges it replaces</div>
+                <ul class="pv-chip-row">
+                  {hrmsChallenges.map((c) => <li>{c}</li>)}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {isDms ? (
+        <>
+          <!-- ============== DMS: ROLES ============== -->
+          <section class="section pv-roles-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Role Architecture</div>
+                <h2 class="section-title">Four roles. <span class="grad-text">Four dashboards.</span></h2>
+                <p class="pv-head-lead">Each role has its own login, dashboard and permission set — RBAC enforced at the backend, not just hidden UI buttons.</p>
+              </div>
+              <div class="pv-roles-grid">
+                {dmsRoles.map((r) => (
+                  <article class:list={["pv-role-card", "reveal", r.accent && "is-accent"]}>
+                    <div class="pv-role-num">{r.n}</div>
+                    <h3>{r.title}</h3>
+                    <div class="pv-role-kicker">{r.kicker}</div>
+                    <p>{r.text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== DMS: MODULES ============== -->
+          <section class="section pv-modules-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Core Modules</div>
+                <h2 class="section-title">Six modules, <span class="grad-text">one data core</span></h2>
+                <p class="pv-head-lead">Every module reads and writes the same real-time record. A sale at the counter moves stock, ledger, warranty and CRM in the same instant.</p>
+              </div>
+              <div class="pv-modules-grid">
+                {dmsModules.map((m) => (
+                  <article class="pv-module-card reveal">
+                    <div class="pv-module-head">
+                      <span class="pv-module-num">{m.n}</span>
+                      <h3>{m.title}</h3>
+                    </div>
+                    <p class="pv-module-lead">{m.text}</p>
+                    <ul class="pv-tick-list pv-tick-sm">
+                      {m.detail.map((d) => <li>{d}</li>)}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+
+              <div class="pv-status-strip reveal">
+                <span class="pv-card-kicker">Order status tracking</span>
+                <div class="pv-mini-chain">
+                  {dmsOrderStatus.map((s) => <span>{s}</span>)}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== DMS: MATRIX ============== -->
+          <section class="section pv-matrix-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Role-Based Feature Matrix</div>
+                <h2 class="section-title">Every module is exposed <span class="grad-text">differently by role</span></h2>
+                <p class="pv-head-lead">This is the core of the RBAC design.</p>
+              </div>
+
+              {dmsMatrix.groups.map((g) => (
+                <div class="pv-matrix-block reveal">
+                  <div class="pv-card-kicker">{g.title}</div>
+                  <div class="pv-table-scroll">
+                    <table class="pv-table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Module / Capability</th>
+                          {dmsMatrix.roles.map((r) => <th scope="col">{r}</th>)}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {g.rows.map((row) => (
+                          <tr>
+                            <th scope="row">{row.module}</th>
+                            {row.cells.map((c) => <td>{c}</td>)}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <!-- ============== DMS: CHANNELS ============== -->
+          <section class="section pv-channels-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Process Flow</div>
+                <h2 class="section-title">Two channels, <span class="grad-text">one core</span></h2>
+              </div>
+              {dmsChannels.map((c) => (
+                <div class="pv-channel reveal">
+                  <div class="pv-channel-head">
+                    <span class="pv-card-kicker">{c.label}</span>
+                    <span class="pv-channel-note">{c.note}</span>
+                  </div>
+                  <div class="pv-channel-flow">
+                    {c.steps.map((s) => (
+                      <div class:list={["pv-channel-step", s.muted && "is-muted"]}>
+                        <div class="pv-channel-step-title">{s.title}</div>
+                        <p>{s.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <!-- ============== DMS: FOUNDATIONS ============== -->
+          <section class="section pv-dark-section">
+            <div class="container">
+              <div class="reveal pv-head pv-head-dark">
+                <div class="section-kicker">What Holds It Together</div>
+                <h2 class="section-title">Four behaviours that run <span class="grad-text">underneath every module</span></h2>
+                <p class="pv-head-lead">They are the reason the system stays consistent as the network scales.</p>
+              </div>
+              <div class="pv-foundations-grid">
+                {dmsFoundations.map((f) => (
+                  <article class="pv-foundation-card reveal">
+                    <div class="pv-foundation-num">{f.n}</div>
+                    <h3>{f.title}</h3>
+                    <p>{f.text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== DMS: AI ROADMAP ============== -->
+          <section class="section pv-ai-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">AI Roadmap</div>
+                <h2 class="section-title">AI in phases, <span class="grad-text">not promises</span></h2>
+                <p class="pv-head-lead">Reliable, working AI at the independent-dealer price point is a real market gap. Small players only claim AI; big platforms deliver it inconsistently.</p>
+              </div>
+              <div class="pv-ai-grid">
+                {dmsAiPhases.map((p) => (
+                  <article class:list={["pv-ai-card", "reveal", p.accent && "is-accent"]}>
+                    <div class="pv-ai-phase">{p.phase} — {p.weight}</div>
+                    <h3>{p.title}</h3>
+                    <ul class="pv-ai-list">
+                      {p.items.map((i) => (
+                        <li>
+                          <span class="pv-ai-item">{i.text}</span>
+                          <span class="pv-ai-roles">{i.roles}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== DMS: WHY ============== -->
+          <section class="section pv-why-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Why It Is Different</div>
+                <h2 class="section-title">Built for handset distribution — <span class="grad-text">not adapted to it</span></h2>
+                <p class="pv-head-lead">Generic ERPs and legacy automotive DMS platforms were designed for a different business. PPV DMS is designed around the four roles you actually operate, with strict API-level RBAC ensuring absolute data isolation.</p>
+              </div>
+              <div class="pv-why-grid pv-why-grid-3">
+                {dmsDifferentiators.map((d) => (
+                  <article class="pv-why-card reveal">
+                    <div class="pv-card-kicker">{d.kicker}</div>
+                    <p>{d.text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        </>
+      ) : (
+        <>
+          <!-- ============== HRMS: CAPABILITIES ============== -->
+          <section class="section pv-modules-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Core Capabilities</div>
+                <h2 class="section-title">A unified HR platform for <span class="grad-text">the whole employee journey</span></h2>
+                <p class="pv-head-lead">Ten core capabilities, delivered as one fully integrated ecosystem rather than a patchwork of point tools.</p>
+              </div>
+              <div class="pv-cap-grid">
+                {hrmsCapabilities.map((c, i) => (
+                  <div class="pv-cap-item reveal">
+                    <span class="pv-cap-num">{String(i + 1).padStart(2, '0')}</span>
+                    <span>{c}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== HRMS: LIFECYCLE ============== -->
+          <section class="section pv-lifecycle-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Employee Lifecycle</div>
+                <h2 class="section-title">From hiring to retirement — <span class="grad-text">managed end to end</span></h2>
+              </div>
+              <div class="pv-lifecycle-grid">
+                {hrmsLifecycle.map((l) => (
+                  <article class="pv-lifecycle-card reveal">
+                    <div class="pv-lifecycle-num">{l.n}</div>
+                    <h3>{l.title}</h3>
+                    <p>{l.text}</p>
+                  </article>
+                ))}
+              </div>
+              <div class="pv-balance reveal">
+                <span class="pv-balance-label">One platform</span>
+                <span>Hire</span><span>Develop</span><span>Retain</span><span>Empower</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== HRMS: MODULE CATEGORIES ============== -->
+          <section class="section pv-modules-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Module Categories</div>
+                <h2 class="section-title">Everything your <span class="grad-text">HR team needs</span></h2>
+                <p class="pv-head-lead">Five categories and more than fifteen functional modules — a single, connected system replacing the patchwork of spreadsheets and point tools.</p>
+              </div>
+              <div class="pv-catgrid">
+                {hrmsCategories.map((c) => (
+                  <article class="pv-cat-card reveal">
+                    <div class="pv-cat-num">{c.n}</div>
+                    <h3>{c.title}</h3>
+                    <ul class="pv-tick-list pv-tick-sm">
+                      {c.items.map((i) => <li>{i}</li>)}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== HRMS: ROLES ============== -->
+          <section class="section pv-dark-section">
+            <div class="container">
+              <div class="reveal pv-head pv-head-dark">
+                <div class="section-kicker">Access &amp; Governance</div>
+                <h2 class="section-title">Role-based access <span class="grad-text">and governance</span></h2>
+                <p class="pv-head-lead">Granular permissions ensure sensitive information stays with the right people — nothing more, nothing less.</p>
+              </div>
+              <div class="pv-foundations-grid pv-foundations-grid-4">
+                {hrmsRoles.map((r) => (
+                  <article class="pv-foundation-card reveal">
+                    <div class="pv-foundation-num">{r.n}</div>
+                    <h3>{r.title}</h3>
+                    <p>{r.text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== HRMS: INTEGRATIONS ============== -->
+          <section class="section pv-integrations-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Integrations</div>
+                <h2 class="section-title">Fits into your <span class="grad-text">existing technology stack</span></h2>
+                <p class="pv-head-lead">Native connectors and open interfaces across identity, communication, finance and operations. Designed to extend your ecosystem — not replace it.</p>
+              </div>
+              <div class="pv-why-grid pv-why-grid-3">
+                {hrmsIntegrations.map((i) => (
+                  <article class="pv-why-card reveal">
+                    <div class="pv-card-kicker">{i.kicker}</div>
+                    <h3 class="pv-why-title">{i.title}</h3>
+                    <ul class="pv-tick-list pv-tick-sm">
+                      {i.items.map((it) => <li>{it}</li>)}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== HRMS: MIGRATION ============== -->
+          <section class="section pv-migration-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Migration</div>
+                <h2 class="section-title">Seamless transition from <span class="grad-text">your existing systems</span></h2>
+                <p class="pv-head-lead">Full migration of legacy HR data — with validation, mapping and reconciliation built into every phase.</p>
+              </div>
+              <div class="pv-migration-grid">
+                <div class="pv-migration-card reveal">
+                  <div class="pv-card-kicker">From — legacy systems</div>
+                  <ul class="pv-tick-list pv-tick-sm">
+                    {hrmsMigration.from.map((f) => <li>{f}</li>)}
+                  </ul>
+                </div>
+                <div class="pv-migration-card is-accent reveal">
+                  <div class="pv-card-kicker">To — PPV HRMS</div>
+                  <ul class="pv-chip-row">
+                    {hrmsMigration.to.map((t) => <li>{t}</li>)}
+                  </ul>
+                </div>
+              </div>
+              <p class="pv-chain-note reveal">Minimize disruption. Accelerate adoption.</p>
+            </div>
+          </section>
+
+          <!-- ============== HRMS: DEPLOYMENT ============== -->
+          <section class="section pv-phases-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Deployment</div>
+                <h2 class="section-title">A structured <span class="grad-text">7-phase deployment</span></h2>
+                <p class="pv-head-lead">Predictable milestones, clear ownership and continuous checkpoints — from kickoff to go-live and beyond.</p>
+              </div>
+              <ol class="pv-phase-list">
+                {hrmsPhases.map((p) => (
+                  <li class="pv-phase reveal">
+                    <span class="pv-phase-num">{p.n}</span>
+                    <span class="pv-phase-body">
+                      <span class="pv-phase-title">{p.title}</span>
+                      <span class="pv-phase-text">{p.text}</span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+
+          <!-- ============== HRMS: WHY ============== -->
+          <section class="section pv-why-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Business Impact</div>
+                <h2 class="section-title">Why organizations <span class="grad-text">choose PPV HRMS</span></h2>
+              </div>
+              <div class="pv-why-grid">
+                {hrmsWhy.map((w) => (
+                  <article class="pv-why-card reveal">
+                    <div class="pv-why-num">{w.n}</div>
+                    <h3 class="pv-why-title">{w.title}</h3>
+                    <p>{w.text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <!-- ============== HRMS: WHAT WE NEED ============== -->
+          <section class="section pv-inputs-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">Getting Started</div>
+                <h2 class="section-title">What we need from <span class="grad-text">your organization</span></h2>
+                <p class="pv-head-lead">Five information categories to configure and deploy PPV HRMS successfully. Detailed checklists are shared for each category during Phase 1 — requirement gathering.</p>
+              </div>
+              <div class="pv-catgrid pv-catgrid-5">
+                {hrmsOnboardingInputs.map((c) => (
+                  <article class="pv-cat-card reveal">
+                    <div class="pv-cat-num">{c.n}</div>
+                    <h3>{c.title}</h3>
+                    <ul class="pv-tick-list pv-tick-sm">
+                      {c.items.map((i) => <li>{i}</li>)}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        </>
+      )}
+
+      <!-- ============== LIVE ENVIRONMENT ============== -->
+      {product.live.length > 0 ? (
+        <section class="section pv-demo-section">
+          <div class="container">
+            <div class="reveal pv-head">
+              <div class="section-kicker">Live Environment</div>
+              <h2 class="section-title">See it running — <span class="grad-text">right now</span></h2>
+              <p class="pv-head-lead">
+                {product.demoPassword
+                  ? 'Every environment is seeded with demo data. Sign in as any role to see exactly how the permission model scopes what that role can do.'
+                  : 'The platform is running on live infrastructure.'}
+                {product.demoNote ? ` ${product.demoNote}` : ''}
+              </p>
+            </div>
+
+            <div class="pv-demo-grid">
+              {product.live.map((env) => (
+                <article class="pv-demo-card reveal">
+                  <div class="pv-demo-head">
+                    <div>
+                      <div class="pv-card-kicker">{env.label}</div>
+                      <a class="pv-demo-url" href={env.url} target="_blank" rel="noopener noreferrer">
+                        <span>{env.url.replace('https://', '')}</span>
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </a>
+                    </div>
+                    <a class="pv-btn pv-btn-primary pv-btn-sm" href={env.url} target="_blank" rel="noopener noreferrer">
+                      <span>Open</span>
+                    </a>
+                  </div>
+                  <p class="pv-demo-blurb">{env.blurb}</p>
+
+                  {env.accounts.length > 0 ? (
+                  <div class="pv-table-scroll">
+                    <table class="pv-table pv-table-creds">
+                      <thead>
+                        <tr><th scope="col">Role</th><th scope="col">Email</th></tr>
+                      </thead>
+                      <tbody>
+                        {env.accounts.map((a) => (
+                          <tr>
+                            <th scope="row">
+                              {a.role}
+                              {a.note && <span class="pv-cred-note">{a.note}</span>}
+                            </th>
+                            <td>
+                              <ul class="pv-cred-emails">
+                                {a.emails.map((e) => <li><code>{e}</code></li>)}
+                              </ul>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  ) : (
+                    <a class="pv-inline-link" href="/#contact"><span>Request demo access</span></a>
+                  )}
+                </article>
+              ))}
+            </div>
+
+            {product.demoPassword && (
+              <div class="pv-password-strip reveal">
+                <span class="pv-card-kicker">Password — all demo accounts</span>
+                <code>{product.demoPassword}</code>
+                <span class="pv-password-note">Demo data only. Records reset periodically.</span>
+              </div>
+            )}
+          </div>
+        </section>
+      ) : (
+        <section class="section pv-demo-section">
+          <div class="container">
+            <div class="pv-walkthrough reveal">
+              <div class="pv-card-kicker">Live Environment</div>
+              <h2 class="section-title">Want to see <span class="grad-text">{product.name} in action?</span></h2>
+              <p>We'll walk you through the live platform on a call — the modules, the role structure and how it would map onto your organisation.</p>
+              <a class="pv-btn pv-btn-primary" href="/#contact">
+                <span>Request a walkthrough</span>
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- ============== CTA ============== -->
+      <section class="section service-cta-section">
+        <div class="container">
+          <div class="service-cta-card reveal">
+            <div class="service-cta-eyebrow"><span class="pulse-dot"></span><span>{product.name}</span></div>
+            <h2 class="service-cta-title">{product.closing}</h2>
+            <a class="service-cta-btn" href="/#contact">
+              <span>Talk to us about {product.name}</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <div class="pv-cta-alt">
+              <a class="pv-inline-link" href="/products"><span>View all products</span></a>
+              <a class="pv-inline-link" href="/technology"><span>Our technology capability</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>

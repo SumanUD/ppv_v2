@@ -1,0 +1,97 @@
+---
+const stages = [
+  {
+    letter: 'V',
+    name: 'View',
+    lead: 'Understand the business as the market experiences it.',
+    body: 'We identify perception, positioning, friction, and unrealised momentum. This includes the business context, category landscape, customer mindset, and how the brand is currently perceived.',
+    tag: 'Diagnose',
+  },
+  {
+    letter: 'E',
+    name: 'Establish',
+    lead: 'Define the strategic direction that gives every future decision clarity, consistency, and purpose.',
+    body: 'This is where positioning is sharpened, communication logic is structured, and clear principles are set for how the brand should move forward across markets, channels, and audiences.',
+    tag: 'Direct',
+  },
+  {
+    letter: 'C',
+    name: 'Connect',
+    lead: 'Align brand, marketing, technology, operations, and people into an integrated system that moves together.',
+    body: 'Decisions are made not in isolation but as part of a broader strategic ecosystem — every layer continuously shaping the others.',
+    tag: 'Integrate',
+  },
+  {
+    letter: 'T',
+    name: 'Transform',
+    lead: 'Build the structures, capabilities, and platforms required to accelerate the next stage of growth.',
+    body: 'This is where strategic intent becomes operational reality — through systems, platforms, and the right internal capability to carry the brand forward.',
+    tag: 'Build',
+  },
+  {
+    letter: 'O',
+    name: 'Oversee',
+    lead: 'Provide strategic oversight that keeps execution aligned with long-term trajectory.',
+    body: "Through a fractional CMO approach, PPV stays involved in key decisions — ensuring the defined direction is consistently followed and adapted where needed.",
+    tag: 'Guide',
+  },
+  {
+    letter: 'R',
+    name: 'Refine',
+    lead: 'Continuously recalibrate based on market movement, behavioural shifts, and emerging opportunities.',
+    body: 'This stage ensures the brand keeps adapting intelligently — without losing its core direction.',
+    tag: 'Adapt',
+  },
+];
+---
+
+<section class="vector-section">
+  <div class="vector-ambient" aria-hidden="true">
+    <span class="vector-blob vector-blob-a"></span>
+    <span class="vector-blob vector-blob-b"></span>
+  </div>
+
+  <div class="container">
+    <div class="reveal vector-header">
+      <div class="section-kicker">How PPV Works With Brands</div>
+      <h2 class="section-title">Every engagement follows one disciplined path. We call it <span class="grad-text">VECTOR</span>.</h2>
+      <p class="section-lead">A vector is a combination of <strong>magnitude and direction</strong>. Six stages — each one earns the next.</p>
+    </div>
+
+    <!-- Letter overview ribbon -->
+    <div class="vector-ribbon reveal" aria-hidden="true">
+      {stages.map((s, i) => (
+        <div class="vector-ribbon-cell">
+          <span class="vector-ribbon-letter">{s.letter}</span>
+          <span class="vector-ribbon-name">{s.name}</span>
+          {i < stages.length - 1 && <span class="vector-ribbon-link"></span>}
+        </div>
+      ))}
+    </div>
+
+    <!-- Detailed stage rows -->
+    <div class="vector-list">
+      {stages.map((s, i) => (
+        <article class="vector-row reveal" data-vector-row>
+          <div class="vector-row-letter">
+            <span class="vector-letter-bg">{s.letter}</span>
+            <span class="vector-letter-fg">{s.letter}</span>
+          </div>
+          <div class="vector-row-body">
+            <div class="vector-row-top">
+              <span class="vector-row-index">Stage {String(i + 1).padStart(2, '0')} / 06</span>
+              <span class="vector-row-tag">{s.tag}</span>
+            </div>
+            <h3 class="vector-row-name">{s.name}</h3>
+            <p class="vector-row-lead">{s.lead}</p>
+            <p class="vector-row-body-text">{s.body}</p>
+          </div>
+          <div class="vector-row-rail" aria-hidden="true">
+            <span class="vector-row-rail-dot"></span>
+            <span class="vector-row-rail-line"></span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

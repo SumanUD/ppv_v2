@@ -1,0 +1,111 @@
+---
+const blocks = [
+  {
+    key: 'why',
+    label: 'WHY',
+    headline: 'Because brands are interpreted before they are chosen.',
+    body: 'The strongest brands create <strong>recognition before visibility</strong>, familiarity before conversion, and trust before scale. PPV exists to help businesses build that layer intentionally — instead of leaving it to chance.',
+    keywords: ['recognition', 'familiarity', 'trust'],
+    glyph: 'eye',
+  },
+  {
+    key: 'how',
+    label: 'HOW',
+    headline: 'By approaching every decision as an interconnected influence — not an isolated function.',
+    body: 'Our work focuses on understanding how brand, marketing, technology, and leadership decisions continuously shape one another — so they are made with <strong>stronger strategic intent, deeper market awareness, and better long-term coherence</strong>.',
+    keywords: ['intent', 'awareness', 'coherence'],
+    glyph: 'network',
+  },
+  {
+    key: 'what',
+    label: 'WHAT',
+    headline: 'End-to-end strategic consulting for brands entering a more serious phase of evolution.',
+    body: "PPV works with businesses across <strong>brand strategy, market positioning, communication systems, governance through a fractional CMO approach, and technology development</strong> — built around the brand's evolving needs.",
+    keywords: ['strategy', 'governance', 'technology'],
+    glyph: 'compass',
+  },
+];
+---
+
+<section class="section whw-section">
+  <div class="whw-ambient" aria-hidden="true">
+    <span class="whw-blob whw-blob-a"></span>
+    <span class="whw-blob whw-blob-b"></span>
+  </div>
+
+  <div class="container">
+    <div class="reveal whw-header">
+      <div class="section-kicker">Why · How · What</div>
+      <h2 class="section-title">The three layers behind <span class="grad-text">how we work</span></h2>
+      <p class="section-lead">Every PPV engagement sits on three foundations — why we exist, how we approach decisions, and what we actually deliver inside the brand's growth system.</p>
+    </div>
+
+    <div class="whw-grid">
+      {blocks.map((b, i) => (
+        <article class="whw-card reveal" data-whw={b.key}>
+          <!-- Background layer -->
+          <div class="whw-card-bg" aria-hidden="true">
+            <span class="whw-card-glow"></span>
+            <svg class="whw-card-glyph" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+              {b.glyph === 'eye' && (
+                <g fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.55">
+                  <path d="M 20 120 Q 120 30, 220 120 Q 120 210, 20 120 Z"/>
+                  <circle cx="120" cy="120" r="40"/>
+                  <circle cx="120" cy="120" r="20" fill="currentColor" opacity="0.4"/>
+                  <circle cx="130" cy="110" r="5" fill="#FFFFFF" opacity="0.8"/>
+                  <path d="M 20 120 L 220 120" stroke-dasharray="4 6" opacity="0.4"/>
+                </g>
+              )}
+              {b.glyph === 'network' && (
+                <g fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.55">
+                  <circle cx="120" cy="60" r="14"/>
+                  <circle cx="60" cy="180" r="14"/>
+                  <circle cx="180" cy="180" r="14"/>
+                  <circle cx="120" cy="140" r="14"/>
+                  <circle cx="40" cy="100" r="10"/>
+                  <circle cx="200" cy="100" r="10"/>
+                  <path d="M 120 74 L 120 126 M 120 154 L 60 166 M 120 154 L 180 166 M 40 110 L 110 60 M 200 110 L 130 60 M 40 110 L 110 140 M 200 110 L 130 140"/>
+                  <circle cx="120" cy="60" r="6" fill="currentColor"/>
+                  <circle cx="60" cy="180" r="6" fill="currentColor"/>
+                  <circle cx="180" cy="180" r="6" fill="currentColor"/>
+                  <circle cx="120" cy="140" r="6" fill="currentColor"/>
+                </g>
+              )}
+              {b.glyph === 'compass' && (
+                <g fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.55">
+                  <circle cx="120" cy="120" r="90"/>
+                  <circle cx="120" cy="120" r="70" stroke-dasharray="3 5"/>
+                  <path d="M 120 50 L 132 120 L 120 190 L 108 120 Z" fill="currentColor" opacity="0.4"/>
+                  <path d="M 50 120 L 120 132 L 190 120 L 120 108 Z" opacity="0.6"/>
+                  <circle cx="120" cy="120" r="8" fill="currentColor"/>
+                  <circle cx="120" cy="120" r="3" fill="#FFFFFF"/>
+                </g>
+              )}
+            </svg>
+          </div>
+
+          <!-- Top row: label -->
+          <header class="whw-card-head">
+            <div class="whw-card-label">{b.label}</div>
+          </header>
+
+          <!-- Headline + body -->
+          <h3 class="whw-card-headline">{b.headline}</h3>
+          <p class="whw-card-body" set:html={b.body}></p>
+
+          <!-- Keyword pills -->
+          <ul class="whw-card-keywords">
+            {b.keywords.map((k) => (
+              <li>{k}</li>
+            ))}
+          </ul>
+
+          <!-- Bottom arrow -->
+          <span class="whw-card-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

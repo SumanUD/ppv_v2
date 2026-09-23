@@ -1,0 +1,145 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { products } from '@/data/products';
+
+const engagement = [
+  { n: '01', title: 'Deploy', text: 'Use the platform as it is and get operational quickly.' },
+  { n: '02', title: 'Customize', text: 'Adapt it to match your processes and terminology.' },
+  { n: '03', title: 'Integrate', text: 'Connect it to your ERP, CRM, e-commerce or accounting stack.' },
+  { n: '04', title: 'Extend', text: 'Add modules and functionality as the business grows.' },
+];
+---
+
+<Base
+  title="Products · Platform Play Venture"
+  description="PPV's live digital products — a Dealer Management System for multi-tier distribution networks and an HRMS covering the complete employee lifecycle."
+>
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="service-page">
+      <!-- ============== HERO ============== -->
+      <section class="service-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <a class="service-hero-back reveal" href="/technology">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Digital &amp; Technology</span>
+          </a>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Products · Live now</span></div>
+          <h1 class="service-hero-title reveal">Platforms that are <span class="grad-text">already built and running</span></h1>
+          <p class="service-hero-lead reveal">These are not concepts. Both platforms are live, and both can be deployed, configured, customized and connected around your business requirement — so you do not have to start from zero.</p>
+        </div>
+      </section>
+
+      <!-- ============== PRODUCT CARDS ============== -->
+      <section class="section pv-catalogue-section">
+        <div class="container">
+          <div class="pv-catalogue">
+            {products.map((p) => (
+              <article class="pv-product-card reveal">
+                <div class="pv-product-head">
+                  <div class="pv-product-id">
+                    <div class="pv-product-name">{p.name}</div>
+                    <div class="pv-product-full">{p.fullName}</div>
+                  </div>
+                  <span class="pv-badge">{p.status === 'live' ? 'Live' : 'In maintenance'}</span>
+                </div>
+
+                <p class="pv-product-positioning">{p.positioning}</p>
+                <p class="pv-product-summary">{p.summary}</p>
+
+                <div class="pv-metric-row">
+                  {p.metrics.map((m) => (
+                    <div class="pv-metric">
+                      <div class="pv-metric-value">{m.value}</div>
+                      <div class="pv-metric-label">{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="pv-product-block">
+                  <div class="pv-card-kicker">Headline capabilities</div>
+                  <ul class="pv-chip-row">
+                    {p.highlights.map((h) => <li>{h}</li>)}
+                  </ul>
+                </div>
+
+                {p.live.length > 0 && (
+                  <div class="pv-product-block">
+                    <div class="pv-card-kicker">Try it live</div>
+                    <div class="pv-live-links">
+                      {p.live.map((l) => (
+                        <a class="pv-btn pv-btn-ghost pv-btn-sm" href={l.url} target="_blank" rel="noopener noreferrer">
+                          <span>{l.label}</span>
+                          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div class="pv-product-foot">
+                  <a class="pv-btn pv-btn-primary" href={`/product/${p.slug}`}>
+                    <span>View full details</span>
+                    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </a>
+                  <span class="pv-product-closing">{p.closing}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== HOW TO ADOPT ============== -->
+      <section class="section pv-engage-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">How You Adopt Them</div>
+            <h2 class="section-title">Four ways in, depending on <span class="grad-text">how far you want to go</span></h2>
+          </div>
+          <div class="pv-engage-grid pv-engage-grid-4">
+            {engagement.map((e) => (
+              <article class="pv-engage-card reveal">
+                <div class="pv-engage-num">{e.n}</div>
+                <h3>{e.title}</h3>
+                <p>{e.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== CTA ============== -->
+      <section class="section service-cta-section">
+        <div class="container">
+          <div class="service-cta-card reveal">
+            <div class="service-cta-eyebrow"><span class="pulse-dot"></span><span>Custom requirements welcome</span></div>
+            <h2 class="service-cta-title">If your business does not fit an existing platform, <br/> we <span class="grad-text">build the one it needs</span>.</h2>
+            <a class="service-cta-btn" href="/#contact">
+              <span>Talk to us about your requirement</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>
