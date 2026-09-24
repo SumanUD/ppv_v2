@@ -1,0 +1,35 @@
+# robots.txt for platformplayventure.com
+
+# --- AI / content scrapers ---
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# --- SEO crawlers (crawl budget / competitive scraping) ---
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+# --- everyone else ---
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /wp-admin/
+Disallow: /admin/
+
+Sitemap: https://platformplayventure.com/sitemap.xml
