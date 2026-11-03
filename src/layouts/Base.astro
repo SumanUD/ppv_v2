@@ -1,15 +1,49 @@
 ---
 import '@/styles/global.css';
 
+interface Crumb {
+  name: string;
+  path: string;
+}
+
 interface Props {
   title?: string;
   description?: string;
+  /** Trail after "Home", e.g. [{ name: 'About', path: '/about/' }]. Renders a BreadcrumbList. */
+  breadcrumbs?: Crumb[];
+  /** Extra JSON-LD objects for this page. */
+  schema?: Record<string, unknown>[];
+  /** Root-relative social share image, e.g. '/insights/post-og.jpg'. */
+  image?: string;
+  ogType?: 'website' | 'article';
 }
 
 const {
   title = "Platform Play Venture · Strategic Growth OS",
-  description = "Platform Play Venture turns scattered strategy, technology, and decision-making into one structured growth system."
+  description = "Platform Play Venture turns scattered strategy, technology, and decision-making into one structured growth system.",
+  breadcrumbs = [],
+  schema = [],
+  image,
+  ogType = 'website'
 } = Astro.props;
+
+const site = Astro.site ?? new URL('https://platformplayventure.com');
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonical = new URL(path, site).href;
+
+const jsonLd = [...schema];
+if (breadcrumbs.length) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ name: 'Home', path: '/' }, ...breadcrumbs].map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.name,
+      item: new URL(c.path, site).href,
+    })),
+  });
+}
 ---
 
 <!DOCTYPE html>
@@ -31,6 +65,7 @@ const {
   <meta name="theme-color" content="#F8F6F1" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
 
   <link rel="icon" type="image/png" href="/newlogo.png" />
 
@@ -41,9 +76,16 @@ const {
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Saira+Condensed:wght@700;800;900&display=swap"
   />
 
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={canonical} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
+  {image && <meta property="og:image" content={new URL(image, site).href} />}
+  {image && <meta name="twitter:card" content="summary_large_image" />}
+
+  {jsonLd.map((data) => (
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />
+  ))}
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->

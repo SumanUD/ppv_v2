@@ -1,0 +1,281 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { getInsight, insightPath } from '@/data/insights';
+
+const post = getInsight('digital-transformation-in-marketing')!;
+const url = new URL(insightPath(post.slug), Astro.site).href;
+
+/** Rendered in the FAQ section below and in the FAQPage schema, so the two always match. */
+const faqs: [string, string][] = [
+  [
+    'What is digital transformation in marketing?',
+    'Digital transformation in marketing is the integration of technology, data, processes and strategic decision-making to improve customer experiences, marketing effectiveness and business outcomes. It goes beyond adopting digital tools to changing how marketing operates and contributes to growth.',
+  ],
+  [
+    'Why is digital transformation important for marketers?',
+    'It helps marketers understand customer behaviour, connect customer touchpoints, improve decisions through data, streamline processes and align marketing activities with business objectives.',
+  ],
+  [
+    'What is the difference between digital marketing and digital transformation?',
+    'Digital marketing uses digital channels to reach and convert audiences. Digital transformation is broader: it changes how an organisation operates, decides and creates value through technology, data, processes and people. Digital marketing can be one part of it.',
+  ],
+  [
+    'What role does marketing technology play in digital transformation?',
+    'Marketing technology supports activities such as CRM, automation, analytics and campaign management. Its effectiveness depends on how well the tools align with business needs, workflows and strategic priorities.',
+  ],
+  [
+    'How can businesses measure the success of digital transformation?',
+    "Success can be assessed through indicators such as qualified leads, conversion rates, customer retention, operational efficiency, customer experience and marketing's contribution to business outcomes. The right measures depend on the objectives set at the start.",
+  ],
+  [
+    'Is digital transformation only relevant for large enterprises?',
+    "No. Businesses of different sizes can benefit. The approach should reflect the organisation's objectives, resources, existing capabilities and complexity. Smaller businesses may begin with foundational improvements before investing in more advanced systems.",
+  ],
+  [
+    'How does marketing governance support digital transformation?',
+    'Marketing governance defines priorities, ownership, measurement and decision-making. It helps ensure that technology investments, campaigns and customer experience work towards shared business objectives rather than operating in isolation.',
+  ],
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    headline: post.title,
+    description: post.excerpt,
+    image: new URL(post.image, Astro.site).href,
+    datePublished: post.published,
+    mainEntityOfPage: url,
+    author: { '@id': 'https://platformplayventure.com/#organization' },
+    publisher: { '@id': 'https://platformplayventure.com/#organization' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${url}#faq`,
+    mainEntity: faqs.map(([name, text]) => ({
+      '@type': 'Question',
+      name,
+      acceptedAnswer: { '@type': 'Answer', text },
+    })),
+  },
+];
+---
+
+<Base
+  title="Digital Transformation in Marketing: A Practical Guide | PPV"
+  description="Digital transformation is more than tools. See how marketers can connect customer insight, data, technology and governance to drive measurable growth."
+  breadcrumbs={[{ name: 'Insights', path: '/insights/' }, { name: post.title, path: insightPath(post.slug) }]}
+  schema={schema}
+  image="/insights/digital-transformation-in-marketing-og.jpg"
+  ogType="article"
+>
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="insights-page">
+      <section class="service-hero article-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <a class="service-hero-back reveal" href="/insights/">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back to Insights</span>
+          </a>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>{post.tag} · {post.readTime}</span></div>
+          <h1 class="service-hero-title article-title reveal">Unpacking Digital Transformation Through the Eyes of a <span class="grad-text">Marketer</span></h1>
+          <figure class="article-cover reveal">
+            <img src={post.image} alt={post.imageAlt} width={post.imageWidth} height={post.imageHeight} decoding="async" fetchpriority="high" />
+          </figure>
+        </div>
+      </section>
+
+      <article class="section article-section">
+        <div class="container article-body">
+          <p class="article-lead">Digital transformation is often associated with new technologies, automated processes, cloud platforms and advanced analytics.</p>
+          <p>But from a marketer's perspective, the transformation goes much deeper.</p>
+          <p>It changes how a business understands its customers, communicates its value, makes decisions and connects marketing activities with broader business objectives.</p>
+          <p>A company can adopt multiple digital tools and still struggle to create meaningful growth. It can invest in marketing automation without improving customer engagement, generate leads without converting them, or collect extensive data without knowing what decisions to make.</p>
+          <p>The difference lies in how technology is integrated into the business.</p>
+          <p>Digital transformation is not simply about doing things digitally. It is about changing how an organisation creates, delivers and measures value.</p>
+          <p>For marketers, understanding this distinction is essential to moving beyond campaigns and contributing to long-term business growth.</p>
+
+          <aside class="article-takeaways">
+            <div class="article-box-tag">Key takeaways</div>
+            <ul>
+              <li>Digital transformation in marketing means integrating customer insight, data, technology and decision-making so marketing becomes more informed, coordinated and accountable.</li>
+              <li>Digital marketing is one component of digital transformation, not a substitute for it.</li>
+              <li>Technology should follow the business problem, not lead it.</li>
+              <li>Governance, ownership and team capability decide whether digital investments create value.</li>
+            </ul>
+          </aside>
+
+          <h2>What Does Digital Transformation Mean for Marketing?</h2>
+          <p>Digital transformation in marketing is the integration of technology, data, processes and strategic decision-making to improve customer experience, marketing effectiveness and business outcomes. It goes beyond adopting digital tools to changing how marketing operates and contributes to growth.</p>
+          <p>Traditional marketing often operated through separate activities: advertising, content creation, sales support, customer communication and performance reporting. Digital platforms have made it possible to connect these activities, but connectivity alone does not guarantee better outcomes.</p>
+          <p>Digital transformation brings together customer insights, <a href="/services/strategy-consulting/">marketing strategy</a>, technology, data and organisational processes to create a more integrated approach to growth.</p>
+          <p>For marketing teams, this can mean:</p>
+          <ul>
+            <li>Understanding customer behaviour through connected data sources.</li>
+            <li>Creating more relevant and consistent customer experiences across channels.</li>
+            <li>Aligning marketing activities with sales and business priorities.</li>
+            <li>Automating repetitive processes while improving operational efficiency.</li>
+            <li>Measuring marketing performance in terms of business outcomes rather than activity alone.</li>
+          </ul>
+          <p>The objective is not to use more technology. It is to make marketing more informed, coordinated and accountable.</p>
+
+          <h2>Digital Transformation vs Digital Marketing: What Is the Difference?</h2>
+          <p>Digital marketing uses digital channels and platforms to reach, engage and convert audiences. Digital transformation is broader. It changes how an organisation operates, makes decisions and creates value through the coordinated use of technology, processes, data and people. Digital marketing can be one component of that transformation.</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead>
+                <tr><th scope="col"><span class="visually-hidden">Aspect</span></th><th scope="col">Digital marketing</th><th scope="col">Digital transformation</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Scope</th><td>Marketing channels and campaigns</td><td>Strategy, processes, data, technology and people across the business</td></tr>
+                <tr><th scope="row">Typical question</th><td>"Which channels and content will reach our audience?"</td><td>"What do we need to change to create and measure value differently?"</td></tr>
+                <tr><th scope="row">How success is judged</th><td>Campaign and channel performance</td><td>Business outcomes such as growth, efficiency and customer experience</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Five Ways Digital Transformation Changes a Marketer's Perspective</h2>
+
+          <h3>1. From Campaign Execution to Customer Understanding</h3>
+          <p>Marketing has traditionally placed considerable emphasis on campaign planning, creative execution and promotional reach. While these remain important, digital transformation shifts the starting point towards understanding the customer.</p>
+          <p>Who are the most valuable customers? What problems are they trying to solve? What influences their buying decisions? Where do they experience friction during their journey?</p>
+          <p>Digital touchpoints can provide useful signals through website interactions, search behaviour, engagement patterns, enquiry forms and customer relationship management (CRM) systems. When interpreted collectively, these signals help marketers understand not just what customers do, but where the business can improve relevance and remove barriers to conversion.</p>
+          <p class="article-shift"><strong>The shift:</strong> From asking, "What should we communicate?" to asking, "What does our audience need, and how can we create value for them?"</p>
+
+          <h3>2. From Isolated Channels to Connected Customer Journeys</h3>
+          <p>Customers rarely experience a brand through one channel alone. A prospective customer might discover a business through a search result, explore its website, engage with a LinkedIn post, download a resource and eventually speak with the sales team. If these interactions operate independently, the business may struggle to understand the complete journey.</p>
+          <p>Digital transformation helps connect these touchpoints through appropriate analytics, CRM systems, marketing automation and integrated processes.</p>
+          <p>For example, a B2B organisation can use its website to communicate expertise, social media to build awareness, relevant content to educate decision-makers and CRM processes to manage enquiries and follow-ups. The objective is to make each interaction contribute to a consistent experience rather than treating every channel as a separate activity.</p>
+          <p class="article-shift"><strong>The shift:</strong> From managing individual marketing channels to designing a connected customer journey.</p>
+
+          <h3>3. From Reporting Activity to Making Data-Driven Decisions</h3>
+          <p>Marketing teams have access to more performance data than ever before. However, collecting metrics is not the same as using them effectively. Impressions, clicks, website sessions, engagement rates and leads can indicate how marketing activities are performing. Their real value emerges when marketers connect these indicators to business questions:</p>
+          <ul>
+            <li>Are the right audiences visiting the website?</li>
+            <li>Which pages attract meaningful engagement?</li>
+            <li>Where are potential customers dropping off?</li>
+            <li>Which content contributes to enquiries?</li>
+            <li>Are marketing-generated leads progressing through the sales process?</li>
+          </ul>
+          <p>Answering these questions requires more than dashboards. It requires clear objectives, reliable measurement, consistent tracking and an understanding of what each metric represents.</p>
+          <p>Early-stage initiatives also need to be judged in context. When a website, channel or programme is new, the first priority is usually visibility, discoverability and baseline data. Meaningful conclusions about conversions and revenue may require a longer observation period.</p>
+          <p class="article-shift"><strong>The shift:</strong> From reporting what happened to understanding why it happened and deciding what to do next.</p>
+
+          <h3>4. From Technology Adoption to Marketing Technology Alignment</h3>
+          <p>The availability of digital tools can make technology adoption seem like the obvious starting point for transformation. However, selecting a platform before understanding the business problem can introduce unnecessary complexity.</p>
+          <p>A CRM system, for example, may help organise customer information and improve sales visibility. Marketing automation can support lead nurturing. Analytics platforms can reveal patterns in digital behaviour. But these tools deliver value only when they support clearly defined processes and objectives.</p>
+          <p>Before introducing new technology, marketers should understand the existing workflow, identify operational gaps, establish ownership and determine how success will be measured. A clear <a href="/services/technology/">technology strategy</a> helps ensure that the right technology fits the organisation's needs, capabilities and stage of growth.</p>
+          <p class="article-shift"><strong>The shift:</strong> From asking, "Which tool should we implement?" to asking, "Which business problem are we solving, and what capabilities do we need?"</p>
+
+          <h3>5. From Marketing Ownership to Cross-Functional Business Alignment</h3>
+          <p>Perhaps the most important change is that digital transformation moves marketing beyond the boundaries of the marketing department. Customer experience, lead conversion, brand perception and business growth are influenced by multiple teams.</p>
+          <p>Marketing may generate demand, but sales must respond effectively. Technology teams must support the required systems. Leadership must establish priorities, allocate resources and create accountability. Without growth alignment, even well-planned marketing activities can become disconnected from the outcomes the business expects.</p>
+          <p><a href="/services/marketing-governance/">Marketing governance</a> helps address this challenge by defining priorities, responsibilities, performance measures and decision-making processes. It ensures that marketing strategy, technology investments, content, sales processes and customer experience work towards shared objectives.</p>
+          <p class="article-shift"><strong>The shift:</strong> From treating marketing as an independent function to making it an integrated contributor to business transformation.</p>
+
+          <h2>The Role of Marketing Governance in Digital Transformation</h2>
+          <p>Digital transformation is not a one-time implementation exercise. It requires continuous coordination between strategy, people, processes and technology. This is where marketing governance becomes important.</p>
+          <p>Without clear governance, organisations may invest in multiple platforms, run disconnected campaigns, and duplicate efforts and struggle to determine which activities are creating value.</p>
+          <p>An effective governance framework establishes clarity around:</p>
+          <ul>
+            <li><strong>Strategic priorities:</strong> What business objectives should marketing support?</li>
+            <li><strong>Ownership:</strong> Who is responsible for decisions, execution and outcomes?</li>
+            <li><strong>Measurement:</strong> Which indicators define progress and success?</li>
+            <li><strong>Processes:</strong> How are campaigns, content, data and customer enquiries managed?</li>
+            <li><strong>Capability:</strong> Does the team have the skills and resources to execute the strategy?</li>
+            <li><strong>Continuous improvement:</strong> How will insights inform future decisions?</li>
+          </ul>
+          <p>For growing and mid-market businesses, this may involve strengthening internal marketing leadership, improving collaboration between teams, investing in <a href="/services/training/">marketing leadership development</a> or introducing <a href="/services/marketing-governance/">fractional marketing leadership</a> where appropriate.</p>
+          <p>The goal is to create a system in which technology and marketing activity are guided by business priorities rather than operating independently.</p>
+
+          <h2>How Can Businesses Approach Digital Transformation Through Marketing?</h2>
+          <p>A structured approach can help businesses move from isolated digital initiatives to a more connected transformation journey.</p>
+
+          <h3>Step 1: Assess the Current State</h3>
+          <p>Begin by understanding existing marketing processes, customer touchpoints, technology platforms, data quality and performance measurement. Identify what is working, where gaps exist and which issues are affecting customer experience or business outcomes.</p>
+
+          <h3>Step 2: Define Business-Aligned Objectives</h3>
+          <p>Establish what the transformation needs to achieve. Objectives may include improving lead quality, reducing friction in customer acquisition, strengthening retention, increasing operational efficiency or improving visibility into marketing performance. Clear objectives provide a basis for prioritisation.</p>
+
+          <h3>Step 3: Identify the Required Capabilities</h3>
+          <p>Determine which processes, skills, data and technology are needed to achieve the objectives. Not every organisation needs a complex technology stack. Some may first need better analytics, clearer workflows or stronger coordination between marketing and sales.</p>
+
+          <h3>Step 4: Integrate Strategy, Technology and Execution</h3>
+          <p>Build a roadmap that connects business objectives with marketing strategy, appropriate digital platforms, defined ownership and implementation priorities. Where possible, start with high-value improvements that can be measured and refined before expanding the programme.</p>
+
+          <h3>Step 5: Measure, Learn and Improve</h3>
+          <p>Track performance against the objectives established at the beginning. Use the findings to identify gaps, improve customer journeys, refine marketing activities and adjust investments. Digital transformation becomes sustainable when learning and improvement are built into the way the organisation operates.</p>
+
+          <h2>Common Digital Transformation Mistakes to Avoid</h2>
+          <p>Even well-intentioned initiatives can fall short when businesses overlook the fundamentals.</p>
+
+          <h3>Adopting Technology Without a Clear Objective</h3>
+          <p>Implementing tools without defining the problem can increase cost and complexity without delivering meaningful business value.</p>
+
+          <h3>Treating Digital Transformation as a Marketing-Only Initiative</h3>
+          <p>Marketing can play a central role, but lasting transformation requires collaboration across leadership, sales, technology and operations.</p>
+
+          <h3>Focusing on Vanity Metrics</h3>
+          <p>High reach or engagement does not automatically translate into qualified leads, stronger relationships or revenue. Metrics must be interpreted in relation to business objectives.</p>
+
+          <h3>Ignoring Team Capability and Change Management</h3>
+          <p>New systems require people who understand how to use them and processes that support adoption. Training, ownership and organisational readiness, supported by <a href="/services/training/">capability development</a>, are essential.</p>
+
+          <h3>Expecting Immediate Results</h3>
+          <p>Digital transformation involves building capabilities, improving processes and learning from performance. Some improvements may become visible quickly, while others require sustained implementation and measurement. The objective should be measurable progress rather than immediate commercial returns from every initiative.</p>
+
+          <h2>Final Thought</h2>
+          <p>Through a marketer's lens, digital transformation is ultimately about creating stronger connections between customers, data, technology, people and business strategy.</p>
+          <p>It is about understanding customers before communicating with them, connecting touchpoints instead of managing isolated channels, using data to make better decisions and ensuring that marketing contributes to the organisation's wider goals.</p>
+          <p>Technology provides the infrastructure. Strategy establishes direction. Governance creates accountability. Capability enables execution.</p>
+          <p>When these elements work together, digital transformation becomes more than a collection of digital initiatives. It becomes a structured approach to creating sustainable business value.</p>
+          <p>At Platform Play Venture, we view digital-led growth through this integrated perspective, connecting strategy, marketing technology, governance and capability development. Our <a href="/services/technology/">technology and digital transformation services</a> help businesses build stronger foundations for transformation.</p>
+          <p>Because the real value of digital transformation is not measured by how much technology a business adopts, but by how effectively it uses that technology to create meaningful change.</p>
+
+          <h2>Digital Transformation in Marketing FAQs</h2>
+          <div class="faq-list article-faq">
+            {faqs.map(([q, a], i) => (
+              <details class="faq-item" open={i === 0}>
+                <summary>
+                  <span class="faq-q-index">Q{i + 1}</span>
+                  <h3 class="faq-q">{q}</h3>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-answer">
+                  <p>{a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+
+          <aside class="article-cta">
+            <h2>Is your marketing technology working towards a clear business goal?</h2>
+            <p>Platform Play Venture helps leadership teams connect strategy, technology, governance and capability. <a href="/#contact">Talk to our team</a> or explore our <a href="/services/technology/">Technology services</a>.</p>
+            <p class="article-cta-sign">Platform Play Venture | Where Strategy Meets Transformation.</p>
+          </aside>
+        </div>
+      </article>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>

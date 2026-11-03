@@ -14,9 +14,14 @@ import WhyUs from '@/components/sections/WhyUs.astro';
 import Insights from '@/components/sections/Insights.astro';
 import Faq from '@/components/sections/Faq.astro';
 import Contact from '@/components/sections/Contact.astro';
+import { organizationSchema, websiteSchema, faqSchema } from '@/data/schema';
 ---
 
-<Base>
+<Base
+  title="Business Growth Consulting Firm | Platform Play Venture"
+  description="Unclear direction or fragmented marketing? Platform Play Venture is a strategic growth company for leaders. Talk to our strategists today."
+  schema={[organizationSchema, websiteSchema, faqSchema]}
+>
   <ScrollProgress />
 
   <div class="site-shell">

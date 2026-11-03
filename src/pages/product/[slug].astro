@@ -38,6 +38,7 @@ const isDms = product.slug === 'dms';
 <Base
   title={`${product.name} · ${product.fullName} · Platform Play Venture`}
   description={product.tagline}
+  breadcrumbs={[{ name: 'Products', path: '/products/' }, { name: product.name, path: `/product/${product.slug}/` }]}
 >
   <ScrollProgress />
 
@@ -53,7 +54,7 @@ const isDms = product.slug === 'dms';
           <span class="service-hero-blob b"></span>
         </div>
         <div class="container service-hero-inner">
-          <a class="service-hero-back reveal" href="/products">
+          <a class="service-hero-back reveal" href="/products/">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
             <span>All Products</span>
           </a>
@@ -163,11 +164,16 @@ const isDms = product.slug === 'dms';
               <div class="reveal pv-head">
                 <div class="section-kicker">Role-Based Feature Matrix</div>
                 <h2 class="section-title">Every module is exposed <span class="grad-text">differently by role</span></h2>
-                <p class="pv-head-lead">This is the core of the RBAC design.</p>
+                <p class="pv-head-lead">This is the core of the RBAC design — open the matrix for the module-by-role detail.</p>
               </div>
 
+              <details class="pv-matrix-details reveal">
+                <summary class="pv-matrix-toggle">
+                  <span>Explore the full feature matrix</span>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </summary>
               {dmsMatrix.groups.map((g) => (
-                <div class="pv-matrix-block reveal">
+                <div class="pv-matrix-block">
                   <div class="pv-card-kicker">{g.title}</div>
                   <div class="pv-table-scroll">
                     <table class="pv-table">
@@ -189,6 +195,7 @@ const isDms = product.slug === 'dms';
                   </div>
                 </div>
               ))}
+              </details>
             </div>
           </section>
 
@@ -310,7 +317,7 @@ const isDms = product.slug === 'dms';
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Employee Lifecycle</div>
-                <h2 class="section-title">From hiring to retirement — <span class="grad-text">managed end to end</span></h2>
+                <h2 class="section-title">From onboarding to offboarding — <span class="grad-text">managed end to end</span></h2>
               </div>
               <div class="pv-lifecycle-grid">
                 {hrmsLifecycle.map((l) => (
@@ -581,8 +588,8 @@ const isDms = product.slug === 'dms';
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
             <div class="pv-cta-alt">
-              <a class="pv-inline-link" href="/products"><span>View all products</span></a>
-              <a class="pv-inline-link" href="/technology"><span>Our technology capability</span></a>
+              <a class="pv-inline-link" href="/products/"><span>View all products</span></a>
+              <a class="pv-inline-link" href="/technology/"><span>Our technology capability</span></a>
             </div>
           </div>
         </div>

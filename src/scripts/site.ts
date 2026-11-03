@@ -644,6 +644,48 @@ function setupLabAccordion() {
   });
 }
 
+// =================== Contact form (Web3Forms over HTTPS) ===================
+function setupContactForm() {
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  if (!form) return;
+  const status = form.querySelector<HTMLElement>('[data-form-status]');
+  const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const fallback = 'Please email us at <a href="mailto:contact@platformplayventure.com">contact@platformplayventure.com</a> instead.';
+
+  const show = (kind: 'success' | 'error', html: string) => {
+    if (!status) return;
+    status.hidden = false;
+    status.className = `form-status is-${kind}`;
+    status.innerHTML = html;
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    if (!data.get('access_key')) {
+      show('error', `Our form is temporarily unavailable. ${fallback}`);
+      return;
+    }
+    if (submit) submit.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: data,
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.success === false) throw new Error(json.message || res.statusText);
+      form.reset();
+      show('success', 'Thank you — your enquiry has been received. We typically respond within one business day.');
+      (window as unknown as { dataLayer?: unknown[] }).dataLayer?.push({ event: 'contact_form_submit' });
+    } catch {
+      show('error', `Sorry, your message could not be sent. ${fallback}`);
+    } finally {
+      if (submit) submit.disabled = false;
+    }
+  });
+}
+
 // =================== Init ===================
 function init() {
   setupLoader();
@@ -656,6 +698,7 @@ function init() {
   setupPillars();
   setupTimelineSpine();
   setupLabAccordion();
+  setupContactForm();
   setupCursor();
 }
 

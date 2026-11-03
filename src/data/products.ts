@@ -616,14 +616,9 @@ export const products: Product[] = [
       'Performance management',
       'Self-service portal',
     ],
-    live: [
-      {
-        label: 'HRMS platform',
-        url: 'https://hrms.ursdigitally.com',
-        blurb: 'The full HR platform — employee records, attendance, leave, payroll and self-service.',
-        accounts: [],
-      },
-    ],
+    // The previous public host (hrms.ursdigitally.com) returns 502, so the page
+    // falls back to the "request a walkthrough" CTA until a new demo URL is live.
+    live: [],
     demoNote: 'Demo logins for the HR platform are shared on request.',
     closing: 'Smarter processes. Better experiences. Stronger workforce.',
   },

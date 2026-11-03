@@ -1,0 +1,67 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { insights, insightPath } from '@/data/insights';
+---
+
+<Base title="Insights · Platform Play Venture" description="Perspectives shaped by real brand experience — field notes from working with brands at the thinking layer." breadcrumbs={[{ name: 'Insights', path: '/insights/' }]}>
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="insights-page">
+      <section class="service-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <a class="service-hero-back reveal" href="/">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back to Home</span>
+          </a>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Insights · PPV</span></div>
+          <h1 class="service-hero-title reveal">Perspectives shaped by <span class="grad-text">real brand experience</span></h1>
+          <p class="service-hero-lead reveal">Field notes from working with brands at the thinking layer — what we observe, what we test, and what we learn while shaping strategy, perception, and decisions.</p>
+        </div>
+      </section>
+
+      <section class="section insights-index-section">
+        <div class="container">
+
+          <div class:list={['insights-index-grid', { 'is-single': insights.length === 1 }]}>
+            {insights.map((e) => (
+              <article class="insight-index-card reveal">
+                <a class="insight-index-card-link" href={insightPath(e.slug)}>
+                  <div class="insight-index-card-media">
+                    <img src={e.image} alt={e.imageAlt} width={e.imageWidth} height={e.imageHeight} loading="lazy" decoding="async" />
+                  </div>
+                  <div class="insight-index-card-body">
+                    <div class="insight-card-tag">
+                      <span class="insight-card-kind">{e.tag}</span>
+                      <span class="insight-card-meta">{e.readTime}</span>
+                    </div>
+                    <h2>{e.title}</h2>
+                    <p>{e.excerpt}</p>
+                    <span class="insight-index-card-cta">Read the article →</span>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>

@@ -143,6 +143,7 @@ const engagement = [
 <Base
   title="Digital & Technology · Platform Play Venture"
   description="Platform Play Venture is a marketing-led organization that uses technology to help businesses reach customers, sell products, manage operations and automate how they work."
+  breadcrumbs={[{ name: 'Digital & Technology', path: '/technology/' }]}
 >
   <ScrollProgress />
 
@@ -166,7 +167,7 @@ const engagement = [
           <h1 class="service-hero-title reveal">Marketing builds the opportunity. <span class="grad-text">Technology builds the engine.</span></h1>
           <p class="service-hero-lead reveal">We build the digital infrastructure behind business growth — platforms that help businesses reach customers, sell products, manage operations, automate processes and create better digital experiences.</p>
           <div class="pv-hero-actions reveal">
-            <a class="pv-btn pv-btn-primary" href="/products">
+            <a class="pv-btn pv-btn-primary" href="/products/">
               <span>See our live products</span>
               <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
@@ -259,7 +260,7 @@ const engagement = [
                 <ul class="pv-chip-row">
                   {p.highlights.slice(0, 4).map((h) => <li>{h}</li>)}
                 </ul>
-                <a class="pv-inline-link" href={`/product/${p.slug}`}>
+                <a class="pv-inline-link" href={`/product/${p.slug}/`}>
                   <span>Explore {p.name}</span>
                   <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>

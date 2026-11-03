@@ -1,0 +1,64 @@
+{
+  "redirects": [
+    {
+      "source": "/insights/thinking-layer-marketing",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/thinking-layer-marketing/",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/fractional-cmo-explained",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/fractional-cmo-explained/",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/growth-engine-alignment",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/growth-engine-alignment/",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/brand-reality-audit-case",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/brand-reality-audit-case/",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/differentiation-interpretation",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/differentiation-interpretation/",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/perception-before-visibility",
+      "destination": "/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/perception-before-visibility/",
+      "destination": "/insights/",
+      "permanent": true
+    }
+  ]
+}
