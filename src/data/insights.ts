@@ -24,7 +24,7 @@ export const insights: Insight[] = [
     title: 'Unpacking Digital Transformation Through the Eyes of a Marketer',
     excerpt:
       'Digital transformation is more than tools. How marketers can connect customer insight, data, technology and governance to drive measurable growth.',
-    readTime: '11 min read',
+    readTime: '10 min read',
     published: '2026-11-03',
     image: '/insights/digital-transformation-in-marketing.webp',
     imageAlt: 'Laptop with strategy, content, audience and growth notes beneath connected digital marketing icons',
