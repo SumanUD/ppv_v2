@@ -1,0 +1,13 @@
+{
+  "name": "ppv-contact-mailer",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Contact form endpoint for platformplayventure.com (POST /api/contact)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}

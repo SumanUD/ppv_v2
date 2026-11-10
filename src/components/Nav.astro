@@ -30,8 +30,8 @@ const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
             <span class="nav-dd-title">Technology &amp; Digital Platforms</span>
             <span class="nav-dd-sub">Operational systems, products, and scale.</span>
           </a>
-          <a href="/technology/" role="menuitem">
-            <span class="nav-dd-title">Digital &amp; Technology</span>
+          <a href="/services/business-automation/" role="menuitem">
+            <span class="nav-dd-title">Business Automation &amp; Software</span>
             <span class="nav-dd-sub">What we build, and the products already live.</span>
           </a>
           <a href="/services/marketing-governance/" role="menuitem">
@@ -46,10 +46,8 @@ const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
       </div>
       <a href="/products/" class:list={["nav-link", (pathname === "/products" || pathname.startsWith("/product/")) && "is-active"]}>Products</a>
       <a href={h('principles')} class="nav-link">Belief System</a>
-      <a href={h('why')} class="nav-link">Why Us</a>
       <a href="/insights/" class:list={["nav-link", pathname.startsWith("/insights") && "is-active"]}>Insights</a>
-      <a href={h('faq')} class="nav-link">FAQ</a>
-      <a class="nav-cta" href={h('contact')}>Contact <span aria-hidden="true">→</span></a>
+      <a class:list={["nav-cta", pathname === "/contact" && "is-active"]} href="/contact/">Contact <span aria-hidden="true">→</span></a>
     </nav>
   </div>
 </header>

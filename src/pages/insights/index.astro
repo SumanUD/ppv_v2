@@ -34,7 +34,7 @@ import { insights, insightPath } from '@/data/insights';
       <section class="section insights-index-section">
         <div class="container">
 
-          <div class:list={['insights-index-grid', { 'is-single': insights.length === 1 }]}>
+          <div class:list={['insights-index-grid', { 'is-single': insights.length === 1, 'is-pair': insights.length === 2 }]}>
             {insights.map((e) => (
               <article class="insight-index-card reveal">
                 <a class="insight-index-card-link" href={insightPath(e.slug)}>

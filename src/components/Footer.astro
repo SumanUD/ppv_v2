@@ -1,8 +1,11 @@
 ---
-import { contact, fullAddress, social } from '@/data/site';
+import { contact, fullAddress } from '@/data/site';
+import SocialIcons from '@/components/SocialIcons.astro';
 
 const isHome = (Astro.url.pathname.replace(/\/+$/, '') || '/') === '/';
 const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
+// On the homepage the form is on the page; everywhere else use the contact page.
+const contactHref = isHome ? '#contact' : '/contact/';
 ---
 <footer class="footer">
   <div class="footer-ambient" aria-hidden="true">
@@ -22,7 +25,7 @@ const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
         <h2 class="footer-cta-title">Clarity is closer than <span class="grad-text">you think.</span></h2>
         <p class="footer-cta-copy">Tell us where the brand is today. We'll show you where it can go — and the structure to get there.</p>
         <div class="footer-cta-actions">
-          <a class="button button-primary" href={h('contact')}>
+          <a class="button button-primary" href={contactHref}>
             <span>Begin the Conversation</span>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -62,7 +65,7 @@ const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
             <span>PLATFORM</span><span class="play">PLAY</span><span>VENTURE</span>
           </span>
         </a>
-        <p class="footer-description">A strategic growth company. We turn scattered marketing, technology, and decision-making into one connected structure built on clarity, direction, and momentum.</p>
+        <p class="footer-description">A strategic growth and transformation company that brings business strategy, marketing and technology together to build connected ecosystems. We help businesses create clarity, strengthen decision-making and drive sustainable growth through purposeful strategy and execution.</p>
         <div class="footer-meta">
           <div>
             <span class="footer-meta-label">Hours</span>
@@ -86,11 +89,10 @@ const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
       <div class="footer-col">
         <div class="footer-heading">Explore</div>
         <div class="footer-links">
-          <a href={h('home')}>Home</a>
-          <a href={h('clarity')}>Clarity</a>
-          <a href={h('who')}>Who We Are</a>
+          <a href={isHome ? '#home' : '/'}>Home</a>
+          <a href="/about/">About</a>
           <a href={h('solutions')}>Solutions</a>
-          <a href={h('principles')}>Principles</a>
+          <a href="/insights/">Insights</a>
         </div>
       </div>
 
@@ -99,7 +101,7 @@ const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
         <div class="footer-links">
           <a href={h('why')}>Why Us</a>
           <a href={h('faq')}>FAQ</a>
-          <a href={h('contact')}>Contact</a>
+          <a href="/contact/">Contact</a>
           <a href={`mailto:${contact.email}`}>Email</a>
           <a href={isHome ? '#home' : '#'}>Back to Top</a>
         </div>
@@ -107,24 +109,16 @@ const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
 
       <div class="footer-col footer-col-social">
         <div class="footer-heading">Follow</div>
-        <div class="footer-social" aria-label="Platform Play Venture social links">
-          <a href={social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.03-1.85-3.03-1.85 0-2.13 1.45-2.13 2.94v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.61 0 4.27 2.38 4.27 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
-            <span class="footer-social-label">LinkedIn</span>
-          </a>
-          <a href={social.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a2.95 2.95 0 0 0-2.08-2.08C19.56 3.6 12 3.6 12 3.6s-7.56 0-9.42.52A2.95 2.95 0 0 0 .5 6.2 30.4 30.4 0 0 0 0 12a30.4 30.4 0 0 0 .5 5.8 2.95 2.95 0 0 0 2.08 2.08C4.44 20.4 12 20.4 12 20.4s7.56 0 9.42-.52a2.95 2.95 0 0 0 2.08-2.08A30.4 30.4 0 0 0 24 12a30.4 30.4 0 0 0-.5-5.8zM9.6 15.5v-7l6.2 3.5-6.2 3.5z"/></svg>
-            <span class="footer-social-label">YouTube</span>
-          </a>
-        </div>
+        <SocialIcons class="footer-social" labels />
 
         <div class="footer-newsletter">
           <span class="footer-newsletter-label">Get the brief</span>
-          <span class="footer-newsletter-desc">Strategy notes, monthly.</span>
-          <a class="footer-newsletter-cta" href={`mailto:${contact.email}?subject=Subscribe%20to%20the%20brief`}>
-            <span>Subscribe</span>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          <span class="footer-newsletter-title">Strategic thinking for businesses moving forward.</span>
+          <span class="footer-newsletter-desc">Get monthly insights on business strategy, marketing, technology and transformation.</span>
+          <button type="button" class="footer-newsletter-cta" data-brief-open>
+            <span>Subscribe to our monthly brief</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -137,8 +131,8 @@ const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
         <span class="footer-tag">Strategic Growth OS</span>
       </div>
       <div class="footer-bottom-links">
-        <a href={h('contact')}>Start with Clarity</a>
-        <a href={h('contact')}>Talk to Our Team</a>
+        <a href={contactHref}>Start with Clarity</a>
+        <a href={contactHref}>Talk to Our Team</a>
         <a href={isHome ? '#home' : '#'} class="footer-top-link">
           <span>Top</span>
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
@@ -146,4 +140,49 @@ const h = (anchor: string) => (isHome ? `#${anchor}` : `/#${anchor}`);
       </div>
     </div>
   </div>
+
+  <dialog class="ppv-dialog brief-dialog" data-brief-dialog aria-labelledby="brief-title">
+    <button type="button" class="ppv-dialog-close" data-dialog-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <form class="lead-form" action="/api/contact" method="POST" novalidate data-lead-form="subscribe">
+      <input type="checkbox" name="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <input type="hidden" name="form" value="subscribe" />
+      <div class="lead-form-body">
+        <span class="lead-badge">The PPV Brief</span>
+        <h2 class="lead-title" id="brief-title">Subscribe to the brief.</h2>
+        <p class="lead-intro">Monthly insights on business strategy, marketing, technology and transformation. No noise, and you can unsubscribe at any time.</p>
+
+        <div class="lead-field">
+          <label for="brief-name">Name <span aria-hidden="true">*</span></label>
+          <input id="brief-name" name="name" type="text" required minlength="2" maxlength="100" autocomplete="name" placeholder="Your name" />
+          <span class="lead-error" data-error-for="name"></span>
+        </div>
+        <div class="lead-field">
+          <label for="brief-email">Work email <span aria-hidden="true">*</span></label>
+          <input id="brief-email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="name@company.com" />
+          <span class="lead-error" data-error-for="email"></span>
+        </div>
+        <div class="lead-field">
+          <label for="brief-company">Company name <span class="lead-optional">(optional)</span></label>
+          <input id="brief-company" name="company" type="text" maxlength="120" autocomplete="organization" placeholder="Your organisation" />
+        </div>
+        <label class="lead-check">
+          <input type="checkbox" name="consent" value="yes" required />
+          <span>I agree to receive the monthly PPV brief by email.</span>
+        </label>
+        <span class="lead-error" data-error-for="consent"></span>
+
+        <button type="submit" class="lead-submit">Subscribe to the Brief <span aria-hidden="true">→</span></button>
+        <p class="lead-status" data-lead-status role="alert" hidden></p>
+      </div>
+
+      <div class="lead-success" data-lead-success hidden tabindex="-1">
+        <span class="lead-success-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <h2 class="lead-success-title">You're subscribed!</h2>
+        <p>Thank you for subscribing to the PPV monthly brief. A confirmation is on its way to your inbox.</p>
+        <span class="lead-success-pill">Subscription confirmed</span>
+      </div>
+    </form>
+  </dialog>
 </footer>

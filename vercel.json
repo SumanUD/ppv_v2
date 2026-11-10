@@ -59,6 +59,16 @@
       "source": "/insights/perception-before-visibility/",
       "destination": "/insights/",
       "permanent": true
+    },
+    {
+      "source": "/technology",
+      "destination": "/services/business-automation/",
+      "permanent": true
+    },
+    {
+      "source": "/technology/",
+      "destination": "/services/business-automation/",
+      "permanent": true
     }
   ]
 }

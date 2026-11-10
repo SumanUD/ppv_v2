@@ -1,4 +1,4 @@
-import { contact } from './site';
+import { contact, social } from './site';
 
 const SITE = 'https://platformplayventure.com/';
 
@@ -44,6 +44,7 @@ export const organizationSchema = {
       },
     },
   ],
+  sameAs: Object.values(social),
   knowsAbout: [
     'Strategic growth',
     'Brand strategy',

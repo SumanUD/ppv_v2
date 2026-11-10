@@ -4,8 +4,8 @@
  */
 export const contact = {
   email: 'contact@platformplayventure.com',
-  phone: '+91 98306 01360',
-  phoneHref: 'tel:+919830601360',
+  phone: '+91 79808 26489',
+  phoneHref: 'tel:+917980826489',
   address: {
     street: '5th Floor, Devi Market, 83 Shyama Prasad Mukherjee Road',
     locality: 'Bhowanipore, Kolkata',
@@ -19,8 +19,12 @@ export const contact = {
 
 export const fullAddress = `${contact.address.street}, ${contact.address.locality}, ${contact.address.region} ${contact.address.postalCode}`;
 
-/** Only channels PPV actively runs. X and Instagram return once those accounts are live. */
+export const website = 'https://www.platformplayventure.com';
+
+/** Only channels PPV actively runs. */
 export const social = {
-  linkedin: 'https://www.linkedin.com/company/platform-play-venture/',
+  instagram: 'https://www.instagram.com/platformplayventure/',
+  facebook: 'https://www.facebook.com/profile.php?id=61594339535834',
   youtube: 'https://www.youtube.com/@platformplayventure-m7c',
+  linkedin: 'https://www.linkedin.com/company/platform-play-venture/',
 };

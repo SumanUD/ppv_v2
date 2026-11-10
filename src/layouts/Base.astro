@@ -16,6 +16,8 @@ interface Props {
   /** Root-relative social share image, e.g. '/insights/post-og.jpg'. */
   image?: string;
   ogType?: 'website' | 'article';
+  /** Keep the page out of search results (e.g. the form thank-you page). */
+  noindex?: boolean;
 }
 
 const {
@@ -24,7 +26,8 @@ const {
   breadcrumbs = [],
   schema = [],
   image,
-  ogType = 'website'
+  ogType = 'website',
+  noindex = false
 } = Astro.props;
 
 const site = Astro.site ?? new URL('https://platformplayventure.com');
@@ -66,6 +69,7 @@ if (breadcrumbs.length) {
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
 
   <link rel="icon" type="image/png" href="/newlogo.png" />
 

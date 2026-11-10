@@ -4,7 +4,8 @@ import PageAurora from '@/components/PageAurora.astro';
 import ScrollProgress from '@/components/ScrollProgress.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
-import { getInsight, insightPath } from '@/data/insights';
+import { getInsight, insightPath, formatPublished } from '@/data/insights';
+import { organizationSchema } from '@/data/schema';
 
 const post = getInsight('digital-transformation-in-marketing')!;
 const url = new URL(insightPath(post.slug), Astro.site).href;
@@ -46,13 +47,17 @@ const schema = [
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     '@id': `${url}#article`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     headline: post.title,
-    description: post.excerpt,
+    description: post.schemaDescription,
     image: new URL(post.image, Astro.site).href,
+    author: { '@type': 'Person', name: post.author.name, url: post.author.url },
+    publisher: {
+      '@type': 'Organization',
+      name: organizationSchema.name,
+      logo: { '@type': 'ImageObject', url: organizationSchema.logo.url },
+    },
     datePublished: post.published,
-    mainEntityOfPage: url,
-    author: { '@id': 'https://platformplayventure.com/#organization' },
-    publisher: { '@id': 'https://platformplayventure.com/#organization' },
   },
   {
     '@context': 'https://schema.org',
@@ -94,6 +99,11 @@ const schema = [
           </a>
           <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>{post.tag} · {post.readTime}</span></div>
           <h1 class="service-hero-title article-title reveal">Unpacking Digital Transformation Through the Eyes of a <span class="grad-text">Marketer</span></h1>
+          <p class="article-byline reveal">
+            By <a href={post.author.url} target="_blank" rel="noopener author">{post.author.name}</a>
+            <span aria-hidden="true">·</span>
+            <time datetime={post.published}>{formatPublished(post.published)}</time>
+          </p>
           <figure class="article-cover reveal">
             <img src={post.image} alt={post.imageAlt} width={post.imageWidth} height={post.imageHeight} decoding="async" fetchpriority="high" />
           </figure>
@@ -265,7 +275,7 @@ const schema = [
 
           <aside class="article-cta">
             <h2>Is your marketing technology working towards a clear business goal?</h2>
-            <p>Platform Play Venture helps leadership teams connect strategy, technology, governance and capability. <a href="/#contact">Talk to our team</a> or explore our <a href="/services/technology/">Technology services</a>.</p>
+            <p>Platform Play Venture helps leadership teams connect strategy, technology, governance and capability. <a href="/contact/?engagement=Digital%20Technology%20%2F%20MarTech">Talk to our team</a> or explore our <a href="/services/technology/">Technology services</a>.</p>
             <p class="article-cta-sign">Platform Play Venture | Where Strategy Meets Transformation.</p>
           </aside>
         </div>

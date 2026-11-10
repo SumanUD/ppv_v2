@@ -4,7 +4,7 @@
  * Consumed by:
  *   - src/pages/products.astro        (listing)
  *   - src/pages/product/[slug].astro  (detail, via getStaticPaths)
- *   - src/pages/technology.astro      (live-products band)
+ *   - src/pages/services/business-automation.astro (live-products band)
  *
  * To add a product, append one object. No new pages required.
  */
@@ -598,7 +598,7 @@ export const products: Product[] = [
     name: 'PPV HRMS',
     fullName: 'Human Resource Management System',
     status: 'live',
-    tagline: 'Digitizing the complete employee lifecycle — from recruitment to retirement.',
+    tagline: 'Digitizing the complete employee lifecycle — from onboarding to offboarding.',
     positioning: 'One platform. Complete workforce management.',
     summary:
       'PPV HRMS digitizes and automates the complete employee lifecycle through a fully integrated ecosystem of HR modules. Instead of spreadsheets, standalone tools and duplicate data entry, it gives an organisation one centralized system for its workforce — with role-based access so sensitive information stays with the right people.',

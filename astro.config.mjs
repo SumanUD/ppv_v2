@@ -12,6 +12,7 @@ export default defineConfig({
     '/insights/brand-reality-audit-case': '/insights/',
     '/insights/differentiation-interpretation': '/insights/',
     '/insights/perception-before-visibility': '/insights/',
+    '/technology': '/services/business-automation/',
   },
   build: {
     inlineStylesheets: 'auto'

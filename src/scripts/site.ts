@@ -257,6 +257,9 @@ function setupSolutionsCarousel() {
 
   let activeIndex = 0;
   let timer: number | undefined;
+  // Once a visitor interacts, autoplay stays off so the card they are
+  // reaching for never rotates away under the pointer.
+  let userTookOver = false;
 
   const slotFor = (index: number) => {
     const offset = (index - activeIndex + cards.length) % cards.length;
@@ -295,17 +298,19 @@ function setupSolutionsCarousel() {
   };
 
   const startAuto = () => {
-    if (prefersReducedMotion || timer) return;
+    if (prefersReducedMotion || timer || userTookOver) return;
     timer = window.setInterval(() => goTo(activeIndex + 1), 5200);
   };
 
   prev?.addEventListener('click', () => {
+    userTookOver = true;
     stopAuto();
     goTo(activeIndex - 1);
     startAuto();
   });
 
   next?.addEventListener('click', () => {
+    userTookOver = true;
     stopAuto();
     goTo(activeIndex + 1);
     startAuto();
@@ -313,6 +318,7 @@ function setupSolutionsCarousel() {
 
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
+      userTookOver = true;
       stopAuto();
       goTo(index);
       startAuto();
@@ -324,9 +330,18 @@ function setupSolutionsCarousel() {
     card.addEventListener('click', (e) => {
       const slot = card.dataset.slot;
       const target = e.target as HTMLElement;
+      userTookOver = true;
 
-      // On the ACTIVE card: let links/buttons work normally
-      if (slot === 'active') return;
+      // ACTIVE card: links work normally, and a click anywhere else on the
+      // card opens that solution's landing page.
+      if (slot === 'active') {
+        stopAuto();
+        if (!target.closest('a')) {
+          const href = card.querySelector<HTMLAnchorElement>('.solution-cta')?.href;
+          if (href) window.location.assign(href);
+        }
+        return;
+      }
 
       // On NON-active cards: always intercept (even on a link) and slide
       e.preventDefault();
@@ -384,6 +399,7 @@ function setupSolutionsCarousel() {
     const dy = endY - touchStartY;
     const threshold = 40;
     if (Math.abs(dx) > threshold && Math.abs(dx) > Math.abs(dy)) {
+      userTookOver = true;
       if (dx < 0) {
         goTo(activeIndex + 1);
       } else {
@@ -644,13 +660,53 @@ function setupLabAccordion() {
   });
 }
 
-// =================== Contact form (Web3Forms over HTTPS) ===================
+// =================== Contact form (VPS mailer at /api/contact) ===================
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const PHONE_RE = /^\d{10}$/;
+
+type ContactField = 'name' | 'email' | 'phone' | 'message';
+
+// Same rules as server/contact-mailer/server.js; returns an error message or ''.
+function contactFieldError(field: ContactField, raw: string): string {
+  const value = raw.trim();
+  switch (field) {
+    case 'name':
+      return value.length < 2 ? 'Please enter your name.' : '';
+    case 'email':
+      if (!value) return 'Please enter your email address.';
+      return EMAIL_RE.test(value) ? '' : 'Please enter a valid email address, e.g. name@company.com.';
+    case 'phone':
+      if (!value) return 'Please enter your phone number.';
+      return PHONE_RE.test(value) ? '' : 'Please enter a valid 10-digit phone number.';
+    case 'message':
+      return value.length < 10 ? 'Please tell us a little more (at least 10 characters).' : '';
+  }
+}
+
 function setupContactForm() {
   const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
   if (!form) return;
   const status = form.querySelector<HTMLElement>('[data-form-status]');
   const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const fields: ContactField[] = ['name', 'email', 'phone', 'message'];
   const fallback = 'Please email us at <a href="mailto:contact@platformplayventure.com">contact@platformplayventure.com</a> instead.';
+
+  const control = (field: ContactField) =>
+    form.elements.namedItem(field) as HTMLInputElement | HTMLTextAreaElement | null;
+
+  const setError = (field: ContactField, message: string) => {
+    const el = control(field);
+    const slot = form.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
+    el?.closest('.form-field')?.classList.toggle('has-error', !!message);
+    el?.setAttribute('aria-invalid', message ? 'true' : 'false');
+    if (slot) slot.textContent = message;
+  };
+
+  const check = (field: ContactField) => {
+    const message = contactFieldError(field, control(field)?.value ?? '');
+    setError(field, message);
+    return !message;
+  };
 
   const show = (kind: 'success' | 'error', html: string) => {
     if (!status) return;
@@ -659,30 +715,324 @@ function setupContactForm() {
     status.innerHTML = html;
   };
 
+  // Phone: digits only, at most 10. Typing stops at 10; a pasted or autofilled
+  // number keeps its last 10 digits, dropping a +91 / 0 prefix.
+  const phone = control('phone');
+  phone?.addEventListener('input', (event) => {
+    let digits = phone.value.replace(/\D/g, '');
+    if (digits.length > 10) {
+      digits = (event as InputEvent).inputType === 'insertText' ? digits.slice(0, 10) : digits.slice(-10);
+    }
+    if (phone.value !== digits) phone.value = digits;
+  });
+
+  // Validate on blur, then live once a field has shown an error.
+  fields.forEach((field) => {
+    const el = control(field);
+    el?.addEventListener('blur', () => {
+      if (el.value.trim()) check(field);
+    });
+    el?.addEventListener('input', () => {
+      if (el.closest('.form-field')?.classList.contains('has-error')) check(field);
+    });
+  });
+
+  if (new URLSearchParams(location.search).get('form') === 'error') {
+    show('error', `Sorry, your message could not be sent. ${fallback}`);
+  }
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const data = new FormData(form);
-    if (!data.get('access_key')) {
-      show('error', `Our form is temporarily unavailable. ${fallback}`);
+    if (status) status.hidden = true;
+
+    const invalid = fields.filter((field) => !check(field));
+    if (invalid.length) {
+      control(invalid[0])?.focus();
       return;
     }
+
+    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
     if (submit) submit.disabled = true;
     try {
       const res = await fetch(form.action, {
         method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: data,
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok || json.success === false) throw new Error(json.message || res.statusText);
-      form.reset();
-      show('success', 'Thank you — your enquiry has been received. We typically respond within one business day.');
+      if (res.status === 422 && json.errors) {
+        Object.entries(json.errors as Record<ContactField, string>).forEach(([f, msg]) => setError(f as ContactField, msg));
+        throw new Error('invalid');
+      }
+      if (!res.ok || !json.success) throw new Error(json.message || res.statusText);
       (window as unknown as { dataLayer?: unknown[] }).dataLayer?.push({ event: 'contact_form_submit' });
-    } catch {
-      show('error', `Sorry, your message could not be sent. ${fallback}`);
-    } finally {
+      window.location.assign(json.redirect || '/thank-you/');
+    } catch (err) {
+      const reason = err instanceof Error && err.message === 'invalid' ? 'Please check the highlighted fields.' : `Sorry, your message could not be sent. ${fallback}`;
+      show('error', reason);
       if (submit) submit.disabled = false;
     }
+  });
+}
+
+// =================== Engagement (which service the enquiry is about) ===================
+// Service pages link to /contact/?engagement=...; homepage links can carry
+// data-engagement. Both fill the contact form's hidden field and info panel.
+function setupEngagement() {
+  const input = document.querySelector<HTMLInputElement>('[data-engagement-input]');
+  const display = document.querySelector<HTMLElement>('[data-engagement-display]');
+  if (!input) return;
+  const apply = (raw: string | null) => {
+    const value = (raw || '').replace(/[<>]/g, '').trim().slice(0, 60);
+    if (!value) return;
+    input.value = value;
+    if (display) display.textContent = value;
+  };
+  apply(new URLSearchParams(location.search).get('engagement'));
+  document.querySelectorAll<HTMLAnchorElement>('a[data-engagement]').forEach((link) => {
+    link.addEventListener('click', () => apply(link.dataset.engagement || null));
+  });
+}
+
+// =================== Land on #anchors reliably ===================
+// Arriving at /#section, the browser jumps before images and fonts finish
+// laying out, and ends up short of the target. Re-align once things settle.
+function setupHashLanding() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id) return;
+  const target = document.getElementById(id);
+  if (!target) return;
+  let userScrolled = false;
+  const stop = () => { userScrolled = true; };
+  window.addEventListener('wheel', stop, { once: true, passive: true });
+  window.addEventListener('touchstart', stop, { once: true, passive: true });
+  window.addEventListener('keydown', stop, { once: true });
+  const align = () => {
+    if (!userScrolled) target.scrollIntoView({ behavior: 'auto', block: 'start' });
+  };
+  requestAnimationFrame(align);
+  document.fonts?.ready.then(align).catch(() => {});
+  if (document.readyState === 'complete') setTimeout(align, 60);
+  else window.addEventListener('load', () => setTimeout(align, 60), { once: true });
+}
+
+// =================== Lead forms (HRMS, DMS, brief subscription) ===================
+type LeadControl = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+
+function leadFieldError(el: LeadControl, form: HTMLFormElement): string {
+  if (el instanceof HTMLInputElement && el.type === 'radio') {
+    const checked = form.querySelector(`input[name="${el.name}"]:checked`);
+    return el.required && !checked ? 'Please choose one option.' : '';
+  }
+  if (el instanceof HTMLInputElement && el.type === 'checkbox') {
+    return el.required && !el.checked ? 'Please tick this box to continue.' : '';
+  }
+  const value = el.value.trim();
+  if (el.required && !value) {
+    return el instanceof HTMLSelectElement ? 'Please select an option.' : 'This field is required.';
+  }
+  if (!value) return '';
+  if (el instanceof HTMLInputElement && el.type === 'email' && !EMAIL_RE.test(value)) {
+    return 'Please enter a valid email address, e.g. name@company.com.';
+  }
+  if (el.hasAttribute('data-phone') && !PHONE_RE.test(value)) return 'Please enter a valid 10-digit phone number.';
+  const min = Number(el.getAttribute('minlength') || 0);
+  if (min && value.length < min) return `Please enter at least ${min} characters.`;
+  return '';
+}
+
+function setupLeadForms() {
+  document.querySelectorAll<HTMLFormElement>('form[data-lead-form]').forEach((form) => {
+    const type = form.dataset.leadForm || 'lead';
+    const body = form.querySelector<HTMLElement>('.lead-form-body');
+    const success = form.querySelector<HTMLElement>('[data-lead-success]');
+    const status = form.querySelector<HTMLElement>('[data-lead-status]');
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const controls = Array.from(form.querySelectorAll<LeadControl>('input:not([type="hidden"]):not(.form-honeypot), select, textarea'));
+
+    const slotFor = (name: string) => form.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+    const setError = (name: string, message: string) => {
+      const slot = slotFor(name);
+      if (slot) slot.textContent = message;
+      form.querySelectorAll<LeadControl>(`[name="${name}"]`).forEach((el) => {
+        el.setAttribute('aria-invalid', message ? 'true' : 'false');
+        el.closest('.lead-field, .lead-check')?.classList.toggle('has-error', !!message);
+      });
+    };
+    const check = (el: LeadControl) => {
+      const message = leadFieldError(el, form);
+      setError(el.name, message);
+      return !message;
+    };
+
+    controls.forEach((el) => {
+      if (el.hasAttribute('data-phone')) {
+        el.addEventListener('input', () => {
+          const digits = el.value.replace(/\D/g, '').slice(-10);
+          if (el.value !== digits) el.value = digits;
+        });
+      }
+      const event = el instanceof HTMLInputElement && (el.type === 'radio' || el.type === 'checkbox') ? 'change' : 'blur';
+      el.addEventListener(event, () => {
+        if (event === 'change' || el.value.trim()) check(el);
+      });
+      el.addEventListener('input', () => {
+        if (el.getAttribute('aria-invalid') === 'true') check(el);
+      });
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (status) status.hidden = true;
+      // One check per field name (radio groups share a name).
+      const seen = new Set<string>();
+      const invalid = controls.filter((el) => {
+        if (!el.name || seen.has(el.name)) return false;
+        seen.add(el.name);
+        return !check(el);
+      });
+      if (invalid.length) {
+        invalid[0].focus();
+        return;
+      }
+
+      const data: Record<string, string> = {};
+      new FormData(form).forEach((v, k) => { data[k] = String(v); });
+      if (submit) {
+        submit.disabled = true;
+        submit.classList.add('is-busy');
+      }
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (res.status === 422 && json.errors) {
+          Object.entries(json.errors as Record<string, string>).forEach(([name, msg]) => setError(name, msg));
+          throw new Error('invalid');
+        }
+        if (!res.ok || !json.success) throw new Error(json.message || res.statusText);
+        (window as unknown as { dataLayer?: unknown[] }).dataLayer?.push({ event: `${type}_form_submit` });
+        if (body) body.hidden = true;
+        if (success) {
+          success.hidden = false;
+          success.focus({ preventScroll: true });
+          success.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+        }
+      } catch (err) {
+        if (status) {
+          status.hidden = false;
+          status.innerHTML = err instanceof Error && err.message === 'invalid'
+            ? 'Please check the highlighted fields.'
+            : 'Sorry, we could not send this right now. Please try again, or email us at <a href="mailto:contact@platformplayventure.com">contact@platformplayventure.com</a>.';
+        }
+      } finally {
+        if (submit) {
+          submit.disabled = false;
+          submit.classList.remove('is-busy');
+        }
+      }
+    });
+  });
+}
+
+// =================== Brief subscription dialog ===================
+function setupBriefDialog() {
+  const dialog = document.querySelector<HTMLDialogElement>('[data-brief-dialog]');
+  if (!dialog || typeof dialog.showModal !== 'function') return;
+  document.querySelectorAll<HTMLElement>('[data-brief-open]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      dialog.showModal();
+      document.body.classList.add('dialog-open');
+      dialog.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
+    });
+  });
+  dialog.querySelector('[data-dialog-close]')?.addEventListener('click', () => dialog.close());
+  // Click on the backdrop closes it.
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+  dialog.addEventListener('close', () => document.body.classList.remove('dialog-open'));
+}
+
+// =================== DMS modules carousel ===================
+function setupModCarousel() {
+  const root = document.querySelector<HTMLElement>('[data-mod-carousel]');
+  if (!root) return;
+  const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-mod-card]'));
+  const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-mod-dot]'));
+  const n = cards.length;
+  let active = 0;
+
+  const render = () => {
+    cards.forEach((card, i) => {
+      const offset = (i - active + n) % n;
+      const slot = offset === 0 ? 'active' : offset === 1 ? 'next' : offset === n - 1 ? 'prev' : 'far';
+      card.dataset.slot = slot;
+      card.setAttribute('aria-hidden', String(slot !== 'active'));
+    });
+    dots.forEach((d, i) => {
+      d.classList.toggle('is-active', i === active);
+      d.setAttribute('aria-current', i === active ? 'true' : 'false');
+    });
+  };
+  const go = (i: number) => {
+    active = (i + n) % n;
+    render();
+  };
+
+  root.querySelector('[data-mod-prev]')?.addEventListener('click', () => go(active - 1));
+  root.querySelector('[data-mod-next]')?.addEventListener('click', () => go(active + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+  cards.forEach((card, i) => {
+    card.addEventListener('click', () => {
+      if (card.dataset.slot !== 'active') go(i);
+    });
+  });
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') go(active - 1);
+    if (e.key === 'ArrowRight') go(active + 1);
+  });
+
+  let startX = 0;
+  let startY = 0;
+  root.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+  root.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(active + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  render();
+}
+
+// =================== DMS role tabs (feature matrix) ===================
+function setupRbac() {
+  const root = document.querySelector<HTMLElement>('[data-rbac]');
+  if (!root) return;
+  const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-rbac-tab]'));
+  const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-rbac-panel]'));
+  const select = (i: number, focus = false) => {
+    tabs.forEach((t, ti) => {
+      const on = ti === i;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
+    });
+    panels.forEach((p, pi) => { p.hidden = pi !== i; });
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(i));
+    t.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); select((i + 1) % tabs.length, true); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); select((i - 1 + tabs.length) % tabs.length, true); }
+    });
   });
 }
 
@@ -699,7 +1049,13 @@ function init() {
   setupTimelineSpine();
   setupLabAccordion();
   setupContactForm();
+  setupEngagement();
+  setupLeadForms();
+  setupBriefDialog();
+  setupModCarousel();
+  setupRbac();
   setupCursor();
+  setupHashLanding();
 }
 
 if (document.readyState === 'loading') {

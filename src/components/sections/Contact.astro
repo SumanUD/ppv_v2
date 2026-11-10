@@ -1,9 +1,6 @@
 ---
-import { contact, fullAddress, social } from '@/data/site';
-
-// Web3Forms access key (public by design). Create one for the contact inbox at
-// https://web3forms.com and set PUBLIC_WEB3FORMS_KEY in the build environment.
-const formKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+import { contact, fullAddress } from '@/data/site';
+import SocialIcons from '@/components/SocialIcons.astro';
 ---
 <section class="contact-section" id="contact">
   <div class="contact-aurora" aria-hidden="true">
@@ -22,11 +19,11 @@ const formKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
 
     <div class="contact-shell">
       <!-- LEFT: form -->
-      <form class="contact-form reveal" action="https://api.web3forms.com/submit" method="POST" data-contact-form>
-        <input type="hidden" name="access_key" value={formKey} />
-        <input type="hidden" name="subject" value="New enquiry from platformplayventure.com" />
-        <input type="hidden" name="from_name" value="Platform Play Venture website" />
+      <!-- Posts to the contact mailer on the VPS (server/contact-mailer), proxied by nginx. -->
+      <form class="contact-form reveal" action="/api/contact" method="POST" novalidate data-contact-form>
         <input type="checkbox" name="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <input type="hidden" name="form" value="contact" />
+        <input type="hidden" name="engagement" value="Strategic" data-engagement-input />
         <div class="contact-form-head">
           <div class="contact-form-status">
             <span class="pulse-dot"></span>
@@ -37,26 +34,30 @@ const formKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
 
         <div class="form-grid">
           <div class="form-field">
-            <input type="text" id="name" name="Name" required placeholder=" " autocomplete="name" />
+            <input type="text" id="name" name="name" required minlength="2" maxlength="100" placeholder=" " autocomplete="name" aria-describedby="name-error" />
             <label for="name">Your name</label>
             <span class="form-field-bar"></span>
+            <span class="form-error" id="name-error" data-error-for="name"></span>
           </div>
           <div class="form-field">
-            <input type="email" id="email" name="Email" required placeholder=" " autocomplete="email" />
+            <input type="email" id="email" name="email" required maxlength="254" placeholder=" " autocomplete="email" aria-describedby="email-error" />
             <label for="email">Email address</label>
             <span class="form-field-bar"></span>
+            <span class="form-error" id="email-error" data-error-for="email"></span>
           </div>
           <div class="form-field">
-            <input type="tel" id="phone" name="Phone" placeholder=" " autocomplete="tel" />
-            <label for="phone">Phone (optional)</label>
+            <input type="tel" id="phone" name="phone" required inputmode="numeric" pattern="[0-9]{10}" placeholder=" " autocomplete="tel" aria-describedby="phone-error" />
+            <label for="phone">Phone number</label>
             <span class="form-field-bar"></span>
+            <span class="form-error" id="phone-error" data-error-for="phone"></span>
           </div>
         </div>
 
         <div class="form-field form-field-full">
-          <textarea id="message" name="Message" rows="5" required placeholder=" "></textarea>
+          <textarea id="message" name="message" rows="5" required minlength="10" maxlength="5000" placeholder=" " aria-describedby="message-error"></textarea>
           <label for="message">How can we help?</label>
           <span class="form-field-bar"></span>
+          <span class="form-error" id="message-error" data-error-for="message"></span>
         </div>
 
         <div class="form-actions">
@@ -104,17 +105,16 @@ const formKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
                 <a href={contact.phoneHref}>{contact.phone}</a>
               </div>
             </li>
-            <li class="contact-channel">
+            <li class="contact-channel contact-channel-social">
               <span class="contact-channel-icon">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.03-1.85-3.03-1.85 0-2.13 1.45-2.13 2.94v5.66H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.61 0 4.27 2.38 4.27 5.47v6.27z"/>
-                  <circle cx="5.34" cy="5.36" r="2.07"/>
-                  <rect x="3.56" y="9" width="3.56" height="11.45"/>
+                  <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
                 </svg>
               </span>
               <div>
-                <span class="contact-channel-label">LinkedIn</span>
-                <a href={social.linkedin} target="_blank" rel="noopener noreferrer">platform-play-venture</a>
+                <span class="contact-channel-label">Social</span>
+                <SocialIcons class="contact-social" />
               </div>
             </li>
           </ul>
@@ -133,7 +133,7 @@ const formKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
             </div>
             <div>
               <span class="contact-meta-label">Engagement</span>
-              <span class="contact-meta-val">Strategic</span>
+              <span class="contact-meta-val" data-engagement-display>Strategic</span>
             </div>
             <div>
               <span class="contact-meta-label">Fit Check</span>

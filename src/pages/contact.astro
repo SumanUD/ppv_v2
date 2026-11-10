@@ -1,0 +1,94 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import Contact from '@/components/sections/Contact.astro';
+import SocialIcons from '@/components/SocialIcons.astro';
+import { contact, fullAddress, website } from '@/data/site';
+import { organizationSchema } from '@/data/schema';
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    '@id': 'https://platformplayventure.com/contact/#webpage',
+    url: 'https://platformplayventure.com/contact/',
+    name: 'Contact Platform Play Venture',
+    about: { '@id': organizationSchema['@id'] },
+  },
+];
+---
+
+<Base
+  title="Contact Us | Platform Play Venture"
+  description="Get in touch with Platform Play Venture. Share your business enquiry, email or call our team, or follow us on Instagram, Facebook, YouTube and LinkedIn."
+  breadcrumbs={[{ name: 'Contact', path: '/contact/' }]}
+  schema={schema}
+>
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="service-page contact-page">
+      <section class="service-hero contact-page-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Contact us</span></div>
+          <h1 class="service-hero-title reveal">Let's <span class="grad-text">Connect.</span></h1>
+          <p class="service-hero-lead reveal">Whether you have a business enquiry, want to explore a collaboration or simply wish to know more about Platform Play Venture, we're here to connect.</p>
+
+          <div class="connect-panel reveal">
+            <div class="connect-block">
+              <h2 class="connect-heading">Get in touch</h2>
+              <ul class="connect-list">
+                <li>
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  <a href={contact.phoneHref}>{contact.phone}</a>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <a href={website}>{website.replace('https://', '')}</a>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <address>{fullAddress}</address>
+                </li>
+              </ul>
+            </div>
+
+            <div class="connect-block">
+              <h2 class="connect-heading">Follow our journey</h2>
+              <p>Stay connected with our ideas, perspectives and updates across our social platforms.</p>
+              <SocialIcons class="connect-social" labels />
+            </div>
+
+            <div class="connect-block">
+              <h2 class="connect-heading">Have a business requirement?</h2>
+              <p>Let's discuss how strategy, marketing and technology can help your business move forward.</p>
+              <a class="connect-cta" href="#contact">Share your enquiry <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Contact />
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>

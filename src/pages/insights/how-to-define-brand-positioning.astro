@@ -1,0 +1,293 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { getInsight, insightPath, formatPublished } from '@/data/insights';
+import { organizationSchema } from '@/data/schema';
+
+const post = getInsight('how-to-define-brand-positioning')!;
+const url = new URL(insightPath(post.slug), Astro.site).href;
+
+/** Rendered in the FAQ section below and in the FAQPage schema, so the two always match. */
+const faqs: [string, string][] = [
+  [
+    'What is brand positioning?',
+    'Brand positioning is the space a brand deliberately chooses to occupy in its market and in the minds of its customers. It defines who the brand is for, what it stands for, how it is different and why customers should choose it over alternatives.',
+  ],
+  [
+    'What is the difference between brand positioning and branding?',
+    'Branding covers the visible and experiential elements of a brand, such as its name, logo, tone and customer experience. Brand positioning is the strategic choice beneath those elements. It decides what the brand should stand for, and branding is how that choice is expressed.',
+  ],
+  [
+    'What is a brand positioning statement?',
+    'A brand positioning statement is a short internal statement that sets out the target audience, the category or role the brand plays, the key value or differentiation it offers, and the reason customers should believe it. It guides decisions and messaging. It is usually not used as a public tagline.',
+  ],
+  [
+    'How is B2B brand positioning different?',
+    'In B2B, the buying decision often involves several stakeholders with different priorities, such as business leadership, finance, procurement, operations and technology. Positioning needs to remain consistent while staying relevant to each group, and it needs to reflect longer, more considered decisions.',
+  ],
+  [
+    'How often should a business revisit its brand positioning?',
+    'There is no fixed schedule. Positioning is worth revisiting when the market, the audience or the business offering changes significantly, or when customer perception no longer matches the intended position. A periodic review as part of annual planning is a sensible practice.',
+  ],
+  [
+    'When should a company get external help with brand positioning?',
+    'External support can help when internal views are divided, when the gap between intended and actual perception is unclear, or when the business is entering a new growth phase. An outside perspective can bring objectivity and structure to the process.',
+  ],
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    headline: post.title,
+    description: post.schemaDescription,
+    image: new URL(post.image, Astro.site).href,
+    author: { '@type': 'Person', name: post.author.name, url: post.author.url },
+    publisher: {
+      '@type': 'Organization',
+      name: organizationSchema.name,
+      logo: { '@type': 'ImageObject', url: organizationSchema.logo.url },
+    },
+    datePublished: post.published,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${url}#faq`,
+    mainEntity: faqs.map(([name, text]) => ({
+      '@type': 'Question',
+      name,
+      acceptedAnswer: { '@type': 'Answer', text },
+    })),
+  },
+];
+---
+
+<Base
+  title="How to Define Brand Positioning: 5 Steps | PPV"
+  description="Learn how to define brand positioning in 5 steps: assess how you're perceived, know your audience, find real differentiation and apply it consistently."
+  breadcrumbs={[{ name: 'Insights', path: '/insights/' }, { name: post.title, path: insightPath(post.slug) }]}
+  schema={schema}
+  image="/insights/how-to-define-brand-positioning-og.jpg"
+  ogType="article"
+>
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="insights-page">
+      <section class="service-hero article-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <a class="service-hero-back reveal" href="/insights/">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back to Insights</span>
+          </a>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>{post.tag} · {post.readTime}</span></div>
+          <h1 class="service-hero-title article-title reveal">5 Steps to Define Your <span class="grad-text">Brand Positioning</span></h1>
+          <p class="article-byline reveal">
+            By <a href={post.author.url} target="_blank" rel="noopener author">{post.author.name}</a>
+            <span aria-hidden="true">·</span>
+            <time datetime={post.published}>{formatPublished(post.published)}</time>
+          </p>
+          <figure class="article-cover reveal">
+            <img src={post.image} alt={post.imageAlt} width={post.imageWidth} height={post.imageHeight} decoding="async" fetchpriority="high" />
+          </figure>
+        </div>
+      </section>
+
+      <article class="section article-section">
+        <div class="container article-body">
+          <p class="article-lead">A strong brand is not simply recognised.</p>
+          <p>It is <strong>understood</strong>.</p>
+          <p>Customers should know what your brand stands for, who it is relevant to, what makes it different, and why they should choose it over alternatives. That clarity comes from <strong>brand positioning</strong>, the foundation of any sound <a href="/services/strategy-consulting/">brand strategy</a>.</p>
+
+          <h2>What Is Brand Positioning?</h2>
+          <p>Brand positioning is the space a brand deliberately chooses to occupy in its market and, more importantly, in the minds of its customers.</p>
+          <p>It influences how a business communicates, what it offers, who it targets, how it differentiates itself, and how customers perceive its value.</p>
+          <p>Yet many businesses approach positioning backwards. They begin with a logo. Then a tagline. Then social media content. Then campaigns.</p>
+          <p>But these are expressions of a brand, not the foundation of its position.</p>
+          <p>A strong brand positioning strategy begins much earlier. It starts with understanding the business, the market, the customer and the value the brand can uniquely create. The five steps below follow that sequence.</p>
+
+          <h2>Step 1: Understand Where Your Brand Stands Today</h2>
+          <p>Before deciding where you want your brand to go, understand where it stands today. Your current brand perception may not be the same as the perception you intend to create.</p>
+          <p>Start by examining:</p>
+          <ul>
+            <li>What do customers currently associate with your brand?</li>
+            <li>What are you known for?</li>
+            <li>What do customers value most?</li>
+            <li>What problems do they associate you with solving?</li>
+            <li>How do competitors describe themselves?</li>
+            <li>Where does your brand currently sit within the market?</li>
+          </ul>
+          <p>This requires looking beyond internal assumptions. Your website, social media, customer conversations, reviews, sales feedback, search presence and competitor communication can all provide useful signals. A structured brand reality audit is one way to bring these signals together.</p>
+          <p>For example, a technology company may believe it is positioned as a <strong>digital transformation partner</strong>, while customers may primarily see it as an <strong>ERP implementation provider</strong>. Neither perception is necessarily wrong. But the gap between the intended and actual positioning needs to be understood before the brand can move forward strategically.</p>
+          <p><strong>Positioning begins with clarity about where you are today.</strong></p>
+
+          <h2>Step 2: Define Your Target Audience and Their Needs</h2>
+          <p>A brand cannot occupy a meaningful position without knowing <strong>whose mind it wants to occupy</strong>. "Everyone" is rarely a useful positioning strategy.</p>
+          <p>Your audience needs to be understood beyond basic demographics. Consider:</p>
+          <ul>
+            <li>Who are your highest-value customers?</li>
+            <li>What problems are they trying to solve?</li>
+            <li>What influences their decisions?</li>
+            <li>What alternatives are they considering?</li>
+            <li>What creates hesitation?</li>
+            <li>What do they value most?</li>
+            <li>What does success look like for them?</li>
+          </ul>
+          <p>For B2B brands, this matters even more because the person using a product may not be the person making the final decision. A technology solution, for example, may involve the CIO, procurement, finance, operations, an implementation partner and business leadership. Each stakeholder may have different priorities.</p>
+          <p>Understanding these needs helps the brand identify <strong>where it can be most relevant and valuable</strong>. The objective is not simply to define an audience. It is to understand the <strong>context in which that audience makes decisions</strong>.</p>
+
+          <h2>Step 3: Identify Your Differentiation</h2>
+          <p>Once you understand your audience and market, the next question is: <strong>why should customers choose you?</strong></p>
+          <p>This is where many positioning exercises become generic. Statements such as "high quality", "innovative solutions", "customer-centric" and "best service" are difficult to own because almost every competitor can say the same thing.</p>
+          <p>Real differentiation comes from identifying something meaningful that your brand can credibly own. Look at these six areas:</p>
+
+          <h3>Capability</h3>
+          <p>What can you do particularly well?</p>
+          <h3>Expertise</h3>
+          <p>What knowledge or experience do you possess?</p>
+          <h3>Approach</h3>
+          <p>How do you solve problems differently?</p>
+          <h3>Experience</h3>
+          <p>What can customers experience with you that they may not get elsewhere?</p>
+          <h3>Ecosystem</h3>
+          <p>What partners, technology, capabilities or relationships strengthen your offering?</p>
+          <h3>Outcomes</h3>
+          <p>What meaningful business result can you help customers achieve?</p>
+
+          <p>For example, two companies may offer similar technology. One may position itself around <strong>technology implementation</strong>. Another may position itself around <strong>helping organisations simplify complex business operations through technology, strategy and transformation</strong>. The underlying technology may overlap. The perceived value does not.</p>
+          <p class="article-shift"><strong>Differentiation is not about being different for the sake of being different. It is about being meaningfully relevant in a way competitors cannot easily replicate.</strong></p>
+
+          <h2>Step 4: Define the Position You Want to Own</h2>
+          <p>Now bring the previous three steps together. You know where you are, who you want to serve and what makes you different. The next step is to define the position you want to own.</p>
+          <p>A useful positioning statement follows this structure:</p>
+          <blockquote class="article-statement">
+            <p><strong>For</strong> [Target Audience],<br />
+            [Brand] <strong>is the</strong> [Category / Role]<br />
+            <strong>that</strong> [Key Value / Differentiation]<br />
+            <strong>because</strong> [Reason to Believe].</p>
+          </blockquote>
+          <p>This does not have to become your public tagline. It is a strategic internal foundation.</p>
+          <p><strong>Example:</strong> For mid-market and enterprise businesses seeking digital-led growth, Platform Play Venture is a strategic growth partner that connects strategy, marketing governance, technology and capability to build stronger business foundations.</p>
+          <p>The exact expression will vary by business. What matters is that the statement creates clarity around:</p>
+          <ul>
+            <li>Who you serve</li>
+            <li>What space you occupy</li>
+            <li>What value you create</li>
+            <li>Why you are credible</li>
+            <li>How you are different</li>
+          </ul>
+          <p>A strong statement should make it easier to answer one simple question: <strong>"Why should this customer think of us?"</strong> Strong positioning also supports a clear growth alignment across marketing, sales and leadership.</p>
+
+          <h2>Step 5: Turn Positioning Into Consistent Brand Behaviour</h2>
+          <p>Defining positioning is not the end. It is the beginning. A positioning statement has little value if the rest of the brand communicates something else.</p>
+          <p>Your positioning should influence every area of the business:</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead>
+                <tr><th scope="col">Area</th><th scope="col">Question to ask</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Brand communication</th><td>What do you talk about consistently?</td></tr>
+                <tr><th scope="row">Content strategy</th><td>What subjects should you become known for?</td></tr>
+                <tr><th scope="row">Website</th><td>How do you explain your value and capabilities?</td></tr>
+                <tr><th scope="row">Social media</th><td>What perceptions should your content reinforce?</td></tr>
+                <tr><th scope="row">Sales</th><td>How does the sales team describe the business?</td></tr>
+                <tr><th scope="row">Customer experience</th><td>Does the actual experience support the promise?</td></tr>
+                <tr><th scope="row">Partnerships</th><td>Do your partners strengthen the position you want to own?</td></tr>
+                <tr><th scope="row">Marketing and capability</th><td>Do campaigns reinforce the same narrative, and does the team have the <a href="/services/training/">marketing capability</a> to deliver it?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>This is where positioning moves from a strategy document into the actual business. If a brand claims to be an industry authority but only publishes promotional content, the positioning will struggle to become credible. If a company claims to be a transformation partner but communicates only individual products or services, the market may continue to see it as a product vendor.</p>
+          <p>Consistency rarely happens by accident. Someone needs to be accountable for the narrative across teams, agencies and channels. That is the role of <a href="/services/marketing-governance/">marketing governance</a>, whether it sits with an in-house CMO or with fractional marketing leadership. It also depends on what we call the thinking layer beneath day-to-day marketing activity.</p>
+          <p><strong>Positioning becomes powerful when the entire brand behaves consistently with it.</strong></p>
+
+          <h2>A Simple Brand Positioning Framework</h2>
+          <p>The five steps come together as one strategic sequence:</p>
+          <div class="article-table-wrap">
+            <table class="article-table">
+              <thead>
+                <tr><th scope="col">Step</th><th scope="col">Stage</th><th scope="col">Question it answers</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>01</td><th scope="row">Understand</th><td>Where are we today?</td></tr>
+                <tr><td>02</td><th scope="row">Define</th><td>Who are we trying to influence?</td></tr>
+                <tr><td>03</td><th scope="row">Differentiate</th><td>Why should they choose us?</td></tr>
+                <tr><td>04</td><th scope="row">Position</th><td>What space do we want to own?</td></tr>
+                <tr><td>05</td><th scope="row">Activate</th><td>How will the entire brand consistently reinforce that position?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>This turns positioning from a one-line marketing statement into a strategic system.</p>
+
+          <h2>Common Brand Positioning Mistakes</h2>
+          <p>Before finalising your positioning, watch for these common mistakes.</p>
+
+          <h3>Positioning Around Everyone</h3>
+          <p>Trying to appeal to everyone often makes the brand difficult to distinguish.</p>
+
+          <h3>Confusing Features With Positioning</h3>
+          <p>What your product does is not necessarily the same as why customers should choose your brand.</p>
+
+          <h3>Copying Competitors</h3>
+          <p>If your positioning sounds interchangeable with three competitors, it is not differentiated enough.</p>
+
+          <h3>Creating a Tagline Instead of a Strategy</h3>
+          <p>A memorable tagline can support positioning. It cannot replace it.</p>
+
+          <h3>Inconsistent Execution</h3>
+          <p>If your website, content, sales team and customer experience communicate different ideas, the market will create its own perception of your brand.</p>
+          <p>And once that perception is established, changing it becomes significantly harder.</p>
+
+          <h2>Final Thought</h2>
+          <p>Brand positioning is ultimately about <strong>owning a clear and meaningful perception</strong>. It answers a fundamental business question:</p>
+          <p><strong>When customers think about our category, what do we want them to think about us?</strong></p>
+          <p>The strongest brands do not try to be everything. They identify where they can create distinctive value, understand who values it, and consistently reinforce the position they want to own. A brand is not positioned by what it says once. <strong>It is positioned by what the market repeatedly experiences, understands and remembers.</strong></p>
+          <p>At Platform Play Venture, we approach brand strategy as part of a broader business and growth journey, connecting positioning with marketing, technology, governance, capability and execution. Our <a href="/services/strategy-consulting/">brand strategy and positioning support</a> is built on that principle.</p>
+          <p>Because defining the position is only the beginning. <strong>The real advantage comes from building the organisation that can consistently deliver it.</strong></p>
+
+          <h2>Brand Positioning FAQs</h2>
+          <div class="faq-list article-faq">
+            {faqs.map(([q, a], i) => (
+              <details class="faq-item" open={i === 0}>
+                <summary>
+                  <span class="faq-q-index">Q{i + 1}</span>
+                  <h3 class="faq-q">{q}</h3>
+                  <span class="faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-answer">
+                  <p>{a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+
+          <aside class="article-cta">
+            <h2>Is your brand positioned the way your market sees it?</h2>
+            <p>Platform Play Venture helps leadership teams define a clear position and build the organisation that delivers it. <a href="/contact/?engagement=Strategy%20%26%20Consulting">Talk to our team</a> or explore our <a href="/services/strategy-consulting/">Strategy &amp; Consulting services</a>.</p>
+            <p class="article-cta-sign">Platform Play Venture | Where Strategy Meets Transformation.</p>
+          </aside>
+        </div>
+      </article>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>

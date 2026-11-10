@@ -1,0 +1,42 @@
+---
+import Base from '@/layouts/Base.astro';
+import PageAurora from '@/components/PageAurora.astro';
+import ScrollProgress from '@/components/ScrollProgress.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import { contact } from '@/data/site';
+---
+
+<Base title="Thank You · Platform Play Venture" description="Thank you for contacting Platform Play Venture. Our team will get back to you within one business day." noindex>
+  <ScrollProgress />
+
+  <div class="site-shell is-ready">
+    <PageAurora />
+    <Nav />
+
+    <main class="service-page">
+      <section class="service-hero thank-you-hero">
+        <div class="service-hero-bg" aria-hidden="true">
+          <span class="service-hero-blob a"></span>
+          <span class="service-hero-blob b"></span>
+        </div>
+        <div class="container service-hero-inner">
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Message received</span></div>
+          <h1 class="service-hero-title reveal">Thank you. We'll be in <span class="grad-text">touch soon.</span></h1>
+          <p class="service-hero-lead reveal">Your enquiry has reached our team and a confirmation is on its way to your inbox. We typically respond within one business day.</p>
+          <p class="thank-you-note reveal">Need us sooner? Call <a href={contact.phoneHref}>{contact.phone}</a> or email <a href={`mailto:${contact.email}`}>{contact.email}</a>.</p>
+          <div class="thank-you-actions reveal">
+            <a class="button button-primary" href="/">Back to Home</a>
+            <a class="button button-ghost" href="/insights/">Read our Insights</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+
+  <script>
+    import '@/scripts/site.ts';
+  </script>
+</Base>
