@@ -4,10 +4,24 @@ import PageAurora from '@/components/PageAurora.astro';
 import ScrollProgress from '@/components/ScrollProgress.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
-import { insights, insightPath } from '@/data/insights';
+import { insights, insightPath, formatPublished } from '@/data/insights';
+import collectionSchema from '@/data/seo/insights.json';
+
+const topics = [
+  { title: 'Brand Strategy & Positioning', text: 'How brands choose the space they own and stay consistent in it.', href: '/services/strategy-consulting/', link: 'brand strategy consulting' },
+  { title: 'Strategic Growth', text: 'The structure and decisions behind growth that compounds.', href: '/about/', link: 'how PPV approaches growth' },
+  { title: 'Fractional CMO & Marketing Governance', text: 'Senior marketing leadership, accountability and agency alignment.', href: '/services/marketing-governance/', link: 'fractional CMO services' },
+  { title: 'Digital & Technology', text: 'Digital transformation, maturity and the platforms that support growth.', href: '/services/technology/', link: 'digital transformation consulting' },
+  { title: 'Capability Development', text: 'Building internal marketing teams that own the strategy.', href: '/services/training/', link: 'marketing training' },
+];
 ---
 
-<Base title="Insights · Platform Play Venture" description="Perspectives shaped by real brand experience — field notes from working with brands at the thinking layer." breadcrumbs={[{ name: 'Insights', path: '/insights/' }]}>
+<Base
+  title="Insights on Brand Strategy, Growth & Fractional CMO | PPV"
+  description="Practical thinking on brand positioning, growth strategy, fractional CMO leadership, marketing governance and digital transformation from Platform Play Venture."
+  breadcrumbs={[{ name: 'Insights', path: '/insights/' }]}
+  schema={[collectionSchema]}
+>
   <ScrollProgress />
 
   <div class="site-shell is-ready">
@@ -26,13 +40,17 @@ import { insights, insightPath } from '@/data/insights';
             <span>Back to Home</span>
           </a>
           <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Insights · PPV</span></div>
-          <h1 class="service-hero-title reveal">Perspectives shaped by <span class="grad-text">real brand experience</span></h1>
-          <p class="service-hero-lead reveal">Field notes from working with brands at the thinking layer — what we observe, what we test, and what we learn while shaping strategy, perception, and decisions.</p>
+          <h1 class="service-hero-title reveal">Insights on Brand Strategy, <span class="grad-text">Business Growth and Marketing Leadership</span></h1>
+          <p class="service-hero-lead reveal">Perspectives shaped by real brand experience — field notes from working with brands at the thinking layer.</p>
         </div>
       </section>
 
       <section class="section insights-index-section">
         <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">Newest first</div>
+            <h2 class="section-title">Latest <span class="grad-text">insights</span></h2>
+          </div>
 
           <div class:list={['insights-index-grid', { 'is-single': insights.length === 1, 'is-pair': insights.length === 2 }]}>
             {insights.map((e) => (
@@ -46,13 +64,50 @@ import { insights, insightPath } from '@/data/insights';
                       <span class="insight-card-kind">{e.tag}</span>
                       <span class="insight-card-meta">{e.readTime}</span>
                     </div>
-                    <h2>{e.title}</h2>
+                    <h3>{e.title}</h3>
                     <p>{e.excerpt}</p>
+                    <p class="insight-index-card-byline">
+                      By {e.author.name} · <time datetime={e.published}>{formatPublished(e.published)}</time>
+                    </p>
                     <span class="insight-index-card-cta">Read the article →</span>
                   </div>
                 </a>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="section topics-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">Topics</div>
+            <h2 class="section-title">Browse by <span class="grad-text">topic</span></h2>
+          </div>
+          <div class="topics-grid">
+            {topics.map((t) => (
+              <article class="topic-card reveal">
+                <h3>{t.title}</h3>
+                <p>{t.text}</p>
+                <a href={t.href}>Explore {t.link} <span aria-hidden="true">→</span></a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="section insights-brief-section">
+        <div class="container">
+          <div class="insights-brief reveal">
+            <div>
+              <div class="section-kicker">Whitepapers and deep-dives</div>
+              <h2 class="section-title">Whitepapers and <span class="grad-text">deep-dives</span></h2>
+              <p>Longer-form whitepapers and deep-dives are coming soon. Subscribe to the monthly brief and we'll send them to you as they're published.</p>
+            </div>
+            <button type="button" class="service-cta-btn" data-brief-open>
+              <span>Subscribe to the monthly brief</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
           </div>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import { contact, social } from './site';
+import { pageFaqs } from './faqs';
 
 const SITE = 'https://platformplayventure.com/';
 
@@ -71,41 +72,13 @@ export const websiteSchema = {
   publisher: { '@id': `${SITE}#organization` },
 };
 
-/** Must stay word-for-word in sync with the questions in components/sections/Faq.astro. */
-const faqs: [string, string][] = [
-  [
-    'How does an engagement with Platform Play Venture typically begin?',
-    'The process usually begins with understanding the current position of the brand, the decisions being made today, and what the business is trying to achieve next. The first step focuses on identifying gaps in clarity and direction before defining the right strategic path forward.',
-  ],
-  [
-    'What happens after the strategy is defined?',
-    'Our role does not end at strategy. Platform Play Venture stays involved in guiding direction, supporting leadership and marketing teams in decision-making, and ensuring that the strategy translates into consistent progress over time.',
-  ],
-  [
-    'How does Platform Play Venture work alongside internal teams?',
-    'The approach is collaborative. The focus is on strengthening clarity, improving alignment, and helping internal teams operate with a clearer sense of direction rather than replacing what already exists.',
-  ],
-  [
-    'At what stage of a brand does working with PPV make the most sense?',
-    'It works best when a business is growing but feels that marketing efforts are not fully aligned with business goals, or when the brand is entering a new phase and needs clearer direction before scaling further.',
-  ],
-  [
-    'What can a brand realistically expect after working with Platform Play Venture?',
-    'The biggest change is usually clarity. Businesses start understanding what to prioritise, what to avoid, and how different parts of marketing, technology, and brand perception should work together. That clarity makes future decisions faster and more confident.',
-  ],
-  [
-    'What does working with a fractional CMO actually mean?',
-    'A fractional CMO means working with an experienced strategic partner who supports leadership and marketing teams in planning, decision-making, and guiding marketing direction — without the need for a full-time in-house CMO. The role is senior, embedded, and accountable to outcomes, not headcount.',
-  ],
-];
-
 export const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   '@id': `${SITE}#faq`,
   url: SITE,
   isPartOf: { '@id': `${SITE}#website` },
-  mainEntity: faqs.map(([name, text]) => ({
+  mainEntity: pageFaqs['/'].map(([name, text]) => ({
     '@type': 'Question',
     name,
     acceptedAnswer: { '@type': 'Answer', text },

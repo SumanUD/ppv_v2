@@ -1,0 +1,39 @@
+---
+/**
+ * Visible FAQ block for inner pages. Pair it with faqPageSchema() from
+ * '@/data/faqs' in the page's schema so the markup and JSON-LD match.
+ */
+import type { Faq } from '@/data/faqs';
+
+interface Props {
+  title: string;
+  faqs: Faq[];
+  kicker?: string;
+  lead?: string;
+}
+
+const { title, faqs, kicker = 'FAQs', lead } = Astro.props;
+---
+<section class="section page-faq-section" id="faq">
+  <div class="container page-faq-inner">
+    <div class="reveal page-faq-head">
+      <div class="section-kicker">{kicker}</div>
+      <h2 class="section-title">{title}</h2>
+      {lead && <p class="section-lead">{lead}</p>}
+    </div>
+    <div class="faq-list page-faq-list reveal">
+      {faqs.map(([q, a], i) => (
+        <details class="faq-item" open={i === 0} data-faq-item>
+          <summary>
+            <span class="faq-q-index">Q{i + 1}</span>
+            <h3 class="faq-q">{q}</h3>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-answer">
+            <p>{a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

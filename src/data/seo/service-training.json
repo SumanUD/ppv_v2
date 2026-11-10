@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://platformplayventure.com/services/training/#service",
+  "name": "Marketing Leadership Development Program",
+  "serviceType": "Marketing leadership and strategic marketing training",
+  "provider": {
+    "@id": "https://platformplayventure.com/#organization"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "url": "https://platformplayventure.com/services/training/",
+  "description": "Marketing leadership development and strategic marketing training that builds lasting internal capability in planning, governance, agency management and data literacy."
+}

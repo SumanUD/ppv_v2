@@ -5,6 +5,7 @@
 //   hrms      - PPV HRMS walkthrough request
 //   dms       - PPV DMS enquiry
 //   subscribe - monthly brief subscription
+//   automation - business automation / custom software requirement
 // Each submission is validated, appended to a JSONL log (DATA_DIR), and then
 // emailed to the PPV inbox plus an acknowledgement to the visitor via Gmail
 // SMTP. The visitor gets a response as soon as the submission is stored; the
@@ -64,6 +65,8 @@ const oneOf = (v, list) => (list.includes(v) ? v : '');
 const HRMS_EMPLOYEES = ['1-50', '51-200', '201-500', '501-1,000', '1,000+'];
 const DMS_ROLES = ['Supplier / Manufacturer', 'Distributor', 'Dealer', 'Direct Dealer', 'Other'];
 const DMS_NETWORK = ['1-10', '11-50', '51-200', '201-500', '500+'];
+const CONTACT_NEEDS = ['Strategy & brand', 'Fractional CMO', 'Digital transformation', 'Business software, DMS or HRMS', 'Training', 'Not sure yet'];
+const AUTOMATION_NEEDS = ['HRMS', 'Dealer management', 'E-commerce', 'WhatsApp automation', 'Custom software', 'Integration', 'Not sure'];
 const DMS_INTERESTS = [
   'Inventory & stock visibility',
   'Order & purchase workflows',
@@ -75,7 +78,7 @@ const DMS_INTERESTS = [
 ];
 
 function common(input, errors) {
-  const d = { name: str(input.name, 100), email: str(input.email, 254) };
+  const d = { name: str(input.name, 100), email: str(input.email, 254), landing: str(input.landing, 300), utm: str(input.utm, 300) };
   if (d.name.length < 2) errors.name = 'Please enter your name.';
   if (!EMAIL_RE.test(d.email)) errors.email = 'Please enter a valid email address.';
   return d;
@@ -93,6 +96,10 @@ const FORMS = {
     d.phone = phoneOf(input, errors);
     d.message = str(input.message, 5000);
     d.engagement = str(input.engagement, 80) || 'Strategic';
+    d.company = str(input.company, 120);
+    d.role = str(input.role, 120);
+    d.need = oneOf(str(input.need), CONTACT_NEEDS);
+    if (!d.need) errors.need = 'Please choose what you need help with.';
     if (d.message.length < 10) errors.message = 'Please tell us a little more (at least 10 characters).';
     return d;
   },
@@ -122,6 +129,16 @@ const FORMS = {
     if (!d.network) errors.network = 'Please select your network size.';
     if (!d.interest) errors.interest = 'Please select your primary requirement.';
     if (!d.consent) errors.consent = 'Please agree to be contacted about your enquiry.';
+    return d;
+  },
+  automation(input, errors) {
+    const d = common(input, errors);
+    d.company = str(input.company, 120);
+    d.phone = phoneOf(input, errors);
+    d.need = oneOf(str(input.need), AUTOMATION_NEEDS);
+    d.message = str(input.message, 3000);
+    if (d.company.length < 2) errors.company = 'Please enter your company name.';
+    if (!d.need) errors.need = 'Please choose what you want to automate or build.';
     return d;
   },
   subscribe(input, errors) {
@@ -183,6 +200,8 @@ function notification({ subject, heading, rows, longLabel, longText, d, meta }) 
     ...(d.phone ? [['Contact number', `<a href="${telHref(d.phone)}">${esc(d.phone)}</a>`]] : []),
     ...rows.map(([k, v]) => [k, esc(v || '—')]),
     ['Submitted', esc(meta.when)],
+    ...(d.landing ? [['Landing page', esc(d.landing)]] : []),
+    ...(d.utm ? [['Source', esc(d.utm)]] : []),
   ];
   const textRows = all.map(([k, v]) => `${k}: ${String(v).replace(/<[^>]+>/g, '')}`).join('\n');
   return {
@@ -199,9 +218,14 @@ const MAILS = {
   contact: {
     internal: (d, meta) =>
       notification({
-        subject: `New website enquiry from ${d.name} – ${d.engagement}`,
+        subject: `New website enquiry from ${d.name} – ${d.need || d.engagement}`,
         heading: 'New website enquiry',
-        rows: [['Engagement', d.engagement]],
+        rows: [
+          ['Needs help with', d.need],
+          ['Engagement', d.engagement],
+          ['Company', d.company],
+          ['Role', d.role],
+        ],
         longLabel: 'Message',
         longText: d.message,
         d,
@@ -281,6 +305,39 @@ ${signoff}`),
         html: shell(`${para(`Hi ${esc(firstName(d.name))},`)}${lines.map((l, i) => para(i === 0 ? `<strong>${esc(l)}</strong>` : esc(l))).join('')}${signoff}`),
       };
     },
+  },
+
+  automation: {
+    internal: (d, meta) =>
+      notification({
+        subject: `New business automation enquiry – ${d.company}`,
+        heading: 'New business automation / custom software enquiry',
+        rows: [
+          ['Company', d.company],
+          ['Wants to automate or build', d.need],
+        ],
+        longLabel: 'Message',
+        longText: d.message,
+        d,
+        meta,
+      }),
+    visitor: (d) => ({
+      subject: 'We have received your requirement | Platform Play Venture',
+      text: `Hi ${firstName(d.name)},
+
+Thank you for telling us about your requirement (${d.need}). Our technology team will review it and get back to you within one business day.
+
+If anything is urgent, call us on ${PHONE} or reply to this email.
+
+Regards,
+Team Platform Play Venture
+www.platformplayventure.com`,
+      html: shell(`${para(`Hi ${esc(firstName(d.name))},`)}
+${para(`<strong>Thank you for telling us about your requirement (${esc(d.need)}).</strong>`)}
+${para('Our technology team will review it and get back to you within one business day.')}
+${para(`If anything is urgent, call us on ${phoneLink} or simply reply to this email.`)}
+${signoff}`),
+    }),
   },
 
   subscribe: {

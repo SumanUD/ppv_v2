@@ -4,9 +4,38 @@ import PageAurora from '@/components/PageAurora.astro';
 import ScrollProgress from '@/components/ScrollProgress.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
+import PageFaq from '@/components/PageFaq.astro';
+import BulletSection from '@/components/BulletSection.astro';
+import { pageFaqs, faqPageSchema } from '@/data/faqs';
+import serviceSchema from '@/data/seo/service-training.json';
+
+const path = '/services/training/';
+const faqs = pageFaqs[path];
+const contactHref = '/contact/?engagement=Training%20%26%20Capability';
+
+const covers = [
+  { title: 'Strategic marketing thinking', text: 'How to connect marketing decisions to business goals, and how to prioritise.' },
+  { title: 'Brand positioning and consumer understanding', text: 'How customers think and choose, and how to keep the brand consistent across every touchpoint.' },
+  { title: 'Marketing planning and governance', text: 'How to build a plan, set budgets, define ownership and review performance.' },
+  { title: 'Briefing and managing agencies', text: 'How to write a strong brief, evaluate work and hold partners to one strategy.' },
+  { title: 'Data and marketing technology literacy', text: 'How to read the numbers that matter and get value from CRM, analytics and automation tools.' },
+  { title: 'Sales and marketing alignment', text: 'How the two teams share targets, language and handovers.' },
+];
+
+const audience = [
+  'Marketing managers stepping into leadership roles',
+  'In-house teams that work with several agencies',
+  'Founders who want their team to own marketing decisions',
+  'Sales and marketing teams that need a shared direction',
+];
 ---
 
-<Base title="Marketing Leadership Development Program | PPV" description="Build stronger marketing leaders and teams. Our strategic marketing training develops capability that lasts beyond the workshop. Enquire about a program." breadcrumbs={[{ name: 'Training & Capability Development', path: '/services/training/' }]}>
+<Base
+  title="Marketing Leadership Development Program | PPV"
+  description="Build stronger marketing leaders and teams. Our strategic marketing training develops capability that lasts beyond the workshop. Enquire about a program."
+  breadcrumbs={[{ name: 'Training & Capability Development', path }]}
+  schema={[serviceSchema, faqPageSchema(path, faqs)]}
+>
   <ScrollProgress />
 
   <div class="site-shell is-ready">
@@ -24,38 +53,72 @@ import Footer from '@/components/Footer.astro';
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
             <span>Back to Home</span>
           </a>
-          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Service · 04</span></div>
-          <h1 class="service-hero-title reveal">Marketing Leadership Development Program for Growing Teams</h1>
-          <p class="service-hero-lead reveal">Building long-term clarity inside the brand — so the brand does not become dependent on external execution.</p>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Training &amp; Capability Development</span></div>
+          <h1 class="service-hero-title reveal">Marketing Leadership Development Program <span class="grad-text">for Growing Teams</span></h1>
+          <p class="service-hero-lead reveal">Strong marketing doesn't come from outside partners alone. It comes from internal teams who understand the strategy, make good decisions and know how to direct agencies. Platform Play Venture's marketing leadership development and strategic marketing training build that capability, so it stays with your business after the programme ends.</p>
+          <div class="service-hero-actions reveal">
+            <a class="service-cta-btn" href={contactHref}>
+              <span>Enquire about a training programme</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
         </div>
       </section>
 
       <section class="section system-section">
         <div class="container system-inner">
           <div class="reveal system-copy">
-            <div class="section-kicker">Why Internal Capability</div>
-            <h2 class="section-title">Stronger brand teams make <span class="grad-text">stronger long-term decisions</span>.</h2>
-            <p>We help internal marketing and sales teams understand strategy better and work more effectively with partners. The focus is on building <strong>long-term clarity</strong> so the brand does not become dependent on external execution.</p>
-            <p>Capability development sits alongside the rest of PPV's work — strategy, governance, and technology — so internal teams can take stronger ownership of every decision over time.</p>
+            <div class="section-kicker">Why it matters</div>
+            <h2 class="section-title">Why marketing capability <span class="grad-text">building matters</span></h2>
+            <p>Many businesses invest in strategy and agencies but not in the people who have to carry the work forward. The result is dependence: teams that wait for direction, agencies that set the agenda, and strategy that fades after the presentation. Building internal capability turns strategy into daily decisions.</p>
           </div>
         </div>
       </section>
 
-      <section class="section service-placeholder-section">
+      <section class="section pv-why-section">
         <div class="container">
-          <div class="service-placeholder reveal">
-            <div class="service-placeholder-tag">Detailed page in progress</div>
-            <h2>Full Training & Capability programmes — coming soon.</h2>
-            <p>Workshop tracks, leadership programmes, marketing-team enablement, and partner-collaboration playbooks will be detailed here as we publish the full curriculum. In the meantime — happy to walk you through it directly.</p>
-            <div class="service-placeholder-actions">
-              <a class="service-cta-btn" href="/contact/?engagement=Training%20%26%20Capability">
-                <span>Talk to us about training engagements</span>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
-              <a class="service-placeholder-link" href="/services/marketing-governance/">
-                <span>Explore Marketing Governance</span>
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
+          <div class="reveal pv-head">
+            <div class="section-kicker">Curriculum</div>
+            <h2 class="section-title">What our strategic marketing <span class="grad-text">training covers</span></h2>
+          </div>
+          <div class="pv-why-grid pv-why-grid-3">
+            {covers.map((item, i) => (
+              <article class="pv-why-card reveal">
+                <div class="pv-why-num">{String(i + 1).padStart(2, '0')}</div>
+                <h3 class="pv-why-title">{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <BulletSection kicker="Audience" title="Who the programme is for" items={audience} />
+
+      <section class="section system-section">
+        <div class="container system-inner">
+          <div class="reveal system-copy">
+            <div class="section-kicker">Outcomes</div>
+            <h2 class="section-title">How we measure <span class="grad-text">capability</span></h2>
+            <p>Each programme starts with a capability baseline and ends with a review against it. Leaders get a clear view of what improved: planning quality, briefing quality, decision speed and the team's confidence working with partners.</p>
+          </div>
+        </div>
+      </section>
+
+      <PageFaq title="Marketing training FAQs" faqs={faqs} />
+
+      <section class="section service-cta-section">
+        <div class="container">
+          <div class="service-cta-card reveal">
+            <div class="service-cta-eyebrow"><span class="pulse-dot"></span><span>Training &amp; Capability</span></div>
+            <h2 class="service-cta-title">Build marketing capability that <span class="grad-text">stays with your business</span>.</h2>
+            <a class="service-cta-btn" href={contactHref}>
+              <span>Enquire about a training programme</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <div class="pv-cta-alt">
+              <a class="pv-inline-link" href="/services/marketing-governance/"><span>Combine with a fractional CMO engagement</span></a>
+              <a class="pv-inline-link" href="/product/hrms/"><span>Managing your people too? See our HR management system</span></a>
             </div>
           </div>
         </div>

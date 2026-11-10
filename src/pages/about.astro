@@ -14,9 +14,20 @@ import Vector from '@/components/sections/about/Vector.astro';
 import PartnershipPhilosophy from '@/components/sections/about/PartnershipPhilosophy.astro';
 import WhoWeWorkBestWith from '@/components/sections/about/WhoWeWorkBestWith.astro';
 import AboutCta from '@/components/sections/about/AboutCta.astro';
+import AboutIntro from '@/components/sections/about/AboutIntro.astro';
+import PageFaq from '@/components/PageFaq.astro';
+import { pageFaqs, faqPageSchema } from '@/data/faqs';
+import aboutSchema from '@/data/seo/about.json';
+
+const faqs = pageFaqs['/about/'];
 ---
 
-<Base title="About · Platform Play Venture" description="We work on the thinking that shapes everything a brand does next. PPV is a strategic growth company that brings brand, marketing, technology, and governance into one integrated way of thinking." breadcrumbs={[{ name: 'About', path: '/about/' }]}>
+<Base
+  title="About Us | Strategic Growth Company in Kolkata | PPV"
+  description="Platform Play Venture is a Kolkata-based strategic growth company combining strategy, fractional CMO governance, technology and training. See how we work."
+  breadcrumbs={[{ name: 'About', path: '/about/' }]}
+  schema={[aboutSchema, faqPageSchema('/about/', faqs)]}
+>
   <ScrollProgress />
 
   <div class="site-shell is-ready">
@@ -25,6 +36,7 @@ import AboutCta from '@/components/sections/about/AboutCta.astro';
 
     <main class="about-page">
       <AboutHero />
+      <AboutIntro />
       <GoldenCircle />
       <WhyHowWhat />
       <WayWeSeeBrands />
@@ -32,6 +44,7 @@ import AboutCta from '@/components/sections/about/AboutCta.astro';
       <Vector />
       <PartnershipPhilosophy />
       <WhoWeWorkBestWith />
+      <PageFaq title="Frequently asked questions about Platform Play Venture" faqs={faqs} />
       <AboutCta />
     </main>
 

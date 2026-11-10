@@ -74,7 +74,7 @@ const schema = [
 
 <Base
   title="Digital Transformation in Marketing: A Practical Guide | PPV"
-  description="Digital transformation is more than tools. See how marketers can connect customer insight, data, technology and governance to drive measurable growth."
+  description="What digital transformation in marketing means, how it differs from digital marketing, and how to start with a maturity assessment. From PPV strategists."
   breadcrumbs={[{ name: 'Insights', path: '/insights/' }, { name: post.title, path: insightPath(post.slug) }]}
   schema={schema}
   image="/insights/digital-transformation-in-marketing-og.jpg"
@@ -98,11 +98,14 @@ const schema = [
             <span>Back to Insights</span>
           </a>
           <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>{post.tag} · {post.readTime}</span></div>
-          <h1 class="service-hero-title article-title reveal">Unpacking Digital Transformation Through the Eyes of a <span class="grad-text">Marketer</span></h1>
+          <h1 class="service-hero-title article-title reveal">Digital Transformation in Marketing: <span class="grad-text">A Practical Guide</span></h1>
+          <p class="article-subtitle reveal">Unpacking digital transformation through the eyes of a marketer.</p>
           <p class="article-byline reveal">
             By <a href={post.author.url} target="_blank" rel="noopener author">{post.author.name}</a>
             <span aria-hidden="true">·</span>
             <time datetime={post.published}>{formatPublished(post.published)}</time>
+            <span aria-hidden="true">·</span>
+            <span>{post.readTime}</span>
           </p>
           <figure class="article-cover reveal">
             <img src={post.image} alt={post.imageAlt} width={post.imageWidth} height={post.imageHeight} decoding="async" fetchpriority="high" />
@@ -145,7 +148,7 @@ const schema = [
           <p>The objective is not to use more technology. It is to make marketing more informed, coordinated and accountable.</p>
 
           <h2>Digital Transformation vs Digital Marketing: What Is the Difference?</h2>
-          <p>Digital marketing uses digital channels and platforms to reach, engage and convert audiences. Digital transformation is broader. It changes how an organisation operates, makes decisions and creates value through the coordinated use of technology, processes, data and people. Digital marketing can be one component of that transformation.</p>
+          <p>Digital marketing uses digital channels to reach, engage and convert audiences. Digital transformation is broader: it changes how the whole organisation operates, decides and creates value through technology, processes, data and people. Digital marketing can be one part of that transformation.</p>
           <div class="article-table-wrap">
             <table class="article-table">
               <thead>
@@ -153,8 +156,10 @@ const schema = [
               </thead>
               <tbody>
                 <tr><th scope="row">Scope</th><td>Marketing channels and campaigns</td><td>Strategy, processes, data, technology and people across the business</td></tr>
+                <tr><th scope="row">Owner</th><td>Marketing team and agencies</td><td>Leadership, with marketing, technology, operations and sales</td></tr>
+                <tr><th scope="row">Timeframe</th><td>Campaign cycles: weeks to months</td><td>A multi-phase programme: months to years</td></tr>
                 <tr><th scope="row">Typical question</th><td>"Which channels and content will reach our audience?"</td><td>"What do we need to change to create and measure value differently?"</td></tr>
-                <tr><th scope="row">How success is judged</th><td>Campaign and channel performance</td><td>Business outcomes such as growth, efficiency and customer experience</td></tr>
+                <tr><th scope="row">Success measure</th><td>Campaign and channel performance</td><td>Business outcomes such as growth, efficiency and customer experience</td></tr>
               </tbody>
             </table>
           </div>
@@ -218,6 +223,9 @@ const schema = [
 
           <h3>Step 1: Assess the Current State</h3>
           <p>Begin by understanding existing marketing processes, customer touchpoints, technology platforms, data quality and performance measurement. Identify what is working, where gaps exist and which issues are affecting customer experience or business outcomes.</p>
+
+          <h4>Assess Your Digital Maturity First</h4>
+          <p>Assessing the current state works best as a structured exercise rather than a quick audit. A <a href="/services/technology/#maturity-assessment">digital and technology maturity review</a> looks at platforms, data, marketing technology, customer experience, processes and team capability together, so the roadmap starts from facts rather than assumptions.</p>
 
           <h3>Step 2: Define Business-Aligned Objectives</h3>
           <p>Establish what the transformation needs to achieve. Objectives may include improving lead quality, reducing friction in customer acquisition, strengthening retention, increasing operational efficiency or improving visibility into marketing performance. Clear objectives provide a basis for prioritisation.</p>

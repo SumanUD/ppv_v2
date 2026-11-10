@@ -660,11 +660,61 @@ function setupLabAccordion() {
   });
 }
 
+// =================== Lead attribution + analytics ===================
+// First page of the visit and its UTM tags, kept for the session so a lead
+// submitted later can be attributed to where the visitor arrived.
+function rememberLanding() {
+  try {
+    if (sessionStorage.getItem('ppv_landing')) return;
+    sessionStorage.setItem('ppv_landing', location.pathname + location.search);
+    const params = new URLSearchParams(location.search);
+    const utm = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']
+      .filter((k) => params.get(k))
+      .map((k) => `${k}=${params.get(k)}`)
+      .join('&');
+    sessionStorage.setItem('ppv_utm', utm || (document.referrer ? `referrer=${new URL(document.referrer).hostname}` : ''));
+  } catch { /* storage unavailable */ }
+}
+
+function fillAttribution(form: HTMLFormElement) {
+  let landing = location.pathname;
+  let utm = '';
+  try {
+    landing = sessionStorage.getItem('ppv_landing') || landing;
+    utm = sessionStorage.getItem('ppv_utm') || '';
+  } catch { /* storage unavailable */ }
+  form.querySelectorAll<HTMLInputElement>('[data-landing-input], input[name="landing"]').forEach((el) => { el.value = landing.slice(0, 300); });
+  form.querySelectorAll<HTMLInputElement>('[data-utm-input], input[name="utm"]').forEach((el) => { el.value = utm.slice(0, 300); });
+}
+
+function pushEvent(payload: Record<string, unknown>) {
+  const w = window as unknown as { dataLayer?: unknown[] };
+  w.dataLayer = w.dataLayer || [];
+  w.dataLayer.push(payload);
+}
+
+/** Clicks out to the live product demos would otherwise leave no trace. */
+function setupDemoTracking() {
+  document.addEventListener('click', (e) => {
+    const link = (e.target as HTMLElement).closest?.('a[href]') as HTMLAnchorElement | null;
+    if (!link) return;
+    const host = link.hostname;
+    if (/^(dms|ecommerce-dms)\.platformplayventure\.com$/.test(host)) {
+      pushEvent({ event: 'demo_click', link_url: link.href, product: host.startsWith('ecommerce') ? 'ecommerce' : 'dms' });
+    }
+  });
+}
+
+/** GA4 recommended lead event, sent through GTM's dataLayer. */
+function trackLead(formLocation: string, service?: string) {
+  pushEvent({ event: 'generate_lead', form_location: formLocation, service: service || undefined });
+}
+
 // =================== Contact form (VPS mailer at /api/contact) ===================
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_RE = /^\d{10}$/;
 
-type ContactField = 'name' | 'email' | 'phone' | 'message';
+type ContactField = 'name' | 'email' | 'phone' | 'message' | 'need';
 
 // Same rules as server/contact-mailer/server.js; returns an error message or ''.
 function contactFieldError(field: ContactField, raw: string): string {
@@ -680,6 +730,8 @@ function contactFieldError(field: ContactField, raw: string): string {
       return PHONE_RE.test(value) ? '' : 'Please enter a valid 10-digit phone number.';
     case 'message':
       return value.length < 10 ? 'Please tell us a little more (at least 10 characters).' : '';
+    case 'need':
+      return value ? '' : 'Please choose what you need help with.';
   }
 }
 
@@ -688,7 +740,7 @@ function setupContactForm() {
   if (!form) return;
   const status = form.querySelector<HTMLElement>('[data-form-status]');
   const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-  const fields: ContactField[] = ['name', 'email', 'phone', 'message'];
+  const fields: ContactField[] = ['name', 'email', 'phone', 'need', 'message'];
   const fallback = 'Please email us at <a href="mailto:contact@platformplayventure.com">contact@platformplayventure.com</a> instead.';
 
   const control = (field: ContactField) =>
@@ -751,6 +803,7 @@ function setupContactForm() {
       return;
     }
 
+    fillAttribution(form);
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
     if (submit) submit.disabled = true;
     try {
@@ -765,7 +818,7 @@ function setupContactForm() {
         throw new Error('invalid');
       }
       if (!res.ok || !json.success) throw new Error(json.message || res.statusText);
-      (window as unknown as { dataLayer?: unknown[] }).dataLayer?.push({ event: 'contact_form_submit' });
+      trackLead(location.pathname.startsWith('/contact') ? 'contact_page' : 'homepage', data.need);
       window.location.assign(json.redirect || '/thank-you/');
     } catch (err) {
       const reason = err instanceof Error && err.message === 'invalid' ? 'Please check the highlighted fields.' : `Sorry, your message could not be sent. ${fallback}`;
@@ -789,6 +842,20 @@ function setupEngagement() {
     if (display) display.textContent = value;
   };
   apply(new URLSearchParams(location.search).get('engagement'));
+  const need = document.querySelector<HTMLSelectElement>('[data-need-select]');
+  const preselect = () => {
+    if (!need || need.value) return;
+    const e = input.value.toLowerCase();
+    const option =
+      e.includes('cmo') || e.includes('governance') ? 'Fractional CMO'
+      : e.includes('strategy') ? 'Strategy & brand'
+      : e.includes('martech') || e.includes('digital') ? 'Digital transformation'
+      : e.includes('automation') || e.includes('platform') || e.includes('commerce') || e.includes('dms') || e.includes('hrms') ? 'Business software, DMS or HRMS'
+      : e.includes('training') ? 'Training'
+      : '';
+    if (option) need.value = option;
+  };
+  preselect();
   document.querySelectorAll<HTMLAnchorElement>('a[data-engagement]').forEach((link) => {
     link.addEventListener('click', () => apply(link.dataset.engagement || null));
   });
@@ -897,6 +964,7 @@ function setupLeadForms() {
       }
 
       const data: Record<string, string> = {};
+      fillAttribution(form);
       new FormData(form).forEach((v, k) => { data[k] = String(v); });
       if (submit) {
         submit.disabled = true;
@@ -914,7 +982,8 @@ function setupLeadForms() {
           throw new Error('invalid');
         }
         if (!res.ok || !json.success) throw new Error(json.message || res.statusText);
-        (window as unknown as { dataLayer?: unknown[] }).dataLayer?.push({ event: `${type}_form_submit` });
+        if (type === 'subscribe') pushEvent({ event: 'sign_up', method: 'newsletter' });
+        else trackLead(form.dataset.formLocation || type, data.need || data.interest);
         if (body) body.hidden = true;
         if (success) {
           success.hidden = false;
@@ -1048,6 +1117,8 @@ function init() {
   setupPillars();
   setupTimelineSpine();
   setupLabAccordion();
+  rememberLanding();
+  setupDemoTracking();
   setupContactForm();
   setupEngagement();
   setupLeadForms();

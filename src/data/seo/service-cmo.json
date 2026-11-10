@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://platformplayventure.com/services/marketing-governance/#service",
+  "name": "Fractional CMO Services",
+  "alternateName": "Marketing Governance and Fractional Chief Marketing Officer",
+  "serviceType": "Fractional CMO",
+  "provider": {
+    "@id": "https://platformplayventure.com/#organization"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "url": "https://platformplayventure.com/services/marketing-governance/"
+}

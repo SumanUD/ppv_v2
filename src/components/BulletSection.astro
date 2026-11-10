@@ -1,0 +1,28 @@
+---
+/** Simple heading + bullet list section ("Who it's for", "When to hire", …). */
+interface Props {
+  kicker?: string;
+  title: string;
+  items: string[];
+  lead?: string;
+  id?: string;
+}
+const { kicker, title, items, lead, id } = Astro.props;
+---
+<section class="section bullet-section" id={id}>
+  <div class="container">
+    <div class="reveal bullet-head">
+      {kicker && <div class="section-kicker">{kicker}</div>}
+      <h2 class="section-title">{title}</h2>
+      {lead && <p class="section-lead">{lead}</p>}
+    </div>
+    <ul class="bullet-grid">
+      {items.map((item, i) => (
+        <li class="bullet-card reveal">
+          <span class="bullet-num">{String(i + 1).padStart(2, '0')}</span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://platformplayventure.com/insights/#webpage",
+  "url": "https://platformplayventure.com/insights/",
+  "name": "Insights on Brand Strategy, Business Growth and Marketing Leadership",
+  "isPartOf": {
+    "@id": "https://platformplayventure.com/#website"
+  },
+  "publisher": {
+    "@id": "https://platformplayventure.com/#organization"
+  }
+}

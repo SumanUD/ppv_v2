@@ -1,17 +1,7 @@
 # robots.txt for platformplayventure.com
 
-# --- AI / content scrapers ---
-User-agent: CCBot
-Disallow: /
-
+# --- Aggressive scrapers ---
 User-agent: Bytespider
-Disallow: /
-
-# --- SEO crawlers (crawl budget / competitive scraping) ---
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
 Disallow: /
 
 User-agent: MJ12bot
@@ -23,13 +13,15 @@ Disallow: /
 User-agent: BLEXBot
 Disallow: /
 
-User-agent: DataForSeoBot
-Disallow: /
+# SEO audit crawlers (AhrefsBot, SemrushBot, DataForSeoBot) and Common Crawl
+# (CCBot) are allowed so PPV can audit its own site and stay visible to AI
+# systems trained on open web data (SEO sheet, Nov 2026).
 
 # --- everyone else ---
 User-agent: *
 Disallow: /cgi-bin/
 Disallow: /wp-admin/
 Disallow: /admin/
+Disallow: /api/
 
 Sitemap: https://platformplayventure.com/sitemap.xml

@@ -4,6 +4,16 @@ import PageAurora from '@/components/PageAurora.astro';
 import ScrollProgress from '@/components/ScrollProgress.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
+import PageFaq from '@/components/PageFaq.astro';
+import { pageFaqs, faqPageSchema } from '@/data/faqs';
+import serviceSchema from '@/data/seo/service-automation.json';
+
+const faqs = pageFaqs['/services/business-automation/'];
+const productAnchor: Record<string, string> = {
+  dms: 'Explore PPV DMS – dealer management system',
+  hrms: 'Explore PPV HRMS – HRMS software',
+};
+const automationNeeds = ['HRMS', 'Dealer management', 'E-commerce', 'WhatsApp automation', 'Custom software', 'Integration', 'Not sure'];
 import { products } from '@/data/products';
 
 const journey = [
@@ -46,14 +56,14 @@ const journey = [
 ];
 
 const portfolio = [
-  { n: '01', title: 'HR & Workforce Management', text: 'Software for employee and HR operations, end to end.' },
-  { n: '02', title: 'Dealer & Distributor Management', text: 'Digital infrastructure for channel-partner led businesses.' },
-  { n: '03', title: 'E-Commerce & Digital Commerce', text: 'Ready-to-use and customized online selling platforms.' },
-  { n: '04', title: 'WhatsApp Business Automation', text: 'Conversational journeys for customers, partners and campaigns.' },
-  { n: '05', title: 'Web & Mobile Applications', text: 'Customer-facing, partner-facing and internal applications.' },
-  { n: '06', title: 'Business Dashboards & Analytics', text: 'Decision-making systems built around business data.' },
-  { n: '07', title: 'Custom Business Software', text: 'Purpose-built platforms for unique operational requirements.' },
-  { n: '08', title: 'Technology Integration', text: 'Connecting the systems that already exist in a business.' },
+  { n: '01', title: 'HR & Workforce Management', text: 'Software for employee and HR operations, end to end. It replaces spreadsheets and disconnected HR tools with one system for records, attendance, leave and payroll.' },
+  { n: '02', title: 'Dealer & Distributor Management', text: 'Digital infrastructure for channel-partner led businesses. It removes the blind spots between supplier, distributor and dealer, so stock, orders and payments are visible at every tier.' },
+  { n: '03', title: 'E-Commerce & Digital Commerce', text: 'Ready-to-use and customised online selling platforms. They let a brand sell directly without running a separate system for orders, stock and customers.' },
+  { n: '04', title: 'WhatsApp Business Automation', text: 'Conversational journeys for customers, partners and campaigns. Typical use cases are lead follow-up, order updates and service notifications, sent automatically instead of by hand.' },
+  { n: '05', title: 'Web & Mobile Applications', text: 'Customer-facing, partner-facing and internal applications. They give people a simple way to do in minutes what currently takes calls, emails and paperwork.' },
+  { n: '06', title: 'Business Dashboards & Analytics', text: 'Decision-making systems built around business data. They end the wait for manual reports by putting live numbers in front of the people who need them.' },
+  { n: '07', title: 'Custom Business Software', text: 'Purpose-built platforms for unique operational requirements. They fit processes that off-the-shelf software forces you to work around.' },
+  { n: '08', title: 'Technology Integration', text: 'Connecting the systems that already exist in a business. Data flows between ERP, CRM, payment and logistics tools instead of being re-entered by hand.' },
 ];
 
 const funnel = ['Audience', 'Campaign', 'Lead', 'Engagement', 'Conversion', 'Customer', 'Retention'];
@@ -100,7 +110,7 @@ const pillars = [
   {
     n: '03',
     title: 'Connect',
-    head: 'Your systems should talk to each other.',
+    head: 'ERP, CRM and third-party system integration',
     beforeLabel: 'The problem',
     before: [
       'Website apart from the CRM',
@@ -141,9 +151,11 @@ const engagement = [
 ---
 
 <Base
-  title="Workflow Automation Solutions | Platform Play Venture"
-  description="Automate manual work, connect your ERP and CRM, and see the business on live dashboards. Custom business software built for growth. Talk to our team."
+  title="Business Automation & Custom Software Development | PPV"
+  description="Automate manual work, connect your ERP and CRM, and run the business on live dashboards. Custom software and WhatsApp automation built around your goals."
   breadcrumbs={[{ name: 'Business Automation', path: '/services/business-automation/' }]}
+
+  schema={[serviceSchema, faqPageSchema('/services/business-automation/', faqs)]}
 >
   <ScrollProgress />
 
@@ -164,14 +176,14 @@ const engagement = [
             <span>Back to Home</span>
           </a>
           <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Business Automation &amp; Software</span></div>
-          <h1 class="service-hero-title reveal">Workflow Automation and Custom Business Software, <span class="grad-text">Built for Growth</span></h1>
+          <h1 class="service-hero-title reveal">Business Process Automation and Custom Software Development, <span class="grad-text">Built for Growth</span></h1>
           <p class="service-hero-lead reveal">We build the digital infrastructure behind business growth — platforms that help businesses reach customers, sell products, manage operations, automate processes and create better digital experiences.</p>
           <div class="pv-hero-actions reveal">
             <a class="pv-btn pv-btn-primary" href="/products/">
               <span>See our live products</span>
               <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
-            <a class="pv-btn pv-btn-ghost" href="/contact/?engagement=Business%20Automation%20%26%20Software"><span>Start a conversation</span></a>
+            <a class="pv-btn pv-btn-ghost" href="#requirement"><span>Start a conversation</span></a>
           </div>
           <ul class="pv-hero-strip reveal">
             <li>Strategy</li><li>Business software</li><li>Commerce</li><li>Automation</li><li>Applications</li><li>Integration</li><li>Analytics</li>
@@ -189,9 +201,11 @@ const engagement = [
 
           <div class="pv-approach-grid">
             <div class="pv-approach-copy reveal">
+              <p class="pv-answer">Platform Play Venture designs and builds business software that removes manual work, connects your systems and gives leaders live visibility. We start with the business objective, then choose whether to deploy one of our live platforms, customise it, integrate it with your existing stack or build a custom application.</p>
               <p>We do not approach technology as a standalone IT service. We look at the business first.</p>
               <p>Most businesses do not wake up needing a new application. They need to sell more, work faster, reduce manual effort, serve customers better, manage partners more effectively and understand their own business — without adding complexity.</p>
               <p><strong>Technology is simply the mechanism that makes those outcomes possible. That is where PPV sits.</strong></p>
+              <p>Not sure what should change first? Our <a href="/services/technology/">digital transformation consulting</a> starts with a maturity assessment and a roadmap.</p>
             </div>
             <div class="pv-approach-card reveal">
               <div class="pv-card-kicker">We look at the business first</div>
@@ -220,7 +234,7 @@ const engagement = [
         <div class="container">
           <div class="reveal pv-head">
             <div class="section-kicker">What PPV Builds</div>
-            <h2 class="section-title">Technology across <span class="grad-text">the complete business journey</span></h2>
+            <h2 class="section-title">Business automation across the complete <span class="grad-text">customer and operations journey</span></h2>
             <p class="pv-head-lead">Six places where a digital intervention changes the business outcome.</p>
           </div>
           <div class="pv-journey-grid">
@@ -243,7 +257,7 @@ const engagement = [
         <div class="container">
           <div class="reveal pv-head">
             <div class="section-kicker">Live Products</div>
-            <h2 class="section-title">Businesses do not always need to <span class="grad-text">start from zero</span></h2>
+            <h2 class="section-title">Ready-to-deploy platforms: <span class="grad-text">PPV DMS and PPV HRMS</span></h2>
             <p class="pv-head-lead">Two platforms are already built and running. They can be deployed as they are, configured to your processes, or connected into the systems you already use.</p>
           </div>
           <div class="pv-live-grid">
@@ -261,7 +275,7 @@ const engagement = [
                   {p.highlights.slice(0, 4).map((h) => <li>{h}</li>)}
                 </ul>
                 <a class="pv-inline-link" href={`/product/${p.slug}/`}>
-                  <span>Explore {p.name}</span>
+                  <span>{productAnchor[p.slug] ?? `Explore ${p.name}`}</span>
                   <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </article>
@@ -275,7 +289,7 @@ const engagement = [
         <div class="container">
           <div class="reveal pv-head">
             <div class="section-kicker">Digital Solution Portfolio</div>
-            <h2 class="section-title">A portfolio of <span class="grad-text">business-ready digital solutions</span></h2>
+            <h2 class="section-title">Our business automation and <span class="grad-text">custom software services</span></h2>
             <p class="pv-head-lead">Not standalone software products. Platforms that can be deployed, configured, customized and connected around the business requirement.</p>
           </div>
           <div class="pv-portfolio-grid">
@@ -295,7 +309,7 @@ const engagement = [
         <div class="container">
           <div class="reveal pv-head pv-head-dark">
             <div class="section-kicker">Marketing Technology</div>
-            <h2 class="section-title">Where PPV becomes <span class="grad-text">different</span></h2>
+            <h2 class="section-title">Why PPV: marketing and technology <span class="grad-text">under one roof</span></h2>
             <p class="pv-head-lead">Technology at PPV does not operate separately from marketing. The same organization that creates the demand builds the system that captures it.</p>
           </div>
 
@@ -331,7 +345,7 @@ const engagement = [
         <div class="container">
           <div class="reveal pv-head">
             <div class="section-kicker">Automation, Data &amp; Integration</div>
-            <h2 class="section-title">Remove the friction. See the business. <span class="grad-text">Connect the systems.</span></h2>
+            <h2 class="section-title">Workflow automation, dashboards <span class="grad-text">and system integration</span></h2>
             <p class="pv-head-lead">A large part of digital transformation is simply making everyday business processes easier.</p>
           </div>
           <div class="pv-pillars-grid">
@@ -365,7 +379,7 @@ const engagement = [
         <div class="container">
           <div class="reveal pv-head">
             <div class="section-kicker">Technology Capability</div>
-            <h2 class="section-title">The engine behind <span class="grad-text">the experience</span></h2>
+            <h2 class="section-title">Our technology <span class="grad-text">stack</span></h2>
             <p class="pv-head-lead">We do not choose technology because it is popular. We choose it because it is right for the business.</p>
           </div>
           <div class="pv-stack-grid">
@@ -386,7 +400,7 @@ const engagement = [
         <div class="container">
           <div class="reveal pv-head">
             <div class="section-kicker">How We Engage</div>
-            <h2 class="section-title">There is no single <span class="grad-text">PPV technology model</span></h2>
+            <h2 class="section-title">Engagement models: deploy, customise, <span class="grad-text">integrate, build or scale</span></h2>
           </div>
           <div class="pv-engage-grid">
             {engagement.map((e) => (
@@ -401,6 +415,77 @@ const engagement = [
             <span class="pv-balance-label">Balancing</span>
             <span>Speed</span><span>Cost</span><span>Customization</span><span>Scalability</span>
           </div>
+        </div>
+      </section>
+
+      <PageFaq title="Business automation FAQs" faqs={faqs} />
+
+      <!-- ============== REQUIREMENT FORM ============== -->
+      <section class="section lead-section" id="requirement">
+        <div class="container lead-layout">
+          <div class="lead-aside reveal">
+            <div class="section-kicker">Start here</div>
+            <h2 class="section-title">Tell us about <span class="grad-text">your requirement</span></h2>
+            <p>Share what you want to automate or build. Our technology team will review it and come back with a clear recommendation: deploy, customise, integrate or build.</p>
+            <ol class="lead-steps">
+              <li><span>01</span>Tell us what you need in a few lines.</li>
+              <li><span>02</span>You get an acknowledgement email right away.</li>
+              <li><span>03</span>We reply within one business day with next steps.</li>
+            </ol>
+          </div>
+
+          <form class="lead-form lead-card reveal" action="/api/contact" method="POST" novalidate data-lead-form="automation" data-form-location="business_automation">
+            <input type="checkbox" name="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <input type="hidden" name="form" value="automation" />
+            <input type="hidden" name="landing" />
+            <input type="hidden" name="utm" />
+            <div class="lead-form-body">
+              <span class="lead-badge">Business Automation &amp; Software</span>
+              <h3 class="lead-title">What do you want to automate or build?</h3>
+              <div class="lead-grid">
+                <div class="lead-field">
+                  <label for="ba-name">Name <span aria-hidden="true">*</span></label>
+                  <input id="ba-name" name="name" type="text" required minlength="2" maxlength="100" autocomplete="name" placeholder="Your full name" />
+                  <span class="lead-error" data-error-for="name"></span>
+                </div>
+                <div class="lead-field">
+                  <label for="ba-company">Company <span aria-hidden="true">*</span></label>
+                  <input id="ba-company" name="company" type="text" required minlength="2" maxlength="120" autocomplete="organization" placeholder="Your organisation" />
+                  <span class="lead-error" data-error-for="company"></span>
+                </div>
+                <div class="lead-field">
+                  <label for="ba-email">Email <span aria-hidden="true">*</span></label>
+                  <input id="ba-email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="name@company.com" />
+                  <span class="lead-error" data-error-for="email"></span>
+                </div>
+                <div class="lead-field">
+                  <label for="ba-phone">Phone <span aria-hidden="true">*</span></label>
+                  <input id="ba-phone" name="phone" type="tel" required inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="10-digit mobile number" data-phone />
+                  <span class="lead-error" data-error-for="phone"></span>
+                </div>
+              </div>
+              <div class="lead-field">
+                <label for="ba-need">What do you want to automate or build? <span aria-hidden="true">*</span></label>
+                <select id="ba-need" name="need" required>
+                  <option value="" selected disabled>Choose one</option>
+                  {automationNeeds.map((o) => <option value={o}>{o}</option>)}
+                </select>
+                <span class="lead-error" data-error-for="need"></span>
+              </div>
+              <div class="lead-field">
+                <label for="ba-message">Message <span class="lead-optional">(optional)</span></label>
+                <textarea id="ba-message" name="message" rows="4" maxlength="3000" placeholder="A few lines about the process, the systems involved and what good looks like…"></textarea>
+              </div>
+              <button type="submit" class="lead-submit">Send my requirement <span aria-hidden="true">→</span></button>
+              <p class="lead-status" data-lead-status role="alert" hidden></p>
+            </div>
+            <div class="lead-success" data-lead-success hidden tabindex="-1">
+              <span class="lead-success-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <h3 class="lead-success-title">Requirement received!</h3>
+              <p>Thank you. Our technology team will review your requirement and get back to you within one business day. A confirmation is on its way to your inbox.</p>
+              <span class="lead-success-pill">Requirement Successfully Submitted</span>
+            </div>
+          </form>
         </div>
       </section>
 

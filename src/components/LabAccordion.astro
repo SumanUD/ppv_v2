@@ -4,6 +4,7 @@ interface Panel {
   title: string;
   body: string;
   img: string;
+  link?: { href: string; label: string };
 }
 interface Props {
   panels: Panel[];
@@ -25,6 +26,7 @@ const { panels, theme = 'dark' } = Astro.props;
         <span class="lab-panel-num">{p.num}</span>
         <h3 class="lab-panel-title">{p.title}</h3>
         <p class="lab-panel-body">{p.body}</p>
+        {p.link && <a class="lab-panel-link" href={p.link.href}>Explore {p.link.label} <span aria-hidden="true">→</span></a>}
       </div>
       <span class="lab-panel-accent" aria-hidden="true"></span>
     </article>

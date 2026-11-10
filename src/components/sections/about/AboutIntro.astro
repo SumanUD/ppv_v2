@@ -1,0 +1,32 @@
+---
+import { fullAddress } from '@/data/site';
+
+// Facts only. Founding year is left out until PPV confirms it.
+const facts: [string, string][] = [
+  ['Headquarters', fullAddress],
+  ['Markets served', 'Businesses across India'],
+  ['Solutions', 'Strategy & Consulting · Marketing Governance & Fractional CMO · Technology & Digital Platforms · Business Automation & Software · Training & Capability Development'],
+  ['Live products', 'PPV DMS (dealer management system) · PPV HRMS (HR management system)'],
+  ['Method', 'VECTOR — View, Establish, Connect, Transform, Oversee, Refine'],
+];
+---
+<section class="section about-intro-section">
+  <div class="container about-intro-grid">
+    <div class="about-intro-who reveal">
+      <div class="section-kicker">Who we are</div>
+      <h2 class="section-title">Who we <span class="grad-text">are</span></h2>
+      <p>Platform Play Venture (PPV) is a strategic growth company based in Kolkata, India. We work with founders, CEOs and marketing leaders whose brands are entering a new phase of growth, repositioning or transformation. We bring strategy consulting, marketing governance through a fractional CMO model, technology development and team capability building into one connected structure, built on a simple principle: clarity first, then direction, then momentum.</p>
+    </div>
+    <div class="about-glance reveal">
+      <h2 class="about-glance-title">PPV at a glance</h2>
+      <dl>
+        {facts.map(([k, v]) => (
+          <div>
+            <dt>{k}</dt>
+            <dd>{v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>

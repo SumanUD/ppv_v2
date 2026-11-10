@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": "https://platformplayventure.com/about/#webpage",
+  "url": "https://platformplayventure.com/about/",
+  "name": "About Platform Play Venture",
+  "isPartOf": {
+    "@id": "https://platformplayventure.com/#website"
+  },
+  "about": {
+    "@id": "https://platformplayventure.com/#organization"
+  },
+  "mainEntity": {
+    "@id": "https://platformplayventure.com/#organization"
+  }
+}

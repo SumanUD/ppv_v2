@@ -26,6 +26,10 @@ import {
   dmsAiPhases,
   dmsDifferentiators,
 } from '@/data/products';
+import PageFaq from '@/components/PageFaq.astro';
+import { pageFaqs, faqPageSchema } from '@/data/faqs';
+import dmsSoftwareSchema from '@/data/seo/software-dms.json';
+import hrmsSoftwareSchema from '@/data/seo/software-hrms.json';
 
 export function getStaticPaths() {
   return products.map((p) => ({ params: { slug: p.slug }, props: { product: p } }));
@@ -52,13 +56,41 @@ const moduleIcons = [
   '<line x1="4" y1="20" x2="20" y2="20"/><rect x="6" y="11" width="3" height="7"/><rect x="11" y="6" width="3" height="12"/><rect x="16" y="13" width="3" height="5"/>',
 ];
 const matrixRoles = dmsMatrix.roles;
+
+/** Approved meta, H1 and definition copy (SEO implementation sheet, Nov 2026). */
+const seo = isDms
+  ? {
+      title: 'Dealer & Distributor Management System (DMS) | PPV DMS',
+      description: 'PPV DMS is a real-time dealer and distributor management system with IMEI tracking, POS with EMI, warranty and tiered ledgers. Try the live demo.',
+      h1: ['PPV DMS:', 'Dealer and Distributor Management System', 'for Multi-Tier Distribution'],
+      sub: 'Not software. A business engine.',
+      answer: 'PPV DMS is a dealer and distributor management system that connects suppliers, distributors, dealers and direct dealers on one real-time data core. It manages inventory down to IMEI level, orders, pricing and schemes, point-of-sale with EMI, warranty and RMA, and tiered ledgers, so every sale updates stock, accounts and CRM at once.',
+    }
+  : {
+      title: 'HRMS Software in India: HR & Payroll System | PPV HRMS',
+      description: 'PPV HRMS is HR and payroll software for Indian businesses: attendance, leave, payroll, recruitment, performance and self-service in one system. Book a demo.',
+      h1: ['PPV HRMS:', 'HRMS Software', 'for HR, Payroll and Workforce Management'],
+      sub: 'One platform. Complete workforce management.',
+      answer: 'PPV HRMS is a human resource management system that brings employee records, attendance, leave, payroll, recruitment, onboarding, performance, assets and employee self-service into one platform. It replaces spreadsheets and disconnected tools with a single source of HR data, with role-based access for sensitive information.',
+    };
+const pagePath = `/product/${product.slug}/`;
+const faqs = pageFaqs[pagePath] ?? [];
+const pageSchema = [isDms ? dmsSoftwareSchema : hrmsSoftwareSchema, ...(faqs.length ? [faqPageSchema(pagePath, faqs)] : [])];
+
+/** DMS vs ERP comparison (3 rows, as specified). */
+const dmsVsErp = [
+  { name: 'Generic ERP', scope: 'Finance, procurement and operations across the whole company', channel: 'Limited — partners usually sit outside the system', units: 'Quantity-based stock', after: 'Usually an add-on or separate tool' },
+  { name: 'Automotive DMS', scope: 'Vehicle sales, service bays and parts for car and two-wheeler dealers', channel: 'Single dealer or dealer group', units: 'VIN-based, built for vehicles', after: 'Vehicle service and parts' },
+  { name: 'PPV DMS', scope: 'The distribution channel: supplier → distributor → dealer → customer', channel: 'Every tier on one data core, each seeing only its own data', units: 'IMEI / serial-level tracking for every unit', after: 'Warranty and RMA linked to the same unit record' },
+];
 const roleLabel = (r: string) => r.replace('-', ' ');
 const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next' : i === n - 1 ? 'prev' : 'far');
 ---
 
 <Base
-  title={`${product.name} · ${product.fullName} · Platform Play Venture`}
-  description={product.tagline}
+  title={seo.title}
+  description={seo.description}
+  schema={pageSchema}
   breadcrumbs={[{ name: 'Products', path: '/products/' }, { name: product.name, path: `/product/${product.slug}/` }]}
 >
   <ScrollProgress />
@@ -83,7 +115,8 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <span class="pulse-dot"></span>
             <span>{product.fullName}{product.status === 'live' ? ' · Live' : ''}</span>
           </div>
-          <h1 class="service-hero-title reveal">{product.name} — <span class="grad-text">{product.positioning}</span></h1>
+          <h1 class="service-hero-title reveal">{seo.h1[0]} <span class="grad-text">{seo.h1[1]}</span> {seo.h1[2]}</h1>
+          <p class="service-hero-sub reveal">{seo.sub}</p>
           <p class="service-hero-lead reveal">{product.tagline}</p>
 
           <div class="pv-hero-metrics reveal">
@@ -102,9 +135,10 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
         <div class="container pv-overview-inner">
           <div class="reveal pv-overview-side">
             <div class="section-kicker">Overview</div>
-            <h2 class="section-title">What {product.name} <span class="grad-text">actually is</span></h2>
+            <h2 class="section-title">What is <span class="grad-text">{product.name}?</span></h2>
           </div>
           <div class="pv-overview-body reveal">
+            <p class="pv-answer">{seo.answer}</p>
             <p>{product.summary}</p>
             {isDms ? (
               <ul class="pv-num-list">
@@ -131,7 +165,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Role Architecture</div>
-                <h2 class="section-title">Four roles. <span class="grad-text">Four dashboards.</span></h2>
+                <h2 class="section-title">Four roles, four dashboards: <span class="grad-text">supplier, distributor, dealer and direct dealer</span></h2>
                 <p class="pv-head-lead">Each role has its own login, dashboard and permission set — RBAC enforced at the backend, not just hidden UI buttons.</p>
               </div>
               <div class="pv-roles-grid">
@@ -152,7 +186,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Core Modules</div>
-                <h2 class="section-title">Six modules, <span class="grad-text">one data core</span></h2>
+                <h2 class="section-title">Dealer management system features: <span class="grad-text">six modules on one data core</span></h2>
                 <p class="pv-head-lead">Every module reads and writes the same real-time record. A sale at the counter moves stock, ledger, warranty and CRM in the same instant.</p>
               </div>
               <div class="mod-carousel reveal" data-mod-carousel>
@@ -204,7 +238,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Role-Based Feature Matrix</div>
-                <h2 class="section-title">Every module is exposed <span class="grad-text">differently by role</span></h2>
+                <h2 class="section-title">Role-based access control <span class="grad-text">across every module</span></h2>
                 <p class="pv-head-lead">This is the core of the RBAC design. Choose a role to see what each module lets it do, and open any capability to compare it with the other roles.</p>
               </div>
 
@@ -256,7 +290,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Process Flow</div>
-                <h2 class="section-title">Two channels, <span class="grad-text">one core</span></h2>
+                <h2 class="section-title">Two distribution channels, <span class="grad-text">one core</span></h2>
               </div>
               {dmsChannels.map((c) => (
                 <div class="pv-channel reveal">
@@ -282,8 +316,8 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head pv-head-dark">
                 <div class="section-kicker">What Holds It Together</div>
-                <h2 class="section-title">Four behaviours that run <span class="grad-text">underneath every module</span></h2>
-                <p class="pv-head-lead">They are the reason the system stays consistent as the network scales.</p>
+                <h2 class="section-title">How PPV DMS works <span class="grad-text">under the hood</span></h2>
+                <p class="pv-head-lead">Four behaviours run underneath every module. They are the reason the system stays consistent as the network scales.</p>
               </div>
               <div class="pv-foundations-grid">
                 {dmsFoundations.map((f) => (
@@ -302,8 +336,9 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">AI Roadmap</div>
-                <h2 class="section-title">AI in phases, <span class="grad-text">not promises</span></h2>
+                <h2 class="section-title">AI features in PPV DMS: <span class="grad-text">a phased roadmap</span></h2>
                 <p class="pv-head-lead">Reliable, working AI at the independent-dealer price point is a real market gap. Small players only claim AI; big platforms deliver it inconsistently.</p>
+                <p class="pv-roadmap-note">These AI features are on the PPV DMS roadmap and are delivered in phases. Ask us which are available for your deployment today.</p>
               </div>
               <div class="pv-ai-grid">
                 {dmsAiPhases.map((p) => (
@@ -329,7 +364,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Why It Is Different</div>
-                <h2 class="section-title">Built for handset distribution — <span class="grad-text">not adapted to it</span></h2>
+                <h2 class="section-title">DMS built for <span class="grad-text">handset distribution</span></h2>
                 <p class="pv-head-lead">Generic ERPs and legacy automotive DMS platforms were designed for a different business. PPV DMS is designed around the four roles you actually operate, with strict API-level RBAC ensuring absolute data isolation.</p>
               </div>
               <div class="pv-why-grid pv-why-grid-3">
@@ -342,6 +377,41 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
               </div>
             </div>
           </section>
+
+          <!-- ============== DMS: VS ERP ============== -->
+          <section class="section compare-section">
+            <div class="container">
+              <div class="reveal pv-head">
+                <div class="section-kicker">DMS vs ERP</div>
+                <h2 class="section-title">Dealer management system vs ERP: <span class="grad-text">what's the difference?</span></h2>
+                <p class="pv-head-lead">A general ERP is built to run a company's finance, procurement and operations broadly. It treats channel partners as customers or vendors sitting outside the system. A dealer management system is built around the channel itself: allocating stock down the tiers, giving every distributor and dealer their own scoped view, tracking each unit by serial number, applying schemes at billing and handling warranty after the sale. Automotive DMS platforms solve this for vehicle dealers; PPV DMS solves it for multi-tier handset distribution, so the supplier, distributors, dealers and direct dealers all work from the same real-time record.</p>
+              </div>
+              <div class="pv-table-scroll reveal">
+                <table class="pv-table compare-table">
+                  <thead>
+                    <tr>
+                      <th scope="col"><span class="visually-hidden">System</span></th>
+                      <th scope="col">Built around</th>
+                      <th scope="col">Channel partners</th>
+                      <th scope="col">Unit tracking</th>
+                      <th scope="col">After-sales</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dmsVsErp.map((r) => (
+                      <tr class:list={[r.name === 'PPV DMS' && 'is-highlight-row']}>
+                        <th scope="row">{r.name}</th>
+                        <td>{r.scope}</td>
+                        <td>{r.channel}</td>
+                        <td>{r.units}</td>
+                        <td>{r.after}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
         </>
       ) : (
         <>
@@ -350,7 +420,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Core Capabilities</div>
-                <h2 class="section-title">A unified HR platform for <span class="grad-text">the whole employee journey</span></h2>
+                <h2 class="section-title">HRMS features: <span class="grad-text">10 integrated modules in one platform</span></h2>
                 <p class="pv-head-lead">Ten core capabilities, delivered as one fully integrated ecosystem rather than a patchwork of point tools.</p>
               </div>
               <div class="pv-cap-grid">
@@ -369,7 +439,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Employee Lifecycle</div>
-                <h2 class="section-title">From onboarding to offboarding — <span class="grad-text">managed end to end</span></h2>
+                <h2 class="section-title">Employee lifecycle management, <span class="grad-text">from onboarding to offboarding</span></h2>
               </div>
               <div class="pv-lifecycle-grid">
                 {hrmsLifecycle.map((l) => (
@@ -392,7 +462,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Module Categories</div>
-                <h2 class="section-title">Everything your <span class="grad-text">HR team needs</span></h2>
+                <h2 class="section-title">HR module <span class="grad-text">categories</span></h2>
                 <p class="pv-head-lead">Five categories and more than fifteen functional modules — a single, connected system replacing the patchwork of spreadsheets and point tools.</p>
               </div>
               <div class="pv-catgrid">
@@ -414,7 +484,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head pv-head-dark">
                 <div class="section-kicker">Access &amp; Governance</div>
-                <h2 class="section-title">Role-based access <span class="grad-text">and governance</span></h2>
+                <h2 class="section-title">Role-based access <span class="grad-text">and HR data governance</span></h2>
                 <p class="pv-head-lead">Granular permissions ensure sensitive information stays with the right people — nothing more, nothing less.</p>
               </div>
               <div class="pv-foundations-grid pv-foundations-grid-4">
@@ -434,7 +504,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Integrations</div>
-                <h2 class="section-title">Fits into your <span class="grad-text">existing technology stack</span></h2>
+                <h2 class="section-title">HRMS integrations: <span class="grad-text">biometric, payroll banking, ERP and SSO</span></h2>
                 <p class="pv-head-lead">Native connectors and open interfaces across identity, communication, finance and operations. Designed to extend your ecosystem — not replace it.</p>
               </div>
               <div class="pv-why-grid pv-why-grid-3">
@@ -456,7 +526,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Migration</div>
-                <h2 class="section-title">Seamless transition from <span class="grad-text">your existing systems</span></h2>
+                <h2 class="section-title">Data migration from <span class="grad-text">spreadsheets and legacy systems</span></h2>
                 <p class="pv-head-lead">Full migration of legacy HR data — with validation, mapping and reconciliation built into every phase.</p>
               </div>
               <div class="pv-migration-grid">
@@ -482,7 +552,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Deployment</div>
-                <h2 class="section-title">A structured <span class="grad-text">7-phase deployment</span></h2>
+                <h2 class="section-title">HRMS implementation: <span class="grad-text">a structured 7-phase deployment</span></h2>
                 <p class="pv-head-lead">Predictable milestones, clear ownership and continuous checkpoints — from kickoff to go-live and beyond.</p>
               </div>
               <ol class="pv-phase-list">
@@ -504,7 +574,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             <div class="container">
               <div class="reveal pv-head">
                 <div class="section-kicker">Business Impact</div>
-                <h2 class="section-title">Why organizations <span class="grad-text">choose PPV HRMS</span></h2>
+                <h2 class="section-title">Benefits of <span class="grad-text">PPV HRMS</span></h2>
               </div>
               <div class="pv-why-grid">
                 {hrmsWhy.map((w) => (
@@ -548,7 +618,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
           <div class="container">
             <div class="reveal pv-head">
               <div class="section-kicker">Live Environment</div>
-              <h2 class="section-title">See it running — <span class="grad-text">right now</span></h2>
+              <h2 class="section-title">See PPV DMS running: <span class="grad-text">live demo</span></h2>
               <p class="pv-head-lead">
                 {product.demoPassword
                   ? 'Every environment is seeded with demo data. Sign in as any role to see exactly how the permission model scopes what that role can do.'
@@ -621,7 +691,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
           <div class="container lead-layout">
             <div class="lead-aside reveal">
               <div class="section-kicker">Talk to us about PPV DMS</div>
-              <h2 class="section-title">Let's talk <span class="grad-text">distribution.</span></h2>
+              <h2 class="section-title">Request a guided <span class="grad-text">PPV DMS demo</span></h2>
               <p>Tell us about your business and distribution requirements. Our team will help you understand how PPV DMS can bring greater visibility, control and efficiency to your distribution network.</p>
               <ol class="lead-steps">
                 <li><span>01</span>Share your details and requirements.</li>
@@ -630,9 +700,11 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
               </ol>
             </div>
 
-            <form class="lead-form lead-card reveal" action="/api/contact" method="POST" novalidate data-lead-form="dms">
+            <form class="lead-form lead-card reveal" action="/api/contact" method="POST" novalidate data-lead-form="dms" data-form-location="dms_demo">
               <input type="checkbox" name="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
               <input type="hidden" name="form" value="dms" />
+              <input type="hidden" name="landing" />
+              <input type="hidden" name="utm" />
               <div class="lead-form-body">
                 <span class="lead-badge">PPV DMS</span>
                 <h3 class="lead-title">Let's Talk Distribution.</h3>
@@ -721,7 +793,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
           <div class="container lead-layout">
             <div class="lead-aside reveal">
               <div class="section-kicker">Live walkthrough</div>
-              <h2 class="section-title">Want to see <span class="grad-text">{product.name} in action?</span></h2>
+              <h2 class="section-title">Request a <span class="grad-text">PPV HRMS demo</span></h2>
               <p>We'll walk you through the live platform on a call — the modules, the role structure and how it would map onto your organisation.</p>
               <ol class="lead-steps">
                 <li><span>01</span>Request your walkthrough with a few details.</li>
@@ -730,9 +802,11 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
               </ol>
             </div>
 
-            <form class="lead-form lead-card reveal" action="/api/contact" method="POST" novalidate data-lead-form="hrms">
+            <form class="lead-form lead-card reveal" action="/api/contact" method="POST" novalidate data-lead-form="hrms" data-form-location="hrms_demo">
               <input type="checkbox" name="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
               <input type="hidden" name="form" value="hrms" />
+              <input type="hidden" name="landing" />
+              <input type="hidden" name="utm" />
               <div class="lead-form-body">
                 <span class="lead-badge">PPV HRMS</span>
                 <h3 class="lead-title">Request Your PPV HRMS Walkthrough</h3>
@@ -796,6 +870,8 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
         </section>
       )}
 
+      {faqs.length > 0 && <PageFaq title={`${product.name} FAQs`} faqs={faqs} />}
+
       <!-- ============== CTA ============== -->
       <section class="section service-cta-section">
         <div class="container">
@@ -808,7 +884,7 @@ const slotFor = (i: number, n: number) => (i === 0 ? 'active' : i === 1 ? 'next'
             </a>
             <div class="pv-cta-alt">
               <a class="pv-inline-link" href="/products/"><span>View all products</span></a>
-              <a class="pv-inline-link" href="/services/business-automation/"><span>Our technology capability</span></a>
+              <a class="pv-inline-link" href="/services/business-automation/"><span>Need something bespoke? Custom business software</span></a>
             </div>
           </div>
         </div>

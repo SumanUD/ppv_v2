@@ -1,6 +1,14 @@
 ---
 import { contact, fullAddress } from '@/data/site';
 import SocialIcons from '@/components/SocialIcons.astro';
+
+interface Props {
+  /** Plain-text heading override (the contact page uses the SEO heading). */
+  title?: string;
+  kicker?: string;
+  lead?: string;
+}
+const { title, kicker = 'Ready to Transform', lead = "Let's turn your data, strategy, and curiosity into decisions that move markets." } = Astro.props;
 ---
 <section class="contact-section" id="contact">
   <div class="contact-aurora" aria-hidden="true">
@@ -12,9 +20,11 @@ import SocialIcons from '@/components/SocialIcons.astro';
 
   <div class="container">
     <div class="contact-header reveal">
-      <div class="section-kicker">Ready to Transform</div>
-      <h2 class="section-title contact-title">It's time to <span class="grad-text">connect.</span></h2>
-      <p class="section-lead contact-lead">Let's turn your data, strategy, and curiosity into decisions that move markets.</p>
+      <div class="section-kicker">{kicker}</div>
+      {title
+        ? <h2 class="section-title contact-title">{title}</h2>
+        : <h2 class="section-title contact-title">It's time to <span class="grad-text">connect.</span></h2>}
+      <p class="section-lead contact-lead">{lead}</p>
     </div>
 
     <div class="contact-shell">
@@ -52,6 +62,35 @@ import SocialIcons from '@/components/SocialIcons.astro';
             <span class="form-error" id="phone-error" data-error-for="phone"></span>
           </div>
         </div>
+
+        <div class="form-grid form-grid-2">
+          <div class="form-field">
+            <input type="text" id="company" name="company" maxlength="120" placeholder=" " autocomplete="organization" />
+            <label for="company">Company</label>
+            <span class="form-field-bar"></span>
+          </div>
+          <div class="form-field">
+            <input type="text" id="role" name="role" maxlength="120" placeholder=" " autocomplete="organization-title" />
+            <label for="role">Your role</label>
+            <span class="form-field-bar"></span>
+          </div>
+        </div>
+        <div class="form-field form-field-full form-field-select">
+            <select id="need" name="need" required aria-describedby="need-error" data-need-select>
+              <option value="" selected disabled></option>
+              <option>Strategy &amp; brand</option>
+              <option>Fractional CMO</option>
+              <option>Digital transformation</option>
+              <option>Business software, DMS or HRMS</option>
+              <option>Training</option>
+              <option>Not sure yet</option>
+            </select>
+            <label for="need">What do you need help with?</label>
+            <span class="form-field-bar"></span>
+            <span class="form-error" id="need-error" data-error-for="need"></span>
+        </div>
+        <input type="hidden" name="landing" data-landing-input />
+        <input type="hidden" name="utm" data-utm-input />
 
         <div class="form-field form-field-full">
           <textarea id="message" name="message" rows="5" required minlength="10" maxlength="5000" placeholder=" " aria-describedby="message-error"></textarea>

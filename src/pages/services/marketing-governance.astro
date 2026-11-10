@@ -4,9 +4,60 @@ import PageAurora from '@/components/PageAurora.astro';
 import ScrollProgress from '@/components/ScrollProgress.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
+import PageFaq from '@/components/PageFaq.astro';
+import BulletSection from '@/components/BulletSection.astro';
+import { pageFaqs, faqPageSchema } from '@/data/faqs';
+import serviceSchema from '@/data/seo/service-cmo.json';
+
+const path = '/services/marketing-governance/';
+const faqs = pageFaqs[path];
+const contactHref = '/contact/?engagement=Marketing%20Governance%20%2F%20Fractional%20CMO';
+
+const includes = [
+  { title: 'Marketing strategy and annual planning', text: 'We turn business goals into a marketing direction: priorities, audiences, positioning, channel mix and a plan the whole team can follow.' },
+  { title: 'Marketing governance', text: 'We set up how marketing decisions are made, reviewed and measured: who owns what, how budgets are approved, and how performance is reported to leadership.' },
+  { title: 'Agency and partner management', text: 'We brief, align and review your agencies and freelancers so they work to one strategy instead of separate agendas.' },
+  { title: 'Team leadership and capability', text: "We guide your in-house marketing team day to day and build their skills, so the business doesn't stay dependent on outside help." },
+  { title: 'Performance visibility for leadership', text: "We define the metrics that matter to the business, not just to marketing, and give founders and boards a clear view of what's working." },
+  { title: 'Marketing technology alignment', text: "We make sure your website, CRM, analytics and automation tools support the strategy, drawing on PPV's own technology team when needed." },
+];
+
+const whenToHire = [
+  'Marketing is busy but not clearly contributing to revenue or growth.',
+  'Several agencies are working without one shared strategy.',
+  "You've outgrown a marketing manager but aren't ready for a full-time CMO.",
+  'The founder is still making most marketing decisions.',
+  "You're entering a new market, launching a product or repositioning the brand.",
+  "Leadership can't see which marketing investments are paying off.",
+];
+
+const comparison = {
+  cols: ['Fractional CMO', 'Full-time CMO', 'Marketing agency'],
+  rows: [
+    ['Commitment', 'Part-time or defined engagement', 'Full-time executive hire', 'Project or retainer'],
+    ['Focus', 'Strategy, governance and leadership', 'Strategy, governance and leadership', 'Mainly execution'],
+    ['Owns business outcomes', 'Yes', 'Yes', 'Usually owns outputs'],
+    ['Manages your agencies and team', 'Yes', 'Yes', 'No'],
+    ['Speed to start', 'Weeks', 'Months (recruitment)', 'Weeks'],
+    ['Best for', 'Growing businesses that need senior direction now', 'Large organisations with a full-time remit', 'Specific campaigns or channels'],
+  ],
+};
+
+const steps = [
+  { title: '1. View: marketing and brand diagnostic', text: "We review your positioning, current marketing activity, agency set-up, data and team to see what's working and where effort is being lost." },
+  { title: '2. Establish: direction and a 90-day plan', text: 'We agree priorities with leadership and set out a clear plan with owners, budgets and measures.' },
+  { title: '3. Connect: align agencies, teams and technology', text: 'We bring every partner and internal team onto one strategy, one calendar and one set of metrics.' },
+  { title: '4. Oversee: ongoing governance', text: 'We run a regular review rhythm, approve major decisions and report progress to leadership.' },
+  { title: '5. Refine: adjust as the market moves', text: 'We recalibrate the plan as results come in and as customer behaviour shifts.' },
+];
 ---
 
-<Base title="Fractional CMO Services in India | Platform Play Venture" description="Get senior marketing leadership without a full-time hire. Our fractional CMO sets direction, aligns agencies and governs results. Book a discovery call." breadcrumbs={[{ name: 'Marketing Governance • Fractional CMO', path: '/services/marketing-governance/' }]}>
+<Base
+  title="Fractional CMO Services in India | Platform Play Venture"
+  description="Get senior marketing leadership without a full-time hire. Our fractional CMO sets direction, aligns agencies and governs results. Book a discovery call."
+  breadcrumbs={[{ name: 'Marketing Governance & Fractional CMO', path }]}
+  schema={[serviceSchema, faqPageSchema(path, faqs)]}
+>
   <ScrollProgress />
 
   <div class="site-shell is-ready">
@@ -24,38 +75,124 @@ import Footer from '@/components/Footer.astro';
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
             <span>Back to Home</span>
           </a>
-          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Service · 03</span></div>
-          <h1 class="service-hero-title reveal">Fractional CMO Services: Senior Marketing Leadership Without a Full-Time Hire</h1>
-          <p class="service-hero-lead reveal">Fractional CMO oversight — guiding direction, aligning execution with strategy, and ensuring every campaign moves the brand toward the same business goal.</p>
+          <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Marketing Governance &amp; Fractional CMO</span></div>
+          <h1 class="service-hero-title reveal">Fractional CMO Services: <span class="grad-text">Senior Marketing Leadership</span> Without a Full-Time Hire</h1>
+          <p class="service-hero-lead reveal">Most growing businesses don't have a marketing problem. They have a direction problem. Campaigns run, agencies deliver and dashboards fill up, yet nobody senior is accountable for whether marketing is moving the business forward. Platform Play Venture's fractional CMO services put that senior leadership in place, without the cost and commitment of a full-time hire.</p>
+          <div class="service-hero-actions reveal">
+            <a class="service-cta-btn" href={contactHref}>
+              <span>Book a fractional CMO discovery call</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
         </div>
       </section>
 
       <section class="section system-section">
         <div class="container system-inner">
           <div class="reveal system-copy">
-            <div class="section-kicker">Fractional CMO Approach</div>
-            <h2 class="section-title">We take responsibility for <span class="grad-text">how marketing is planned and executed</span>.</h2>
-            <p>As a fractional CMO, PPV works with the brand's existing agencies, agencies from our network, or any new agency the brand chooses to onboard. Our role is to guide the direction, align execution with strategy, and ensure every campaign, platform, and activity moves the brand towards the same business goal.</p>
-            <p>The role is senior, embedded, and accountable to outcomes — not headcount. We stay involved in decision-making while the brand continues to operate without the overhead of a full-time in-house CMO.</p>
+            <div class="section-kicker">Definition</div>
+            <h2 class="section-title">What is a <span class="grad-text">fractional CMO?</span></h2>
+            <p>A fractional CMO (fractional chief marketing officer) is an experienced marketing leader who works with your business part-time or on a defined engagement, taking ownership of marketing strategy, planning, governance and team direction. You get CMO-level thinking and accountability without hiring a full-time executive.</p>
           </div>
         </div>
       </section>
 
-      <section class="section service-placeholder-section">
+      <section class="section pv-why-section">
         <div class="container">
-          <div class="service-placeholder reveal">
-            <div class="service-placeholder-tag">Detailed page in progress</div>
-            <h2>Full Marketing Governance breakdown — coming soon.</h2>
-            <p>Workshops, fractional engagement models, agency-alignment workflows, and reporting structures will be detailed here as we publish the full playbook. In the meantime — happy to walk you through the approach directly.</p>
-            <div class="service-placeholder-actions">
-              <a class="service-cta-btn" href="/contact/?engagement=Marketing%20Governance%20%2F%20Fractional%20CMO">
-                <span>Talk to us about a fractional CMO engagement</span>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
-              <a class="service-placeholder-link" href="/services/strategy-consulting/">
-                <span>Explore Strategy & Consulting</span>
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
+          <div class="reveal pv-head">
+            <div class="section-kicker">What's included</div>
+            <h2 class="section-title">What our fractional CMO <span class="grad-text">services include</span></h2>
+          </div>
+          <div class="pv-why-grid pv-why-grid-3">
+            {includes.map((item, i) => (
+              <article class="pv-why-card reveal">
+                <div class="pv-why-num">{String(i + 1).padStart(2, '0')}</div>
+                <h3 class="pv-why-title">{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <BulletSection kicker="Timing" title="When should you hire a fractional CMO?" items={whenToHire} />
+
+      <section class="section compare-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">Compare the options</div>
+            <h2 class="section-title">Fractional CMO vs full-time CMO <span class="grad-text">vs marketing agency</span></h2>
+          </div>
+          <div class="pv-table-scroll reveal">
+            <table class="pv-table compare-table">
+              <thead>
+                <tr>
+                  <th scope="col"><span class="visually-hidden">Criterion</span></th>
+                  {comparison.cols.map((c, i) => <th scope="col" class:list={[i === 0 && 'is-highlight']}>{c}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {comparison.rows.map(([label, ...cells]) => (
+                  <tr>
+                    <th scope="row">{label}</th>
+                    {cells.map((c, i) => <td class:list={[i === 0 && 'is-highlight']}>{c}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section pv-phases-section">
+        <div class="container">
+          <div class="reveal pv-head">
+            <div class="section-kicker">The engagement</div>
+            <h2 class="section-title">How our fractional CMO <span class="grad-text">engagement works</span></h2>
+          </div>
+          <ol class="pv-phase-list">
+            {steps.map((s, i) => (
+              <li class="pv-phase reveal">
+                <span class="pv-phase-num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="pv-phase-body">
+                  <h3 class="pv-phase-title">{s.title}</h3>
+                  <span class="pv-phase-text">{s.text}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section class="section system-section">
+        <div class="container system-inner system-inner-split">
+          <div class="reveal system-copy">
+            <div class="section-kicker">Governance</div>
+            <h2 class="section-title">What is marketing governance, <span class="grad-text">and why does it matter?</span></h2>
+            <p>Marketing governance is the set of rules, roles and routines that decide how marketing is planned, approved, executed and measured. Without it, every agency and team member makes decisions in isolation. With it, spend becomes accountable and campaigns build on each other. Governance is the core of how PPV delivers its fractional CMO role.</p>
+          </div>
+          <div class="reveal system-copy">
+            <div class="section-kicker">Where we work</div>
+            <h2 class="section-title">Fractional CMO services <span class="grad-text">in India</span></h2>
+            <p>Platform Play Venture is based in Kolkata and provides fractional CMO services to businesses across India, working on-site for key workshops and remotely for ongoing governance.</p>
+          </div>
+        </div>
+      </section>
+
+      <PageFaq title="Fractional CMO FAQs" faqs={faqs} />
+
+      <section class="section service-cta-section">
+        <div class="container">
+          <div class="service-cta-card reveal">
+            <div class="service-cta-eyebrow"><span class="pulse-dot"></span><span>Fractional CMO</span></div>
+            <h2 class="service-cta-title">Ready for senior <span class="grad-text">marketing leadership?</span></h2>
+            <p class="service-cta-copy">Tell us where your marketing is today. In a 30-minute conversation we'll tell you honestly whether a fractional CMO is the right step, and what it would focus on first.</p>
+            <a class="service-cta-btn" href={contactHref}>
+              <span>Book a fractional CMO discovery call</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <div class="pv-cta-alt">
+              <a class="pv-inline-link" href="/services/strategy-consulting/"><span>Explore Strategy &amp; Consulting</span></a>
             </div>
           </div>
         </div>

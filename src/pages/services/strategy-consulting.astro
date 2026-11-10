@@ -4,6 +4,12 @@ import PageAurora from '@/components/PageAurora.astro';
 import ScrollProgress from '@/components/ScrollProgress.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
+import PageFaq from '@/components/PageFaq.astro';
+import BulletSection from '@/components/BulletSection.astro';
+import { pageFaqs, faqPageSchema } from '@/data/faqs';
+import serviceSchema from '@/data/seo/service-strategy.json';
+
+const faqs = pageFaqs['/services/strategy-consulting/'];
 
 const stats = [
   { value: '81%', text: 'of consumers say trust influences purchase decisions before consideration even begins.', source: 'Edelman Trust Barometer' },
@@ -15,7 +21,7 @@ const stats = [
 ];
 
 const coverage = [
-  { name: 'Brand Strategy', sub: 'Positioning · Architecture · Identity', body: 'Defining how the brand should be positioned, differentiated, interpreted, and remembered within the market. May include brand architecture, positioning systems, messaging logic, perception mapping, personality definition, and strategic identity frameworks — Aaker, Kapferer, or Archetype Mapping where relevant.' },
+  { name: 'Brand Strategy', sub: 'Positioning · Architecture · Identity', body: 'Defining how the brand should be positioned, differentiated, interpreted, and remembered within the market. Brand positioning decides the space the brand owns in its customers’ minds; differentiation defines the reasons to choose it over alternatives; brand architecture organises how products, sub-brands and services relate to each other. Work may include positioning systems, messaging logic, perception mapping, personality definition and strategic identity frameworks — Aaker, Kapferer, or Archetype Mapping where relevant.', link: { href: '/insights/how-to-define-brand-positioning/', label: 'Read: how to define brand positioning' } },
   { name: 'Go-To-Market Strategy', sub: 'Launch · Adoption · Sequencing', body: 'Structuring how a product, service, or new business enters the market with stronger alignment between audience behaviour, communication, channels, pricing logic, and launch sequencing. May involve STP modelling, category mapping, launch planning, adoption strategy, and competitive positioning.' },
   { name: 'Content & Communication Strategy', sub: 'Storytelling · Platform Logic · Flow', body: 'Designing communication systems that create consistency across campaigns, platforms, storytelling, and audience interaction. Includes communication hierarchy, platform-role definition, content ecosystems, attention flow, and behavioural models such as AIDA or customer journey frameworks where strategically relevant.' },
   { name: 'Digital Marketing Strategy', sub: 'Channel mix · Funnel · Measurement', body: 'Building structured digital growth systems aligned with business priorities instead of fragmented platform activity. May involve channel mix strategy, performance roadmap, funnel planning, paid-organic alignment, analytics structure, and growth measurement systems.' },
@@ -33,7 +39,7 @@ const workshops = [
 ];
 ---
 
-<Base title="Marketing Strategy Consulting | Platform Play Venture" description="Unclear positioning or scattered marketing? Get brand and growth strategy consulting built around your business goals. Book a strategy conversation." breadcrumbs={[{ name: 'Strategy & Consulting', path: '/services/strategy-consulting/' }]}>
+<Base title="Marketing Strategy Consulting | Platform Play Venture" description="Unclear positioning or scattered marketing? Get brand and growth strategy consulting built around your business goals. Book a strategy conversation." breadcrumbs={[{ name: 'Strategy & Consulting', path: '/services/strategy-consulting/' }]} schema={[serviceSchema, faqPageSchema('/services/strategy-consulting/', faqs)]}>
   <ScrollProgress />
 
   <div class="site-shell is-ready">
@@ -102,6 +108,7 @@ const workshops = [
             <div class="section-kicker">The Strategy Shift</div>
             <h2 class="section-title">Brand breakthroughs that began with <span class="grad-text">sharper understanding</span> — not bigger budgets</h2>
             <p class="section-lead">Some of the most significant brand breakthroughs began not with bigger marketing budgets, but with sharper strategic understanding of culture, behaviour, positioning, and market psychology.</p>
+            <p class="public-examples-note">Public brand examples — not PPV client work.</p>
           </div>
 
           <!-- ===== DOMINO'S ===== -->
@@ -307,7 +314,8 @@ const workshops = [
         <div class="container">
           <div class="reveal coverage-header">
             <div class="section-kicker">What We Cover</div>
-            <h2 class="section-title">Seven strategic surfaces, <span class="grad-text">one integrated way of thinking</span></h2>
+            <h2 class="section-title">Our marketing and brand <span class="grad-text">strategy consulting services</span></h2>
+            <p class="section-lead">Seven strategic surfaces, one integrated way of thinking.</p>
           </div>
           <div class="coverage-grid">
             {coverage.map((c, i) => (
@@ -321,6 +329,7 @@ const workshops = [
                 <h3>{c.name}</h3>
                 <div class="coverage-card-sub">{c.sub}</div>
                 <p>{c.body}</p>
+                {c.link && <a class="coverage-card-link" href={c.link.href}>{c.link.label} <span aria-hidden="true">→</span></a>}
                 <span class="coverage-card-line" aria-hidden="true"></span>
               </article>
             ))}
@@ -333,7 +342,7 @@ const workshops = [
         <div class="container">
           <div class="reveal workshops-header">
             <div class="section-kicker">How Strategy Is Built At PPV</div>
-            <h2 class="section-title">Strategy is <span class="grad-text">extracted, not imposed</span></h2>
+            <h2 class="section-title">Our strategy consulting process: <span class="grad-text">extracted, not imposed</span></h2>
             <p class="section-lead">Every strategy engagement is built through structured workshops. The objective is not to apply pre-made frameworks — it is to extract sharper clarity directly from the people building the business. Some engagements may require two workshops. Others may evolve across five or more depending on complexity.</p>
           </div>
 
@@ -358,6 +367,19 @@ const workshops = [
         </div>
       </section>
 
+      <BulletSection
+        kicker="Who it's for"
+        title="Who our strategy consulting is for"
+        items={[
+          'Founders preparing to scale beyond instinct-led growth.',
+          'Brands repositioning in a changing market or category.',
+          'Companies whose marketing is fragmented across several agencies.',
+          'Leadership teams entering new markets or launching new offerings.',
+        ]}
+      />
+
+      <PageFaq title="Strategy consulting FAQs" faqs={faqs} />
+
       <!-- ============== INSIGHTS TEASER ============== -->
       <section class="section service-teaser-section">
         <div class="container service-teaser-inner is-single">
@@ -377,7 +399,7 @@ const workshops = [
             <div class="service-cta-eyebrow"><span class="pulse-dot"></span><span>Strategic conversation</span></div>
             <h2 class="service-cta-title">Sometimes the next stage of growth does not begin with more activity. <br/> It begins with <span class="grad-text">sharper strategic direction</span>.</h2>
             <a class="service-cta-btn" href="/contact/?engagement=Strategy%20%26%20Consulting">
-              <span>Start a strategic conversation</span>
+              <span>Book a strategy conversation</span>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
           </div>

@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://platformplayventure.com/product/dms/#software",
+  "name": "PPV DMS",
+  "alternateName": "PPV Dealer Management System",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Dealer and Distributor Management System",
+  "operatingSystem": "Web",
+  "url": "https://platformplayventure.com/product/dms/",
+  "description": "Real-time, role-aware dealer and distributor management system for multi-tier handset distribution, with IMEI tracking, POS with EMI, warranty/RMA and tiered ledgers.",
+  "publisher": {
+    "@id": "https://platformplayventure.com/#organization"
+  },
+  "featureList": [
+    "IMEI and serial-number tracking",
+    "Role-based access for supplier, distributor, dealer and direct dealer",
+    "Order and purchase management",
+    "POS with EMI integration",
+    "Warranty and RMA workflow",
+    "Tiered ledgers and scheme engine",
+    "Role-scoped reporting and analytics"
+  ]
+}

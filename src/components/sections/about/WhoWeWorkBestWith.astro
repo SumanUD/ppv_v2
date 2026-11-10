@@ -11,7 +11,7 @@ import LabAccordion from '@/components/LabAccordion.astro';
   <div class="container">
     <div class="reveal best-with-header">
       <div class="section-kicker">Who We Work Best With</div>
-      <h2 class="section-title">Businesses entering the stage where <span class="grad-text">strategic alignment becomes essential</span>.</h2>
+      <h2 class="section-title">Who we <span class="grad-text">work with</span></h2>
       <p class="section-lead">PPV works best with businesses entering a stage where greater market ambition, increasing complexity, and the need for stronger strategic alignment start becoming essential.</p>
     </div>
 
@@ -19,10 +19,10 @@ import LabAccordion from '@/components/LabAccordion.astro';
       <LabAccordion
         theme="light"
         panels={[
-          { num: '01', title: 'Founder-Led Businesses', img: '/labs/founder.jpg', body: 'Brands entering a more serious phase of expansion — where instinct alone is no longer enough, and strategic structure starts becoming critical.' },
-          { num: '02', title: 'Repositioning Brands', img: '/labs/reposition.jpg', body: 'Businesses re-evaluating how they are perceived, differentiated, or understood within a changing market or consumer landscape.' },
-          { num: '03', title: 'Fragmented Ecosystems', img: '/labs/fragmented.jpg', body: 'Companies managing multiple agencies, platforms, teams, or disconnected decisions — that no longer feel strategically aligned.' },
-          { num: '04', title: 'Leadership-Led Transformation', img: '/labs/leadership.jpg', body: 'Businesses looking for stronger strategic guidance before scaling operations, communication, technology, or market presence further.' },
+          { num: '01', title: 'Founder-Led Businesses', img: '/labs/founder.jpg', body: 'Brands entering a more serious phase of expansion — where instinct alone is no longer enough, and strategic structure starts becoming critical.', link: { href: '/services/strategy-consulting/', label: 'growth strategy consulting' } },
+          { num: '02', title: 'Repositioning Brands', img: '/labs/reposition.jpg', body: 'Businesses re-evaluating how they are perceived, differentiated, or understood within a changing market or consumer landscape.', link: { href: '/services/strategy-consulting/', label: 'brand strategy consulting' } },
+          { num: '03', title: 'Fragmented Ecosystems', img: '/labs/fragmented.jpg', body: 'Companies managing multiple agencies, platforms, teams, or disconnected decisions — that no longer feel strategically aligned.', link: { href: '/services/marketing-governance/', label: 'fractional CMO and marketing governance' } },
+          { num: '04', title: 'Leadership-Led Transformation', img: '/labs/leadership.jpg', body: 'Businesses looking for stronger strategic guidance before scaling operations, communication, technology, or market presence further.', link: { href: '/services/technology/', label: 'digital transformation consulting' } },
         ]}
       />
     </div>

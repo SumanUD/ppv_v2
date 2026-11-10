@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://platformplayventure.com/services/business-automation/#service",
+  "name": "Business Process Automation and Custom Software Development",
+  "serviceType": "Custom software development and business process automation",
+  "provider": {
+    "@id": "https://platformplayventure.com/#organization"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "url": "https://platformplayventure.com/services/business-automation/",
+  "description": "Custom business software, workflow automation, WhatsApp automation, dashboards and ERP/CRM integration built around business objectives."
+}

@@ -1,0 +1,16 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://platformplayventure.com/services/strategy-consulting/#service",
+  "name": "Marketing and Brand Strategy Consulting",
+  "serviceType": "Marketing strategy and brand strategy consulting",
+  "provider": {
+    "@id": "https://platformplayventure.com/#organization"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "url": "https://platformplayventure.com/services/strategy-consulting/",
+  "description": "Marketing strategy, brand strategy and brand positioning consulting that turns business context and consumer understanding into a clear, practical growth roadmap."
+}

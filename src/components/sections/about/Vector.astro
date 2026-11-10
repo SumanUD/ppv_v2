@@ -27,6 +27,7 @@ const stages = [
     lead: 'Build the structures, capabilities, and platforms required to accelerate the next stage of growth.',
     body: 'This is where strategic intent becomes operational reality — through systems, platforms, and the right internal capability to carry the brand forward.',
     tag: 'Build',
+    link: { href: '/services/technology/', label: 'digital transformation consulting', before: 'See our ' },
   },
   {
     letter: 'O',
@@ -54,7 +55,7 @@ const stages = [
   <div class="container">
     <div class="reveal vector-header">
       <div class="section-kicker">How PPV Works With Brands</div>
-      <h2 class="section-title">Every engagement follows one disciplined path. We call it <span class="grad-text">VECTOR</span>.</h2>
+      <h2 class="section-title">Our method: <span class="grad-text">VECTOR</span>, one disciplined path for every engagement</h2>
       <p class="section-lead">A vector is a combination of <strong>magnitude and direction</strong>. Six stages — each one earns the next.</p>
     </div>
 
@@ -85,6 +86,7 @@ const stages = [
             <h3 class="vector-row-name">{s.name}</h3>
             <p class="vector-row-lead">{s.lead}</p>
             <p class="vector-row-body-text">{s.body}</p>
+            {s.link && <p class="vector-row-link">{s.link.before}<a href={s.link.href}>{s.link.label}</a>.</p>}
           </div>
           <div class="vector-row-rail" aria-hidden="true">
             <span class="vector-row-rail-dot"></span>

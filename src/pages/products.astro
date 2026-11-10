@@ -5,6 +5,16 @@ import ScrollProgress from '@/components/ScrollProgress.astro';
 import Nav from '@/components/Nav.astro';
 import Footer from '@/components/Footer.astro';
 import { products } from '@/data/products';
+import PageFaq from '@/components/PageFaq.astro';
+import { pageFaqs, faqPageSchema } from '@/data/faqs';
+import collectionSchema from '@/data/seo/products.json';
+
+const faqs = pageFaqs['/products/'];
+/** H2 per product, as approved in the SEO sheet. */
+const productHeading: Record<string, string> = {
+  dms: 'PPV DMS: dealer and distributor management system',
+  hrms: 'PPV HRMS: HR, payroll and workforce management software',
+};
 
 const engagement = [
   { n: '01', title: 'Deploy', text: 'Use the platform as it is and get operational quickly.' },
@@ -15,9 +25,10 @@ const engagement = [
 ---
 
 <Base
-  title="Products · Platform Play Venture"
-  description="PPV's digital products — a Dealer Management System for multi-tier distribution, an HRMS for the complete employee lifecycle, and PPV E-commerce."
+  title="Business Software: Dealer Management & HRMS | PPV"
+  description="Explore PPV's live business platforms: PPV DMS for dealer and distributor management, and PPV HRMS for HR and payroll. Deploy, customise or integrate."
   breadcrumbs={[{ name: 'Products', path: '/products/' }]}
+  schema={[collectionSchema, faqPageSchema('/products/', faqs)]}
 >
   <ScrollProgress />
 
@@ -38,7 +49,8 @@ const engagement = [
             <span>Business Automation &amp; Software</span>
           </a>
           <div class="service-hero-eyebrow reveal"><span class="pulse-dot"></span><span>Products · Live now</span></div>
-          <h1 class="service-hero-title reveal">Platforms that are <span class="grad-text">already built and running</span></h1>
+          <h1 class="service-hero-title reveal">Business Software Platforms: <span class="grad-text">PPV DMS and PPV HRMS</span></h1>
+          <p class="service-hero-sub reveal">Platforms that are already built and running.</p>
           <p class="service-hero-lead reveal">These are not concepts. Each platform is built and running, and each can be deployed, configured, customized and connected around your business requirement — so you do not have to start from zero.</p>
         </div>
       </section>
@@ -51,7 +63,7 @@ const engagement = [
               <article class="pv-product-card reveal">
                 <div class="pv-product-head">
                   <div class="pv-product-id">
-                    <div class="pv-product-name">{p.name}</div>
+                    <h2 class="pv-product-name">{productHeading[p.slug] ?? p.name}</h2>
                     <div class="pv-product-full">{p.fullName}</div>
                   </div>
                   <span class="pv-badge">{p.status === 'live' ? 'Live' : 'In maintenance'}</span>
@@ -92,7 +104,7 @@ const engagement = [
 
                 <div class="pv-product-foot">
                   <a class="pv-btn pv-btn-primary" href={`/product/${p.slug}/`}>
-                    <span>View full details</span>
+                    <span>View {p.name}</span>
                     <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </a>
                   <span class="pv-product-closing">{p.closing}</span>
@@ -104,7 +116,7 @@ const engagement = [
             <article class="pv-product-card pv-product-card-ecom reveal" id="ecommerce">
               <div class="pv-product-head">
                 <div class="pv-product-id">
-                  <div class="pv-product-name">PPV E-commerce</div>
+                  <h2 class="pv-product-name">PPV E-commerce: online storefront platform</h2>
                   <div class="pv-product-full">Commerce Storefront Platform</div>
                 </div>
                 <span class="pv-badge">Live demo</span>
@@ -152,7 +164,7 @@ const engagement = [
         <div class="container">
           <div class="reveal pv-head">
             <div class="section-kicker">How You Adopt Them</div>
-            <h2 class="section-title">Four ways in, depending on <span class="grad-text">how far you want to go</span></h2>
+            <h2 class="section-title">Four ways to adopt <span class="grad-text">a PPV platform</span></h2>
           </div>
           <div class="pv-engage-grid pv-engage-grid-4">
             {engagement.map((e) => (
@@ -210,12 +222,15 @@ const engagement = [
         </div>
       </section>
 
+      <PageFaq title="Product FAQs" faqs={faqs} />
+
       <!-- ============== CTA ============== -->
       <section class="section service-cta-section">
         <div class="container">
           <div class="service-cta-card reveal">
             <div class="service-cta-eyebrow"><span class="pulse-dot"></span><span>Custom requirements welcome</span></div>
-            <h2 class="service-cta-title">If your business does not fit an existing platform, <br/> we <span class="grad-text">build the one it needs</span>.</h2>
+            <h2 class="service-cta-title">Need something different? We build <a class="grad-text service-cta-inline" href="/services/business-automation/">custom business software</a></h2>
+            <p class="service-cta-copy">If your business does not fit an existing platform, we build the one it needs.</p>
             <a class="service-cta-btn" href="/contact/?engagement=Custom%20Platform">
               <span>Talk to us about your requirement</span>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>

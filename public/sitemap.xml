@@ -2,46 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://platformplayventure.com/</loc>
+    <lastmod>2026-11-10</lastmod>
   </url>
   <url>
     <loc>https://platformplayventure.com/about/</loc>
-  </url>
-  <url>
-    <loc>https://platformplayventure.com/services/business-automation/</loc>
-  </url>
-  <url>
-    <loc>https://platformplayventure.com/products/</loc>
-  </url>
-  <url>
-    <loc>https://platformplayventure.com/product/dms/</loc>
-  </url>
-  <url>
-    <loc>https://platformplayventure.com/product/hrms/</loc>
-  </url>
-  <url>
-    <loc>https://platformplayventure.com/services/strategy-consulting/</loc>
-  </url>
-  <url>
-    <loc>https://platformplayventure.com/services/technology/</loc>
-  </url>
-  <url>
-    <loc>https://platformplayventure.com/services/marketing-governance/</loc>
-  </url>
-  <url>
-    <loc>https://platformplayventure.com/services/training/</loc>
+    <lastmod>2026-11-10</lastmod>
   </url>
   <url>
     <loc>https://platformplayventure.com/contact/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://platformplayventure.com/services/strategy-consulting/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://platformplayventure.com/services/marketing-governance/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://platformplayventure.com/services/technology/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://platformplayventure.com/services/business-automation/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://platformplayventure.com/services/training/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://platformplayventure.com/products/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://platformplayventure.com/product/dms/</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://platformplayventure.com/product/hrms/</loc>
+    <lastmod>2026-11-10</lastmod>
   </url>
   <url>
     <loc>https://platformplayventure.com/insights/</loc>
+    <lastmod>2026-11-10</lastmod>
   </url>
   <url>
     <loc>https://platformplayventure.com/insights/how-to-define-brand-positioning/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-10</lastmod>
   </url>
   <url>
     <loc>https://platformplayventure.com/insights/digital-transformation-in-marketing/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-10</lastmod>
   </url>
 </urlset>
